@@ -29,6 +29,7 @@ This script assumes you use `www.google.com`  or `www.google.co.jp` as your sear
 (function() {
     const query = new URLSearchParams(window.location.search).get("q");
     if (!query) return;
+    const searchUrl = window.location.href;
 		
     GM_xmlhttpRequest({
         method: "POST",
@@ -36,7 +37,10 @@ This script assumes you use `www.google.com`  or `www.google.co.jp` as your sear
         headers: {
             "Content-Type": "application/json"
         },
-        data: JSON.stringify({ query: query }),
+        data: JSON.stringify({
+            query: query,
+            url: searchUrl
+        }),
         onload: function(res) {
             console.log("[Userscript] Sent search to Python:", res.status);
         },

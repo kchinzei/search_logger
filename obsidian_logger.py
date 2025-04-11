@@ -67,6 +67,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         try:
             data = json.loads(body)
             query = data.get('query', '').strip()
+            url = data.get('url', '').strip()
             if query in recent_queries:
                 query_to_print = query if debug else '[hidden]'
                 print(f'ℹ️ Skipping duplicate: {query_to_print}', flush=True)
@@ -74,7 +75,10 @@ class RequestHandler(BaseHTTPRequestHandler):
             recent_queries.append(query)
 
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M')
-            entry = f'- {timestamp} — **{query}**\n'
+            if url:
+                entry = f'- {timestamp} — [{query}]({url})\n'
+            else:
+                entry = f'- {timestamp} — **{query}**\n'
             try:
                 with open(log_path, 'a') as f:
                     f.write(entry)
@@ -82,8 +86,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 print(f'❌ Failed to write log: {e if debug else use_debug_msg}', file=sys.stderr)
 
         except Exception as e:
-            query = f'⚠️ Failed to parse query: {e if debug else use_debug_msg}'
-            print(f'{query}', file=sys.stderr)
+            print(f'⚠️ Failed to parse query: {e if debug else use_debug_msg}', file=sys.stderr)
 
 
 def run_server():
