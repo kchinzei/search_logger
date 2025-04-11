@@ -1,6 +1,6 @@
 # Obsidian Search Logger
 
-This package helps log your search queries in an Obsidian vault. It works for Safari on macOS.
+This package helps logging your search queries in an Obsidian vault. It works for Safari on macOS.
 
 Typically the search log looks like;
 
@@ -22,9 +22,9 @@ Obsidian Search Logger has two components.
 The javascript is to signal to the python code about your search queries. 
 The python code receives it then writes in an Obsidian vault folder.
 
-# [Setup](Docs/Setup)
+# [Setup](Docs/Setup.md)
 
-See [Setup](Docs/Setup) for install / uninstall instructions.
+See [Setup](Docs/Setup.md) for install / uninstall instructions.
 ### For other browsers?
 
 I tested Chrome.app + [Tampermonkey](https://www.tampermonkey.net) and it works. Tampermonkey does similar to Userscripts.
@@ -37,4 +37,4 @@ The javascript and `obsidian_logger.py` should work also on browsers + [Tampermo
 
 Not tested...
 
-# [Trouble shooting](Docs/Trouble_shooting)
+# [Trouble shooting](Docs/Trouble_shooting.md)
