@@ -29,7 +29,7 @@ This script assumes you use `www.google.com`  or `www.google.co.jp` as your sear
 (function() {
     const query = new URLSearchParams(window.location.search).get("q");
     if (!query) return;
-    const searchUrl = window.location.href;
+    const searchUrl = `${window.location.protocol}//${window.location.host}/search?q=${encodeURIComponent(query)}`;
 		
     GM_xmlhttpRequest({
         method: "POST",
