@@ -22,7 +22,7 @@ This script assumes you use `www.google.com`  or `www.google.co.jp` as your sear
 // ==UserScript==
 // @name         Search Logger
 // @description  https://github.com/kchinzei/search_logger.git
-// @version      0.3.0
+// @version      0.3.1
 // @match        https://www.google.com/*search*
 // @match        https://www.google.co.jp/*search*
 // @grant        GM_xmlhttpRequest
@@ -70,11 +70,15 @@ This will install a LaunchAgent file in your '~/Libraries/LaunchAgent' folder.
 
 To run Obsidian Search Logger correctly, you need to turn ON the following settings:
 
-- **python3** in System Settings.app >> General >> Login items and extensions
-- **google.com**, **google.co.jp** in Safari.app >> Settings >> Extensions >> Userscripts
+#### Mac
+- **System Settings.app**
+	- General >> Login items and extensions >> **Python : ON**
+	- Privacy & Security >> Local Network >> **Python : OFF**
+- **Safari.app**
+	- Settings >> Extensions >> Userscripts >> **google.com**, **google.co.jp** : ON
+		- If you use other search engine(s), do accordingly.
+		- If you use Tampermonkey, do similarly.
 	- Other sites can be turned OFF (unless you need them for other scripts).
-	- If you use other search engine(s), do accordingly.
-
 # To uninstall
 
 1. UnInstall [Userscripts](https://apps.apple.com/jp/app/userscripts/id1463298887). Just move it to trash.

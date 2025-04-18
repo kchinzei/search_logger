@@ -1,4 +1,23 @@
 #!/usr/bin/env python3
+
+#    The MIT License (MIT)
+#    Copyright (c) Kiyo Chinzei (kchinzei@gmail.com)
+#    Permission is hereby granted, free of charge, to any person obtaining a copy
+#    of this software and associated documentation files (the "Software"), to deal
+#    in the Software without restriction, including without limitation the rights
+#    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#    copies of the Software, and to permit persons to whom the Software is
+#    furnished to do so, subject to the following conditions:
+#    The above copyright notice and this permission notice shall be included in
+#    all copies or substantial portions of the Software.
+#    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+#    THE SOFTWARE.
+
 import os
 import sys
 import json
@@ -7,13 +26,21 @@ from pathlib import Path
 from textwrap import dedent
 
 SYSTEM = platform.system()
+HOME = Path.home()
 
 # Step 1: detect Obsidian vaults
 def get_obsidian_config_path():
     if SYSTEM == 'Darwin':
-        return Path.home() / 'Library/Application Support/obsidian/obsidian.json'
+        return HOME / 'Library/Application Support/obsidian/obsidian.json'
     elif SYSTEM == 'Linux':
-        return Path.home() / '.config/obsidian/obsidian.json'
+        default_path = HOME / '.config/obsidian/obsidian.json'
+        snap_path = HOME / 'snap/obsidian/current/.config/obsidian/obsidian.json        
+        if default_path.exists():
+            return default_path
+        elif snap_path.exists():
+            return snap_path
+        else:
+            return None
     elif SYSTEM == 'Windows':
         return Path(os.environ['APPDATA']) / 'Obsidian' / 'obsidian.json'
     else:
@@ -30,7 +57,7 @@ def detect_python():
     return next((p for p in candidates if Path(p).exists()), None)
 
 def setup_macos(python_path, script_path, vault_path, log_filename):
-    plist_path = Path.home() / 'Library/LaunchAgents/com.obsidian-logger.plist'
+    plist_path = HOME / 'Library/LaunchAgents/com.obsidian-logger.plist'
     plist_content = dedent(f'''        <?xml version='1.0' encoding='UTF-8'?>
         <!DOCTYPE plist PUBLIC '-//Apple//DTD PLIST 1.0//EN'
           'http://www.apple.com/DTDs/PropertyList-1.0.dtd'>
@@ -63,7 +90,7 @@ def setup_macos(python_path, script_path, vault_path, log_filename):
     print(f'✅ Installed LaunchAgent: {plist_path}')
 
 def setup_linux(python_path, script_path, vault_path, log_filename):
-    autostart_dir = Path.home() / '.config' / 'autostart'
+    autostart_dir = HOME / '.config' / 'autostart'
     autostart_dir.mkdir(parents=True, exist_ok=True)
     desktop_entry = dedent(f'''        [Desktop Entry]
         Type=Application
