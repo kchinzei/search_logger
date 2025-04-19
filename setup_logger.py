@@ -34,7 +34,7 @@ def get_obsidian_config_path():
         return HOME / 'Library/Application Support/obsidian/obsidian.json'
     elif SYSTEM == 'Linux':
         default_path = HOME / '.config/obsidian/obsidian.json'
-        snap_path = HOME / 'snap/obsidian/current/.config/obsidian/obsidian.json        
+        snap_path = HOME / 'snap/obsidian/current/.config/obsidian/obsidian.json'
         if default_path.exists():
             return default_path
         elif snap_path.exists():
