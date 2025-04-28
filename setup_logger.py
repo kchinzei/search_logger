@@ -18,16 +18,14 @@
 #    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #    THE SOFTWARE.
 
-import os
 import sys
 import json
 import platform
 from pathlib import Path
-from textwrap import dedent
 
 SYSTEM = platform.system()
-HOME = Path.home()
 
+<<<<<<< HEAD
 # Step 1: detect Obsidian vaults
 def get_obsidian_config_path():
     if SYSTEM == 'Darwin':
@@ -122,6 +120,17 @@ def setup_windows(python_path, script_path, vault_path, log_filename):
     shortcut.IconLocation = str(script_path)
     shortcut.save()
     print(f'✅ Shortcut created in startup folder: {startup_dir / "ObsidianLogger.lnk"}')
+=======
+if SYSTEM == 'Darwin':
+    from setup_logger_macos import setup, get_obsidian_config_path, detect_python
+elif SYSTEM == 'Linux':
+    from setup_logger_linux import setup, get_obsidian_config_path, detect_python
+elif SYSTEM == 'Windows':
+    from setup_logger_windows import setup, get_obsidian_config_path, detect_pythonset
+else:
+    print('❌ Unsupported platform')
+    sys.exit(1)
+>>>>>>> c1315b1 (refactor setup and uninstall / check macOS TCC)
 
 # --- MAIN FLOW ---
 
@@ -147,15 +156,15 @@ for idx, v in enumerate(vault_list):
 choice = input(f'Select a vault [0-{len(vault_list)}] (default 1): ').strip() or '1'
 try:
     if choice == '0':
-        vault_path = input('Enter full path to your Obsidian vault: ').strip()
-        if not Path(vault_path).exists():
+        vault_path = Path(input('Enter full path to your Obsidian vault: ').strip())
+        if not vault_path.exists():
             print('❌ That path does not exist.')
             sys.exit(1)
         if not os.access(vault_path, os.W_OK):
             print('❌ You do not have write access to that folder.')
             sys.exit(1)
     else:
-        vault_path = vault_list[int(choice) - 1]['path']
+        vault_path = Path(vault_list[int(choice) - 1]['path'])
 except (IndexError, ValueError):
     print('❌ Invalid selection.')
     sys.exit(1)
@@ -172,9 +181,4 @@ if not python_path:
     print('❌ Could not locate a usable python3 interpreter.')
     sys.exit(1)
 
-if SYSTEM == 'Darwin':
-    setup_macos(python_path, script_path, vault_path, log_filename)
-elif SYSTEM == 'Linux':
-    setup_linux(python_path, script_path, vault_path, log_filename)
-elif SYSTEM == 'Windows':
-    setup_windows(python_path, script_path, vault_path, log_filename)
+sys.exit(setup(python_path, script_path, vault_path, log_filename))
