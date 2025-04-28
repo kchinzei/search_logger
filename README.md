@@ -39,4 +39,4 @@ Distribution of Obsidian for Linux can be in AppImage, Snap and more. Currently 
 Not tested...
 
 # Trouble shooting
-- [Mac](Trouble_shooting_macos.md)
+- [Mac](Docs/Trouble_shooting_macos.md)
