@@ -39,15 +39,16 @@ if not (len(sys.argv) == 3 or (len(sys.argv) == 4 and debug)):
     sys.exit(1)
 
 port = 27123 # should agree to user javascript
-vault_dir = sys.argv[1]
+vault_dir = Path(sys.argv[1])
 log_filename = sys.argv[2]
-log_path = os.path.join(vault_dir, log_filename)
+log_path = vault_dir / log_filename
 
-def hide_path(path: str):
+def hide_path(path: Path):
     home = str(Path.home())
-    if path.startswith(home):
-        path = path.replace(home, '~')
-    return f'{path[:12]} ... (hidden) ... {path[-12:]}'
+    path_abs = str(path.absolute())
+    if path_abs.startswith(home):
+        path_abs = path_abs.replace(home, '~')
+    return f'{path_abs[:12]} ... (hidden) ... {path_abs[-12:]}'
 
 class RequestHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
@@ -80,7 +81,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             else:
                 entry = f'- {timestamp} — **{query}**\n'
             try:
-                with open(log_path, 'a') as f:
+                with log_path.open('a') as f:
                     f.write(entry)
             except Exception as e:
                 print(f'❌ Failed to write log: {e if debug else use_debug_msg}', file=sys.stderr)
@@ -93,6 +94,12 @@ def run_server():
     log_path_to_print = log_path if debug else hide_path(log_path)
     port_to_print = port if debug else '[hidden port]'
     try:
+        log_path.touch(exist_ok=True, mode=0o600)
+    except Exception as e:
+        print(f'❌ Failed to touch the log file {log_path_to_print}', file=sys.stderr)
+        return -10
+
+    try:
         print(f'🟢 Starting logger...', flush=True)
         print(f'📒 Logging to: {log_path_to_print}', flush=True)
         server = HTTPServer(('localhost', port), RequestHandler)
@@ -100,14 +107,16 @@ def run_server():
         try:
             server.serve_forever()
         except KeyboardInterrupt:
-            print('\n❌ Interrupted by user.', flush=True)
+            print('\n⛔️ Interrupted by user.', flush=True)
         finally:
             server.server_close()
             print('Server terminated gracefully.', flush=True)
     except OSError as e:
         print(f'❌ Server error: {e if debug else use_debug_msg}', file=sys.stderr)
+        return -20
     except Exception as e:
-        print(f'Unexpected error: {e if debug else use_debug_msg}', file=sys.stderr)
+        print(f'❌ Unexpected error: {e if debug else use_debug_msg}', file=sys.stderr)
+        return -30
         
     return 0
 
