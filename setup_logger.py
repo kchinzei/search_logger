@@ -25,102 +25,6 @@ from pathlib import Path
 
 SYSTEM = platform.system()
 
-<<<<<<< HEAD
-# Step 1: detect Obsidian vaults
-def get_obsidian_config_path():
-    if SYSTEM == 'Darwin':
-        return HOME / 'Library/Application Support/obsidian/obsidian.json'
-    elif SYSTEM == 'Linux':
-        default_path = HOME / '.config/obsidian/obsidian.json'
-        snap_path = HOME / 'snap/obsidian/current/.config/obsidian/obsidian.json'
-        if default_path.exists():
-            return default_path
-        elif snap_path.exists():
-            return snap_path
-        else:
-            return None
-    elif SYSTEM == 'Windows':
-        return Path(os.environ['APPDATA']) / 'Obsidian' / 'obsidian.json'
-    else:
-        print(f'Unsupported platform: {SYSTEM}')
-        sys.exit(1)
-
-def detect_python():
-    candidates = [
-        '/opt/homebrew/bin/python3',
-        '/usr/local/bin/python3',
-        '/usr/bin/python3',
-        sys.executable
-    ]
-    return next((p for p in candidates if Path(p).exists()), None)
-
-def setup_macos(python_path, script_path, vault_path, log_filename):
-    plist_path = HOME / 'Library/LaunchAgents/com.obsidian-logger.plist'
-    plist_content = dedent(f'''        <?xml version='1.0' encoding='UTF-8'?>
-        <!DOCTYPE plist PUBLIC '-//Apple//DTD PLIST 1.0//EN'
-          'http://www.apple.com/DTDs/PropertyList-1.0.dtd'>
-        <plist version='1.0'>
-        <dict>
-            <key>Label</key>
-            <string>com.obsidian-logger</string>
-            <key>ProgramArguments</key>
-            <array>
-                <string>{python_path}</string>
-                <string>{script_path}</string>
-                <string>{vault_path}</string>
-                <string>{log_filename}</string>
-            </array>
-            <key>RunAtLoad</key>
-            <true/>
-            <key>WorkingDirectory</key>
-            <string>{script_path.parent}</string>
-            <key>StandardOutPath</key>
-            <string>/tmp/com.obsidian-logger.launch-stdout.log</string>
-            <key>StandardErrorPath</key>
-            <string>/tmp/com.obsidian-logger.launch-stderr.log</string>
-        </dict>
-        </plist>
-    ''')
-    plist_path.parent.mkdir(parents=True, exist_ok=True)
-    plist_path.write_text(plist_content)
-    os.system(f'launchctl unload {plist_path} > /dev/null 2>&1')
-    os.system(f'launchctl load -w {plist_path}')
-    print(f'✅ Installed LaunchAgent: {plist_path}')
-
-def setup_linux(python_path, script_path, vault_path, log_filename):
-    autostart_dir = HOME / '.config' / 'autostart'
-    autostart_dir.mkdir(parents=True, exist_ok=True)
-    desktop_entry = dedent(f'''        [Desktop Entry]
-        Type=Application
-        Name=Obsidian Logger
-        Exec={python_path} {script_path} "{vault_path}" "{log_filename}"
-        X-GNOME-Autostart-enabled=true
-    ''')
-    (autostart_dir / 'obsidian-logger.desktop').write_text(desktop_entry)
-    print(f'✅ Created autostart entry: {autostart_dir / "obsidian-logger.desktop"}')
-
-def setup_windows(python_path, script_path, vault_path, log_filename):
-    try:
-        from win32com.client import Dispatch
-    except ImportError:
-        print('❌ pywin32 is required on Windows. Install with: pip install pywin32')
-        sys.exit(1)
-
-    pythonw = Path(sys.executable).with_name('pythonw.exe')
-    if not pythonw.exists():
-        print('❌ pythonw.exe not found.')
-        sys.exit(1)
-
-    startup_dir = Path(os.environ['APPDATA']) / 'Microsoft' / 'Windows' / 'Start Menu' / 'Programs' / 'Startup'
-    shell = Dispatch('WScript.Shell')
-    shortcut = shell.CreateShortcut(str(startup_dir / 'ObsidianLogger.lnk'))
-    shortcut.TargetPath = str(pythonw)
-    shortcut.Arguments = f'"{script_path}" "{vault_path}" "{log_filename}"'
-    shortcut.WorkingDirectory = str(script_path.parent)
-    shortcut.IconLocation = str(script_path)
-    shortcut.save()
-    print(f'✅ Shortcut created in startup folder: {startup_dir / "ObsidianLogger.lnk"}')
-=======
 if SYSTEM == 'Darwin':
     from setup_logger_macos import setup, get_obsidian_config_path, detect_python
 elif SYSTEM == 'Linux':
@@ -130,7 +34,6 @@ elif SYSTEM == 'Windows':
 else:
     print('❌ Unsupported platform')
     sys.exit(1)
->>>>>>> c1315b1 (refactor setup and uninstall / check macOS TCC)
 
 # --- MAIN FLOW ---
 
