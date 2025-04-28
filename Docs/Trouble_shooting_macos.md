@@ -47,13 +47,13 @@ The full-disk access privilege is powerful therfore sometimes a risk. You need t
 `setup_logger.py` can automatically detect if any of necessary files are under TCC. Then it asks you to change the setting via System Setting.app. Because it is a security manipulation, there is no automatic ways to turn on it. Please follow this:
 #### Set full-disk access privilege
  1. `setup_logger.py` opens SYstem Setting.app for you. You will see something like this:
-    ![[before.png]]
+    ![before listing](figs/before.png)
  2. Click `'+'`. to add `python3` in the list. But most likely, it is in the system folder which is invisible from Finder.
  3. Type `⌘` and `Shift` and `G` keys to get a small window to directly type directory path.
-    ![[command-shift-g.png]]
+   ![command-shift-g](figs/command-shift-g.png)
  4. Type the path, then type `return`. You will get a long list of commands. Find `python3` and click `Open`.
  5. You will now have `python3` in the full-disk assess list.
-    ![[after.png]]
+    ![after listing](figs/after.png)
 
 ---
 from README
