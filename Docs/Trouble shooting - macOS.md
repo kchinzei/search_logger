@@ -1,7 +1,3 @@
----
-tags:
-- review
----
 # Obsidian Search Logger - Trouble shooting
 
 When Obsidian Search Logger does not work, try the following.

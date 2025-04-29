@@ -1,7 +1,10 @@
-# Preliquisite
-Complete steps 1 - 3 [here](Setup). Select  [Tampermonkey](https://www.tampermonkey.net) as browser extension, download from AppStore.
 
-## To add and activate the javascript
+This page explains the setup for Chrome + Tampermonkey on macOS.
+
+## Preliquisite
+Complete steps 1 - 3 [here](Setup.md). Select  [Tampermonkey](https://www.tampermonkey.net) as browser extension, download from AppStore.
+
+### To add and activate the javascript
 Once Tampermonkey is installed, you should have an icon of a jigsaw puzzle. It's a shortcut to **Extension Setting**.
 - Extension setting icon >> Tampermonkey >> Three vertical dots >> Option
 	You are now Tampermonkey setting view. Click "**+**" icon will open script editor.
@@ -9,15 +12,16 @@ Once Tampermonkey is installed, you should have an icon of a jigsaw puzzle. It's
 - File >> Save
 	Click **Installed UserScript** (next to "**+**" icon) to confirm the new script was listed and activated.
 	
-# System Settings
+## System Settings
 - General >> Login items and extensions >> **Python3 : ON**
 - Privacy & Security >> Local Network >> **Python3 : OFF**
 
 You may be asked to allow **Full-disk access** to python3 when running `setup_logger.py`.
 If it appears, apply the following.
 - Privacy & Security >> Full-disk Access >> **Python3 : ON**
-  To do it, see [here](<Trouble shooting - macOS#Set full-disk access>).
-# Chrome Setting
+  To do it, see [here](<Trouble shooting - macOS.md#Set full-disk access>).
+
+## Chrome Setting
 - Settings >> Extensions
 	- **Tampermonkey : ON**
 	- **Developper Mode : ON** (at the upper right of the window)
@@ -26,7 +30,7 @@ If it appears, apply the following.
 		- http://localhost:27123/*
 		- https://www.google.co.jp/*
 		- https://www.google.com/*
-	You can add these manually ([fig 1](figs/mac_chrome_extension_1.png), [fig 2](mac_chrome_extension_2.png)).
+	You can add these manually ([fig 1](figs/mac_chrome_extension_1.png), [fig 2](figs/mac_chrome_extension_2.png)).
 
 ### Tampermonkey may ask about "cross-origin resource access"
 In the first run, Tampermonkey may ask to about "cross-origin resource access" ([fig 3](figs/mac_chrome_xrossorigin_access_permit.png)).
