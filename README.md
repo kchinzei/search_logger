@@ -16,7 +16,7 @@ Typically the search log looks like;
 
 Obsidian Search Logger has two components.
 
-1. Logger javascript (below), with aid of Safari extension [Userscripts](https://apps.apple.com/jp/app/userscripts/id1463298887).
+1. Logger javascript, with aid of browser extension.
 2. Python code `obsidian_logger.py` to update a search log file in the vault.
 
 The javascript is to signal to the python code about your search queries. 
@@ -31,12 +31,12 @@ I tested Chrome.app + [Tampermonkey](https://www.tampermonkey.net) and it works.
 
 ### For Linux?
 
-The javascript and `obsidian_logger.py` should work also on browsers + [Tampermonkey](https://www.tampermonkey.net) on Linux. You can use `setup_logger.py` to automatically launch `obsidian_logger.py` when GUI session starts.
-Distribution of Obsidian for Linux can be in AppImage, Snap and more. Currently I conded and tested for Snap only.
+I tested with Firefox + [Tampermonkey](https://www.tampermonkey.net) on Ubuntu 24.04. You can use `setup_logger.py` to automatically launch `obsidian_logger.py` when GUI session starts.
+Distribution of Obsidian for Linux is in AppImage, Snap and more. Currently I conded and tested for Snap only.
 
 ### For windows?
 
 Not tested...
 
 # Trouble shooting
-- [Mac](Docs/Trouble_shooting_macos.md)
+- [Mac](Trouble_shooting_macos.md)

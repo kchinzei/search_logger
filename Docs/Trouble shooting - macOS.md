@@ -7,7 +7,7 @@ tags:
 When Obsidian Search Logger does not work, try the following.
 The problem can be either the browser javascript side, the python side, or the LaunchAgent matter.
 
-### Javascript side debugging
+### Browser / Javascript side debugging
 
 1. Check userscript is activated.
    You need to activate both Userscripts (or Tampermon) extension itself and the javascript.
@@ -41,19 +41,18 @@ The problem can be either the browser javascript side, the python side, or the L
 3. Manually run `setup_logger_macos.py`
    Most likely, Privacy & Security setting in System Setting is teh source of the trouble.
 
-### TCC setting
-MacOS regulates accesses to certain user folders like `Documents`, `Desktop` and iCloud cloud storage. It is called TCC (Transparency, Consent and Control). Running a python script from LaunchAgent can be affected by this regulation. The easiest way to overcome this regulation is to provide `python3` a full-disk access privilege.
-The full-disk access privilege is powerful therfore sometimes a risk. You need to be aware of the both sides.
-`setup_logger.py` can automatically detect if any of necessary files are under TCC. Then it asks you to change the setting via System Setting.app. Because it is a security manipulation, there is no automatic ways to turn on it. Please follow this:
-#### Set full-disk access privilege
- 1. `setup_logger.py` opens SYstem Setting.app for you. You will see something like this:
-    ![before listing](figs/before.png)
- 2. Click `'+'`. to add `python3` in the list. But most likely, it is in the system folder which is invisible from Finder.
- 3. Type `⌘` and `Shift` and `G` keys to get a small window to directly type directory path.
-   ![command-shift-g](figs/command-shift-g.png)
- 4. Type the path, then type `return`. You will get a long list of commands. Find `python3` and click `Open`.
+## TCC setting
+MacOS regulates accesses to certain user folders like `Documents`, `Desktop` and iCloud storage. It is called TCC (Transparency, Consent and Control). Running a python script from LaunchAgent can be affected by this regulation. The easiest way to overcome this regulation is to allow a full-disk access to  `python3`.
+`setup_logger.py` can automatically guide you by opening System Setting.app. You need to do it by yourself.
+### Set full-disk access
+ 1. `setup_logger.py` opens System Setting.app for you. You will see something like this:
+    ![before listing](figs/mac_systemsetup_before.png)
+ 2. Click `'+'`.
+ 3. Type `⌘` and `Shift` and **`G`** keys to get a small window to type directory path.
+   ![command-shift-g](figs/mac_systemsetup_cmd-shift-g.png)
+ 4. Type the path, then type **return**. You will get a long list of commands. Find `python3` and click `Open`.
  5. You will now have `python3` in the full-disk assess list.
-    ![after listing](figs/after.png)
+    ![after listing](figs/mac_systemsetup_after.png)
 
 ---
 from README
