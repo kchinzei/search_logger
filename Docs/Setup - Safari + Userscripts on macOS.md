@@ -20,6 +20,8 @@ If it appears, apply the following.
 - Privacy & Security >> Full-disk Access >> **Python3 : ON**
   To do it, see [here](<Trouble shooting - macOS#Set full-disk access>).
 # Safari Setting
-- Settings >> Extensions >> Userscripts >> **google.com**, **google.co.jp** : **Allow**
-  You can add these manually.
+- Settings >> Extensions >> Userscripts 
+	This will show a list of URLs that Userscripts will apply ([fig1](mac_safari_extension.png)). Set **Allow** for
+	- **google.com**
+	- **google.co.jp**
 - Other sites can be **Deny** (unless you need them for other scripts).

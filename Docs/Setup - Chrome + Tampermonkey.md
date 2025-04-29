@@ -26,4 +26,8 @@ If it appears, apply the following.
 		- http://localhost:27123/*
 		- https://www.google.co.jp/*
 		- https://www.google.com/*
-	  You can add these manually.
+	You can add these manually ([fig 1](figs/mac_chrome_extension_1.png), [fig 2](mac_chrome_extension_2.png)).
+
+### Tampermonkey may ask about "cross-origin resource access"
+In the first run, Tampermonkey may ask to about "cross-origin resource access" ([fig 3](figs/mac_chrome_xrossorigin_access_permit.png)).
+If it appears, select "**Always allow**".

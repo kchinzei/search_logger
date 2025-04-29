@@ -73,7 +73,7 @@ You run it once at the beginning, or when updating Search Logger.
 To run Search Logger correctly, you need to tune the OS setting and browser extension settings.
 
 - [macOS : Safari + Userscripts](<Setup - Safari + Userscripts on macOS>)
-- macOS : Chrome + Tampermonkey
+- [macOS : Chrome + Tampermonkey](<Setup - Chrome + Tampermonkey>)
 # To uninstall
 
 1. UnInstall [Userscripts](https://apps.apple.com/jp/app/userscripts/id1463298887). Just move it to trash.
