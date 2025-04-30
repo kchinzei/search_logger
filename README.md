@@ -11,7 +11,7 @@ Typically the search log looks like;
 ### Why logging search queries?
 
 - To examine if I correctively search Internet,
-- To play back my think porcess and routes.
+- To play back my thinking process.
 ### How it works
 
 Obsidian Search Logger has two components.
@@ -25,9 +25,12 @@ The python code receives it then writes in an Obsidian vault folder.
 # [Setup](Docs/Setup.md)
 
 See [Setup](Docs/Setup.md) for install / uninstall instructions.
-### For other browsers?
+###  Which OS / browsers supported?
 
-I tested Chrome.app + [Tampermonkey](https://www.tampermonkey.net) and it works. Tampermonkey does similar to Userscripts.
+- Safari on macOS
+- Chrome on macOS
+- Firefox on Linux (Ubuntu)
+Not tested for Windows because I don't have it.
 
 ### For Linux?
 
