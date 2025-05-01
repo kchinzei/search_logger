@@ -21,10 +21,11 @@ This script assumes you use `www.google.com`  or `www.google.co.jp`. To use othe
 // ==UserScript==
 // @name         Search Logger
 // @description  https://github.com/kchinzei/search_logger.git
-// @version      0.4.1
+// @version      0.4.2
 // @match        https://www.google.com/*search*
 // @match        https://www.google.co.jp/*search*
 // @grant        GM_xmlhttpRequest
+// @connect      localhost
 // ==/UserScript==
 
 (function() {
