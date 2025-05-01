@@ -6,7 +6,7 @@ Complete steps 1 - 3 [here](Setup.md). Select  [Tampermonkey](https://www.tamper
 
 ### To add and activate the javascript
 Once Tampermonkey is installed, you should have an icon of a jigsaw puzzle. It's a shortcut to **Extension Setting**.
-- Extension setting icon >> Tampermonkey >> Three vertical dots >> Option
+- Jigsaw puzzle icon >> Tampermonkey >> Three vertical dots >> Option
 	You are now Tampermonkey setting view. Click "**+**" icon will open script editor.
 - Paste the javascript code
 - File >> Save
@@ -31,7 +31,10 @@ If it appears, apply the following.
 		- https://www.google.co.jp/*
 		- https://www.google.com/*
 	You can add these manually ([fig 1](figs/mac_chrome_extension_1.png), [fig 2](figs/mac_chrome_extension_2.png)).
-
+- Jigsaw puzzle icon >> Tampermonkey >> Three vertical dots >> Option 
+  \>> Installed UserScripts >> Search Logger >> Settings
+  \>> XHR Security >> User domain whitelist
+	- Click "**Add...**" then type "**localhost**" ([fig 3](figs/mac_chrome_tampermonkey_xhrsecurity.png))
 ### Tampermonkey may ask about "cross-origin resource access"
-In the first run, Tampermonkey may ask to about "cross-origin resource access" ([fig 3](figs/mac_chrome_xrossorigin_access_permit.png)).
+In the first run, Tampermonkey may ask to about "cross-origin resource access" ([fig 4](figs/mac_chrome_xrossorigin_access_permit.png)) or "cross-origin request privilege" ([fig 5](figs/mac_chrome_xrossorigin_request.png)).
 If it appears, select "**Always allow**".
