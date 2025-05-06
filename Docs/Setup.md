@@ -1,11 +1,17 @@
 # Obsidian Search Logger - Setup
 
+Please find detailed explanation for your OS/browser combination.
+
+- [macOS : Safari + Userscripts](<Setup - Safari + Userscripts on macOS.md>)
+- [macOS : Chrome + Tampermonkey](<Setup - Chrome + Tampermonkey.md>)
+
+# Step by step
+
 - [Step 1 Install a browser extension](<#Step 1 Install a browser extension>)
 - [Step 2 Activate javascript](<#Step 2 Activate javascript>)
 - [Step 3 Setup python script](<#Step 3 Setup python script>)
 - [Step 4 Tune OS and browser settings](<#Step 4 Tune OS and browser settings>) - See here for your OS + browser
 
-- [To uninstall](<#To uninstall>)
 ## Step 1: Install a browser extension
 
 A browser extension is necessary to run a javascript. Two extensions are available for major browsers.
@@ -15,43 +21,13 @@ A browser extension is necessary to run a javascript. Two extensions are availab
 ## Step 2: Activate javascript
 
 You create a user script and activate it. You can copy/paste the following script.
+- [search_logger.js](search_logger.js) <-- (External editor may open)
 This script assumes you use `www.google.com`  or `www.google.co.jp`. To use other search engine, modify or add `@match` value(s).
 
-```
-// ==UserScript==
-// @name         Search Logger
-// @description  https://github.com/kchinzei/search_logger.git
-// @version      0.4.2
-// @match        https://www.google.com/*search*
-// @match        https://www.google.co.jp/*search*
-// @grant        GM_xmlhttpRequest
-// @connect      localhost
-// ==/UserScript==
+You can also log google map search terms by adding following script.
+- [search_map_logger.js](search_map_logger.js) <-- (External editor may open)
 
-(function() {
-    const query = new URLSearchParams(window.location.search).get("q");
-    if (!query) return;
-    const searchUrl = `${window.location.protocol}//${window.location.host}/search?q=${encodeURIComponent(query)}`;
-		
-    GM_xmlhttpRequest({
-        method: "POST",
-        url: "http://localhost:27123",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        data: JSON.stringify({
-            query: query,
-            url: searchUrl
-        }),
-        onload: function(res) {
-            console.log("[Userscript] Sent search to Python:", res.status);
-        },
-        onerror: function(err) {
-            console.error("[Userscript] Failed to send:", err);
-        }
-    });
-})();
-```
+These scripts work for both Userscripts and Tampermonkey.
 
 ## Step 3: Setup python script
 
@@ -69,9 +45,6 @@ You run it once at the beginning, or when updating Search Logger.
 ## Step 4: Tune OS and browser settings
 
 To run Search Logger correctly, you need to tune the OS setting and browser extension settings.
-
-- [macOS : Safari + Userscripts](<Setup - Safari + Userscripts on macOS.md>)
-- [macOS : Chrome + Tampermonkey](<Setup - Chrome + Tampermonkey.md>)
 # To uninstall
 
 1. UnInstall [Userscripts](https://apps.apple.com/jp/app/userscripts/id1463298887). Just move it to trash.
