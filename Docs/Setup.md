@@ -21,11 +21,11 @@ A browser extension is necessary to run a javascript. Two extensions are availab
 ## Step 2: Activate javascript
 
 You create a user script and activate it. You can copy/paste the following script.
-- [search_logger.js](search_logger.js) <-- (External editor may open)
+- [search_logger.js](../search_logger.js) <-- (External editor may open)
 This script assumes you use `www.google.com`  or `www.google.co.jp`. To use other search engine, modify or add `@match` value(s).
 
 You can also log google map search terms by adding following script.
-- [search_map_logger.js](search_map_logger.js) <-- (External editor may open)
+- [search_map_logger.js](../search_map_logger.js) <-- (External editor may open)
 
 These scripts work for both Userscripts and Tampermonkey.
 
