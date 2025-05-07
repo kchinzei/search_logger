@@ -2,8 +2,8 @@
 // @name         Search Logger
 // @description  https://github.com/kchinzei/search_logger.git
 // @version      0.5.0
-// @match        https://www.google.com/*search*
-// @match        https://www.google.co.jp/*search*
+// @match        https://www.google.com/search*
+// @match        https://www.google.co.jp/search*
 // @grant        GM_xmlhttpRequest
 // @connect      localhost
 // ==/UserScript==

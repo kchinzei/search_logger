@@ -2,19 +2,19 @@
 // @name         Search Map Logger
 // @description  https://github.com/kchinzei/search_logger.git
 // @version      0.5.0
-// @match        https://www.google.com/maps/search*
-// @match        https://www.google.co.jp/maps/search*
+// @match        https://www.google.com/maps/place*
+// @match        https://www.google.co.jp/maps/place*
 // @grant        GM_xmlhttpRequest
 // @connect      localhost
 // ==/UserScript==
 
 (function() {
     const s = window.location.pathname;
-    const m = s.match(/^\/maps\/search\/([^\/]+)/);
+    const m = s.match(/^\/maps\/place\/([^\/]+)/);
     if (!m) return;
 
     const query = decodeURIComponent(m[1]);
-    const searchUrl = `${location.origin}/maps/search/${encodeURIComponent(query)}`;
+    const searchUrl = `${window.location.origin}/maps/place/${encodeURIComponent(query)}`;
 		
     GM_xmlhttpRequest({
         method: "POST",
