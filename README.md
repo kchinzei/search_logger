@@ -22,23 +22,6 @@ For detail, see [[#Developers]].
 	- Listener port: local server port number, match with that in the browser extension.
 	- Prepend mode: When on, new entries are inserted at the top of the note. It can make Obsidian slow the the log growing very long.
 
-## Future plan
-
-Install the extension by downloading it from the official directory for your browser:
-
-- **[Chrome Web Store](https://chromewebstore.google.com/detail/obsidian-web-clipper/cnjifjpddelmedmihgijeibhnjfabmlf)** for Chrome, Brave, Arc, Orion, and other Chromium-based browsers.
-- **[Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/web-clipper-obsidian/)** for Firefox and Firefox Mobile.
-- **[Safari Extensions](https://apps.apple.com/us/app/obsidian-web-clipper/id6720708363)** for macOS, iOS, and iPadOS.
-- **[Edge Add-Ons](https://microsoftedge.microsoft.com/addons/detail/obsidian-web-clipper/eigdjhmgnaaeaonimdklocfekkaanfme)** for Microsoft Edge.
-
-## Roadmap
-
-In no particular order:
-
-- [ ] Distribute via Web Store etc for non-developer users.
-- [ ] Segmenting log note in certain length - when it grows long, it's getting hard to manage.
-- [ ] Translate UI into other languages — help is welcomed!
-
 ## Developers
 
 To build the extension:
