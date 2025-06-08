@@ -1,0 +1,81 @@
+# Search Logger browser extension for Obsidian 
+
+It is a part of Search Logger for Obsidian. It stays in your browser (Chrome, Edge, Safar, Firefox) to capture the search terms while Obsidian is running.
+
+Due to the nature of two-pieces software, you need to install and setup 
+
+## Installation
+
+- Clone this repo.
+- Make sure your NodeJS is at least v16 (`node --version`).
+- `npm i` or `yarn` to install dependencies.
+- `npm run build` to start compilation.
+
+For detail, see [[#Developers]].
+
+## Setup
+
+- Go Extensions of your browser.
+  Find 'Search Logger' and turn on.
+- Go 'Search Logger Settings'
+	- Log note name: Filename of a note. '.md' is automatically appeded.
+	- Listener port: local server port number, match with that in the browser extension.
+	- Prepend mode: When on, new entries are inserted at the top of the note. It can make Obsidian slow the the log growing very long.
+
+## Future plan
+
+Install the extension by downloading it from the official directory for your browser:
+
+- **[Chrome Web Store](https://chromewebstore.google.com/detail/obsidian-web-clipper/cnjifjpddelmedmihgijeibhnjfabmlf)** for Chrome, Brave, Arc, Orion, and other Chromium-based browsers.
+- **[Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/web-clipper-obsidian/)** for Firefox and Firefox Mobile.
+- **[Safari Extensions](https://apps.apple.com/us/app/obsidian-web-clipper/id6720708363)** for macOS, iOS, and iPadOS.
+- **[Edge Add-Ons](https://microsoftedge.microsoft.com/addons/detail/obsidian-web-clipper/eigdjhmgnaaeaonimdklocfekkaanfme)** for Microsoft Edge.
+
+## Roadmap
+
+In no particular order:
+
+- [ ] Distribute via Web Store etc for non-developer users.
+- [ ] Segmenting log note in certain length - when it grows long, it's getting hard to manage.
+- [ ] Translate UI into other languages — help is welcomed!
+
+## Developers
+
+To build the extension:
+
+```
+npm run build
+```
+
+This will create three directories:
+- `dist/` for the Chromium version
+- `dist_firefox/` for the Firefox version
+- `dist_safari/` for the Safari version
+  For Safari on macOS and iOS, you need Xcode to compile.
+
+### Install the extension locally
+
+For Chromium browsers, such as Chrome, Brave, Edge, and Arc:
+
+1. Open your browser and navigate to `chrome://extensions`
+2. Enable **Developer mode**
+3. Click **Load unpacked** and select the `dist` directory
+
+For Firefox:
+
+1. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`
+2. Click **Load Temporary Add-on**
+3. Navigate to the `dist_firefox` directory and select the `manifest.json` file.
+
+For Safari on macOS:
+
+1. Open `Search Logger.xcodeproj` using Xcode.
+2. Build and run the project.
+3. Open Safari and navigate to Safari menu >> Preferences >> Extensions.
+4. Find 'Search Logger'.
+
+For Safari on iOS:
+
+1. Open `Search Logger.xcodeproj` using Xcode on your Mac.
+2. Connect your iOS device, build and run the project.
+   The rest should be the same for Safari on macOS.

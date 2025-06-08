@@ -6,6 +6,10 @@ cmake_install.cmake
 *.out
 .ssh/
 
+# Javascript
+node_modules/
+package-lock.json
+
 # Python
 # https://github.com/github/gitignore/blob/main/Python.gitignore
 # Byte-compiled / optimized / DLL files

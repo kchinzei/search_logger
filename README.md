@@ -1,6 +1,7 @@
-# Obsidian Search Logger
+# Search Logger for Obsidian
 
-This package helps logging your search queries in an Obsidian vault. It works for Safari on macOS.
+This package helps logging your search terms in Google, Bing.
+It works for Chrome, Edge, Safari, Firefox on Windows and macOS.
 
 Typically the search log looks like;
 
@@ -17,32 +18,11 @@ You can also log Google Map search terms
 - To play back my thinking process.
 ### How it works
 
-Obsidian Search Logger has two components.
+Search Logger has two components.
 
-1. Logger javascript, with aid of browser extension.
-2. Python code `obsidian_logger.py` to update a search log file in the vault.
+1. Browser extension
+2. Obsidian plugin
 
-The javascript is to signal to the python code about your search queries. 
-The python code receives it then writes in an Obsidian vault folder.
+The browser extension transmits the search terms and the Obsidian plugin receives it and write in an Obsidian note.
 
-# [Setup](Docs/Setup.md)
-
-See [Setup](Docs/Setup.md) for install / uninstall instructions.
-###  Which OS / browsers supported?
-
-- Safari on macOS
-- Chrome on macOS
-- Firefox on Linux (Ubuntu)
-Not tested for Windows because I don't have it.
-
-### For Linux?
-
-I tested with Firefox + [Tampermonkey](https://www.tampermonkey.net) on Ubuntu 24.04. You can use `setup_logger.py` to automatically launch `obsidian_logger.py` when GUI session starts.
-Distribution of Obsidian for Linux is in AppImage, Snap and more. Currently I conded and tested for Snap only.
-
-### For windows?
-
-Not tested...
-
-# Trouble shooting
-- [Mac](<Docs/Trouble shooting - macOS.md>)
+# Setup

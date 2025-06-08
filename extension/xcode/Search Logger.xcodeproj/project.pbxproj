@@ -1,0 +1,992 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7AEF057F2CA0F50D005FFBC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF057E2CA0F50D005FFBC2 /* AppDelegate.swift */; };
+		7AEF05812CA0F50D005FFBC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF05802CA0F50D005FFBC2 /* SceneDelegate.swift */; };
+		7AEF05842CA0F50D005FFBC2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05832CA0F50D005FFBC2 /* Base */; };
+		7AEF05872CA0F50D005FFBC2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05862CA0F50D005FFBC2 /* Base */; };
+		7AEF05902CA0F50D005FFBC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF058F2CA0F50D005FFBC2 /* AppDelegate.swift */; };
+		7AEF05932CA0F50D005FFBC2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05922CA0F50D005FFBC2 /* Base */; };
+		7AEF059B2CA0F50D005FFBC2 /* Search Logger Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7AEF059A2CA0F50D005FFBC2 /* Search Logger Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7AEF05A52CA0F50D005FFBC2 /* Search Logger Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7AEF05A42CA0F50D005FFBC2 /* Search Logger Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7AEF05AB2CA0F50D005FFBC2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF056F2CA0F50D005FFBC2 /* Base */; };
+		7AEF05AC2CA0F50D005FFBC2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF056F2CA0F50D005FFBC2 /* Base */; };
+		7AEF05AD2CA0F50D005FFBC2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05702CA0F50D005FFBC2 /* Icon.png */; };
+		7AEF05AE2CA0F50D005FFBC2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05702CA0F50D005FFBC2 /* Icon.png */; };
+		7AEF05AF2CA0F50D005FFBC2 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05712CA0F50D005FFBC2 /* Style.css */; };
+		7AEF05B02CA0F50D005FFBC2 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05712CA0F50D005FFBC2 /* Style.css */; };
+		7AEF05B12CA0F50D005FFBC2 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05722CA0F50D005FFBC2 /* Script.js */; };
+		7AEF05B22CA0F50D005FFBC2 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05722CA0F50D005FFBC2 /* Script.js */; };
+		7AEF05B32CA0F50D005FFBC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF05732CA0F50D005FFBC2 /* ViewController.swift */; };
+		7AEF05B42CA0F50D005FFBC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF05732CA0F50D005FFBC2 /* ViewController.swift */; };
+		7AEF05B52CA0F50D005FFBC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05742CA0F50D005FFBC2 /* Assets.xcassets */; };
+		7AEF05B62CA0F50D005FFBC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05742CA0F50D005FFBC2 /* Assets.xcassets */; };
+		7AEF05B72CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF05762CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift */; };
+		7AEF05B82CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF05762CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift */; };
+		B69183F42DF0EFE500530CE1 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = B69183ED2DF0EFC600530CE1 /* background.js */; };
+		B69183F52DF0EFE500530CE1 /* content.css in Resources */ = {isa = PBXBuildFile; fileRef = B69183EE2DF0EFC600530CE1 /* content.css */; };
+		B69183F62DF0EFE500530CE1 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B69183EF2DF0EFC600530CE1 /* manifest.json */; };
+		B69183F72DF0EFE500530CE1 /* options.css in Resources */ = {isa = PBXBuildFile; fileRef = B69183F02DF0EFC600530CE1 /* options.css */; };
+		B69183F82DF0EFE500530CE1 /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = B69183F12DF0EFC600530CE1 /* options.html */; };
+		B69183F92DF0EFE500530CE1 /* options.js in Resources */ = {isa = PBXBuildFile; fileRef = B69183F22DF0EFC600530CE1 /* options.js */; };
+		B69183FB2DF0F05C00530CE1 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = B69183FA2DF0F05C00530CE1 /* icons */; };
+		B6F5E20A2DF4D9B100772214 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = B69183FA2DF0F05C00530CE1 /* icons */; };
+		B6F5E20B2DF4D9BF00772214 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = B69183ED2DF0EFC600530CE1 /* background.js */; };
+		B6F5E20C2DF4D9C300772214 /* content.css in Resources */ = {isa = PBXBuildFile; fileRef = B69183EE2DF0EFC600530CE1 /* content.css */; };
+		B6F5E20D2DF4D9C800772214 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B69183EF2DF0EFC600530CE1 /* manifest.json */; };
+		B6F5E20E2DF4D9CD00772214 /* options.css in Resources */ = {isa = PBXBuildFile; fileRef = B69183F02DF0EFC600530CE1 /* options.css */; };
+		B6F5E20F2DF4D9D100772214 /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = B69183F12DF0EFC600530CE1 /* options.html */; };
+		B6F5E2102DF4D9D500772214 /* options.js in Resources */ = {isa = PBXBuildFile; fileRef = B69183F22DF0EFC600530CE1 /* options.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7AEF059C2CA0F50D005FFBC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AEF05682CA0F50C005FFBC2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AEF05992CA0F50D005FFBC2;
+			remoteInfo = "Obsidian Web Clipper Extension (iOS)";
+		};
+		7AEF05A62CA0F50D005FFBC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AEF05682CA0F50C005FFBC2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AEF05A32CA0F50D005FFBC2;
+			remoteInfo = "Obsidian Web Clipper Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7AEF05BE2CA0F50D005FFBC2 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7AEF059B2CA0F50D005FFBC2 /* Search Logger Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF05C52CA0F50D005FFBC2 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7AEF05A52CA0F50D005FFBC2 /* Search Logger Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7AEF056F2CA0F50D005FFBC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		7AEF05702CA0F50D005FFBC2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		7AEF05712CA0F50D005FFBC2 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		7AEF05722CA0F50D005FFBC2 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		7AEF05732CA0F50D005FFBC2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7AEF05742CA0F50D005FFBC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7AEF05762CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		7AEF057B2CA0F50D005FFBC2 /* Search Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Search Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AEF057E2CA0F50D005FFBC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7AEF05802CA0F50D005FFBC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7AEF05832CA0F50D005FFBC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7AEF05862CA0F50D005FFBC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7AEF05882CA0F50D005FFBC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AEF058D2CA0F50D005FFBC2 /* Search Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Search Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AEF058F2CA0F50D005FFBC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7AEF05922CA0F50D005FFBC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7AEF05942CA0F50D005FFBC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AEF05952CA0F50D005FFBC2 /* SearchLogger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SearchLogger.entitlements; sourceTree = "<group>"; };
+		7AEF059A2CA0F50D005FFBC2 /* Search Logger Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Search Logger Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AEF059F2CA0F50D005FFBC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AEF05A42CA0F50D005FFBC2 /* Search Logger Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Search Logger Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AEF05A92CA0F50D005FFBC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AEF05AA2CA0F50D005FFBC2 /* SearchLogger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SearchLogger.entitlements; sourceTree = "<group>"; };
+		B69183ED2DF0EFC600530CE1 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../dist_safari/background.js; sourceTree = "<group>"; };
+		B69183EE2DF0EFC600530CE1 /* content.css */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.css; path = ../../dist_safari/content.js; sourceTree = "<group>"; };
+		B69183EF2DF0EFC600530CE1 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../dist_safari/manifest.json; sourceTree = "<group>"; };
+		B69183F02DF0EFC600530CE1 /* options.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; name = options.css; path = ../../dist_safari/options.css; sourceTree = "<group>"; };
+		B69183F12DF0EFC600530CE1 /* options.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = options.html; path = ../../dist_safari/options.html; sourceTree = "<group>"; };
+		B69183F22DF0EFC600530CE1 /* options.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = options.js; path = ../../dist_safari/options.js; sourceTree = "<group>"; };
+		B69183FA2DF0F05C00530CE1 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = ../../dist_safari/icons; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7AEF05782CA0F50D005FFBC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF058A2CA0F50D005FFBC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF05972CA0F50D005FFBC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF05A12CA0F50D005FFBC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7AEF05672CA0F50C005FFBC2 = {
+			isa = PBXGroup;
+			children = (
+				7AEF056C2CA0F50D005FFBC2 /* Shared (App) */,
+				7AEF05752CA0F50D005FFBC2 /* Shared (Extension) */,
+				7AEF057D2CA0F50D005FFBC2 /* iOS (App) */,
+				7AEF058E2CA0F50D005FFBC2 /* macOS (App) */,
+				7AEF059E2CA0F50D005FFBC2 /* iOS (Extension) */,
+				7AEF05A82CA0F50D005FFBC2 /* macOS (Extension) */,
+				7AEF057C2CA0F50D005FFBC2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7AEF056C2CA0F50D005FFBC2 /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF05732CA0F50D005FFBC2 /* ViewController.swift */,
+				7AEF05742CA0F50D005FFBC2 /* Assets.xcassets */,
+				7AEF056D2CA0F50D005FFBC2 /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		7AEF056D2CA0F50D005FFBC2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF056E2CA0F50D005FFBC2 /* Main.html */,
+				7AEF05702CA0F50D005FFBC2 /* Icon.png */,
+				7AEF05712CA0F50D005FFBC2 /* Style.css */,
+				7AEF05722CA0F50D005FFBC2 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7AEF05752CA0F50D005FFBC2 /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				B69183F32DF0EFC600530CE1 /* Resources */,
+				7AEF05762CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		7AEF057C2CA0F50D005FFBC2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF057B2CA0F50D005FFBC2 /* Search Logger.app */,
+				7AEF058D2CA0F50D005FFBC2 /* Search Logger.app */,
+				7AEF059A2CA0F50D005FFBC2 /* Search Logger Extension.appex */,
+				7AEF05A42CA0F50D005FFBC2 /* Search Logger Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7AEF057D2CA0F50D005FFBC2 /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF057E2CA0F50D005FFBC2 /* AppDelegate.swift */,
+				7AEF05802CA0F50D005FFBC2 /* SceneDelegate.swift */,
+				7AEF05822CA0F50D005FFBC2 /* LaunchScreen.storyboard */,
+				7AEF05852CA0F50D005FFBC2 /* Main.storyboard */,
+				7AEF05882CA0F50D005FFBC2 /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		7AEF058E2CA0F50D005FFBC2 /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF058F2CA0F50D005FFBC2 /* AppDelegate.swift */,
+				7AEF05912CA0F50D005FFBC2 /* Main.storyboard */,
+				7AEF05942CA0F50D005FFBC2 /* Info.plist */,
+				7AEF05952CA0F50D005FFBC2 /* SearchLogger.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		7AEF059E2CA0F50D005FFBC2 /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF059F2CA0F50D005FFBC2 /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		7AEF05A82CA0F50D005FFBC2 /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF05A92CA0F50D005FFBC2 /* Info.plist */,
+				7AEF05AA2CA0F50D005FFBC2 /* SearchLogger.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+		B69183F32DF0EFC600530CE1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B69183FA2DF0F05C00530CE1 /* icons */,
+				B69183ED2DF0EFC600530CE1 /* background.js */,
+				B69183EE2DF0EFC600530CE1 /* content.css */,
+				B69183EF2DF0EFC600530CE1 /* manifest.json */,
+				B69183F02DF0EFC600530CE1 /* options.css */,
+				B69183F12DF0EFC600530CE1 /* options.html */,
+				B69183F22DF0EFC600530CE1 /* options.js */,
+			);
+			name = Resources;
+			path = "Shared (Extension)";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7AEF057A2CA0F50D005FFBC2 /* Search Logger (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AEF05BF2CA0F50D005FFBC2 /* Build configuration list for PBXNativeTarget "Search Logger (iOS)" */;
+			buildPhases = (
+				7AEF05772CA0F50D005FFBC2 /* Sources */,
+				7AEF05782CA0F50D005FFBC2 /* Frameworks */,
+				7AEF05792CA0F50D005FFBC2 /* Resources */,
+				7AEF05BE2CA0F50D005FFBC2 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7AEF059D2CA0F50D005FFBC2 /* PBXTargetDependency */,
+			);
+			name = "Search Logger (iOS)";
+			productName = "Obsidian Web Clipper (iOS)";
+			productReference = 7AEF057B2CA0F50D005FFBC2 /* Search Logger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7AEF058C2CA0F50D005FFBC2 /* Search Logger (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AEF05C62CA0F50D005FFBC2 /* Build configuration list for PBXNativeTarget "Search Logger (macOS)" */;
+			buildPhases = (
+				7AEF05892CA0F50D005FFBC2 /* Sources */,
+				7AEF058A2CA0F50D005FFBC2 /* Frameworks */,
+				7AEF058B2CA0F50D005FFBC2 /* Resources */,
+				7AEF05C52CA0F50D005FFBC2 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7AEF05A72CA0F50D005FFBC2 /* PBXTargetDependency */,
+			);
+			name = "Search Logger (macOS)";
+			productName = "Obsidian Web Clipper (macOS)";
+			productReference = 7AEF058D2CA0F50D005FFBC2 /* Search Logger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7AEF05992CA0F50D005FFBC2 /* Search Logger Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AEF05BB2CA0F50D005FFBC2 /* Build configuration list for PBXNativeTarget "Search Logger Extension (iOS)" */;
+			buildPhases = (
+				7AEF05962CA0F50D005FFBC2 /* Sources */,
+				7AEF05972CA0F50D005FFBC2 /* Frameworks */,
+				7AEF05982CA0F50D005FFBC2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Search Logger Extension (iOS)";
+			productName = "Obsidian Web Clipper Extension (iOS)";
+			productReference = 7AEF059A2CA0F50D005FFBC2 /* Search Logger Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		7AEF05A32CA0F50D005FFBC2 /* Search Logger Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AEF05C22CA0F50D005FFBC2 /* Build configuration list for PBXNativeTarget "Search Logger Extension (macOS)" */;
+			buildPhases = (
+				7AEF05A02CA0F50D005FFBC2 /* Sources */,
+				7AEF05A12CA0F50D005FFBC2 /* Frameworks */,
+				7AEF05A22CA0F50D005FFBC2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Search Logger Extension (macOS)";
+			productName = "Obsidian Web Clipper Extension (macOS)";
+			productReference = 7AEF05A42CA0F50D005FFBC2 /* Search Logger Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7AEF05682CA0F50C005FFBC2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					7AEF057A2CA0F50D005FFBC2 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					7AEF058C2CA0F50D005FFBC2 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					7AEF05992CA0F50D005FFBC2 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					7AEF05A32CA0F50D005FFBC2 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = 7AEF056B2CA0F50C005FFBC2 /* Build configuration list for PBXProject "Search Logger" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7AEF05672CA0F50C005FFBC2;
+			productRefGroup = 7AEF057C2CA0F50D005FFBC2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7AEF057A2CA0F50D005FFBC2 /* Search Logger (iOS) */,
+				7AEF058C2CA0F50D005FFBC2 /* Search Logger (macOS) */,
+				7AEF05992CA0F50D005FFBC2 /* Search Logger Extension (iOS) */,
+				7AEF05A32CA0F50D005FFBC2 /* Search Logger Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7AEF05792CA0F50D005FFBC2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AEF05AD2CA0F50D005FFBC2 /* Icon.png in Resources */,
+				7AEF05842CA0F50D005FFBC2 /* Base in Resources */,
+				7AEF05AB2CA0F50D005FFBC2 /* Base in Resources */,
+				7AEF05B12CA0F50D005FFBC2 /* Script.js in Resources */,
+				7AEF05B52CA0F50D005FFBC2 /* Assets.xcassets in Resources */,
+				7AEF05872CA0F50D005FFBC2 /* Base in Resources */,
+				7AEF05AF2CA0F50D005FFBC2 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF058B2CA0F50D005FFBC2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AEF05AE2CA0F50D005FFBC2 /* Icon.png in Resources */,
+				7AEF05B02CA0F50D005FFBC2 /* Style.css in Resources */,
+				7AEF05932CA0F50D005FFBC2 /* Base in Resources */,
+				7AEF05B22CA0F50D005FFBC2 /* Script.js in Resources */,
+				7AEF05B62CA0F50D005FFBC2 /* Assets.xcassets in Resources */,
+				7AEF05AC2CA0F50D005FFBC2 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF05982CA0F50D005FFBC2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6F5E2102DF4D9D500772214 /* options.js in Resources */,
+				B6F5E20F2DF4D9D100772214 /* options.html in Resources */,
+				B6F5E20E2DF4D9CD00772214 /* options.css in Resources */,
+				B6F5E20D2DF4D9C800772214 /* manifest.json in Resources */,
+				B6F5E20C2DF4D9C300772214 /* content.css in Resources */,
+				B6F5E20B2DF4D9BF00772214 /* background.js in Resources */,
+				B69183FB2DF0F05C00530CE1 /* icons in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF05A22CA0F50D005FFBC2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6F5E20A2DF4D9B100772214 /* icons in Resources */,
+				B69183F42DF0EFE500530CE1 /* background.js in Resources */,
+				B69183F52DF0EFE500530CE1 /* content.css in Resources */,
+				B69183F62DF0EFE500530CE1 /* manifest.json in Resources */,
+				B69183F72DF0EFE500530CE1 /* options.css in Resources */,
+				B69183F82DF0EFE500530CE1 /* options.html in Resources */,
+				B69183F92DF0EFE500530CE1 /* options.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7AEF05772CA0F50D005FFBC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AEF05B32CA0F50D005FFBC2 /* ViewController.swift in Sources */,
+				7AEF057F2CA0F50D005FFBC2 /* AppDelegate.swift in Sources */,
+				7AEF05812CA0F50D005FFBC2 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF05892CA0F50D005FFBC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AEF05B42CA0F50D005FFBC2 /* ViewController.swift in Sources */,
+				7AEF05902CA0F50D005FFBC2 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF05962CA0F50D005FFBC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AEF05B72CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AEF05A02CA0F50D005FFBC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AEF05B82CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7AEF059D2CA0F50D005FFBC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AEF05992CA0F50D005FFBC2 /* Search Logger Extension (iOS) */;
+			targetProxy = 7AEF059C2CA0F50D005FFBC2 /* PBXContainerItemProxy */;
+		};
+		7AEF05A72CA0F50D005FFBC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AEF05A32CA0F50D005FFBC2 /* Search Logger Extension (macOS) */;
+			targetProxy = 7AEF05A62CA0F50D005FFBC2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7AEF056E2CA0F50D005FFBC2 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AEF056F2CA0F50D005FFBC2 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		7AEF05822CA0F50D005FFBC2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AEF05832CA0F50D005FFBC2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7AEF05852CA0F50D005FFBC2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AEF05862CA0F50D005FFBC2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7AEF05912CA0F50D005FFBC2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AEF05922CA0F50D005FFBC2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7AEF05B92CA0F50D005FFBC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 33XQ7GUGW3;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7AEF05BA2CA0F50D005FFBC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 33XQ7GUGW3;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		7AEF05BC2CA0F50D005FFBC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Search Logger Extension for Obsidian";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.search-logger.Extension";
+				PRODUCT_NAME = "Search Logger Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7AEF05BD2CA0F50D005FFBC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Search Logger Extension for Obsidian";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.search-logger.Extension";
+				PRODUCT_NAME = "Search Logger Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7AEF05C02CA0F50D005FFBC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Search Logger for Obsidian";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.search-logger";
+				PRODUCT_NAME = "Search Logger";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7AEF05C12CA0F50D005FFBC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Search Logger for Obsidian";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.search-logger";
+				PRODUCT_NAME = "Search Logger";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7AEF05C32CA0F50D005FFBC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/SearchLogger.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 36;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "Shared\\ (App)/Assets.xcassets";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Search Logger Extension for Obsidian";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.search-logger.Extension";
+				PRODUCT_NAME = "Search Logger Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7AEF05C42CA0F50D005FFBC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/SearchLogger.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 36;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "Shared\\ (App)/Assets.xcassets";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Search Logger Extension for Obsidian";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.search-logger.Extension";
+				PRODUCT_NAME = "Search Logger Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		7AEF05C72CA0F50D005FFBC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/SearchLogger.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Search Logger for Obsidian";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.search-logger";
+				PRODUCT_NAME = "Search Logger";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7AEF05C82CA0F50D005FFBC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/SearchLogger.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Search Logger for Obsidian";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.search-logger";
+				PRODUCT_NAME = "Search Logger";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7AEF056B2CA0F50C005FFBC2 /* Build configuration list for PBXProject "Search Logger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AEF05B92CA0F50D005FFBC2 /* Debug */,
+				7AEF05BA2CA0F50D005FFBC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AEF05BB2CA0F50D005FFBC2 /* Build configuration list for PBXNativeTarget "Search Logger Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AEF05BC2CA0F50D005FFBC2 /* Debug */,
+				7AEF05BD2CA0F50D005FFBC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AEF05BF2CA0F50D005FFBC2 /* Build configuration list for PBXNativeTarget "Search Logger (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AEF05C02CA0F50D005FFBC2 /* Debug */,
+				7AEF05C12CA0F50D005FFBC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AEF05C22CA0F50D005FFBC2 /* Build configuration list for PBXNativeTarget "Search Logger Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AEF05C32CA0F50D005FFBC2 /* Debug */,
+				7AEF05C42CA0F50D005FFBC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AEF05C62CA0F50D005FFBC2 /* Build configuration list for PBXNativeTarget "Search Logger (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AEF05C72CA0F50D005FFBC2 /* Debug */,
+				7AEF05C82CA0F50D005FFBC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7AEF05682CA0F50C005FFBC2 /* Project object */;
+}
