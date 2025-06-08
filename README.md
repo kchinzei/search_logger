@@ -56,9 +56,3 @@ For Safari on macOS:
 2. Build and run the project.
 3. Open Safari and navigate to Safari menu >> Preferences >> Extensions.
 4. Find 'Search Logger'.
-
-For Safari on iOS:
-
-1. Open `Search Logger.xcodeproj` using Xcode on your Mac.
-2. Connect your iOS device, build and run the project.
-   The rest should be the same for Safari on macOS.
