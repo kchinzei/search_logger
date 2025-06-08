@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Search Logger for Obsidian",
+  "version": "1.0.0",
+  "description": "Logs Google/Bing search terms into Obsidian note.",
+
+  "default_locale": "en",
+  "options_page": "options.html",
+
+  "permissions": [
+    "storage"
+  ],
+
+  "host_permissions": [
+    "https://www.google.com/*",
+    "https://www.google.co.jp/*",
+    "https://www.bing.com/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/search*",
+        "https://www.google.co.jp/search*",
+        "https://www.google.com/maps*",
+        "https://www.google.co.jp/maps*",
+        "https://www.bing.com/search*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
+}
