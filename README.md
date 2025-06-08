@@ -26,3 +26,14 @@ Search Logger has two components.
 The browser extension transmits the search terms and the Obsidian plugin receives it and write in an Obsidian note.
 
 # Setup
+
+- For browser extension, see [here](extension/README.md).
+- For Obsidian plugin, see [here](plugin/README.md).
+## Roadmap
+
+In no particular order:
+
+- [ ] Distribute via Web Store etc for non-developer users.
+- [ ] Segmenting log note in certain length - when it grows long, it's getting hard to manage.
+- [ ] Translate UI into other languages.
+- [ ] App/Extension for Safari on iOS/iPadOS -- current implementation won't work on these devices.
