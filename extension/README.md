@@ -2,7 +2,7 @@
 
 It is a part of Search Logger for Obsidian. It stays in your browser (Chrome, Edge, Safar, Firefox) to capture the search terms while Obsidian is running.
 
-Due to the nature of two-pieces software, you need to install and setup 
+Due to the nature of two-pieces software, you need to install and setup both extension and plugin.
 
 ## Installation
 
