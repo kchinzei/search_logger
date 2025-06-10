@@ -1,5 +1,5 @@
 # Search Logger for Obsidian
-
+![](extension/src/icons/icon128.png)
 This package helps logging your search terms in Google, Bing.
 It works for Chrome, Edge, Safari, Firefox on Windows and macOS.
 
@@ -37,3 +37,7 @@ In no particular order:
 - [ ] Segmenting log note in certain length - when it grows long, it's getting hard to manage.
 - [ ] Translate UI into other languages.
 - [ ] App/Extension for Safari on iOS/iPadOS -- current implementation won't work on these devices.
+
+## About the icon ![](extension/src/icons/icon48.png)
+
+Icon image was originally designed by "Innovative Pulse" Team, Gang of Five in Brain Workout Journey 2025.
