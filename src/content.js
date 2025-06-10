@@ -17,7 +17,7 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-// console.log("SearchLogger ↔ content: loaded on", location.href);
+console.log("SearchLogger ↔ content: loaded on", location.href);
 
 chrome.storage.local.get(['port', 'engines'], ({ port = 27123, engines = {} }) => {
   const isGoogle = engines.google ?? false;
@@ -29,7 +29,7 @@ chrome.storage.local.get(['port', 'engines'], ({ port = 27123, engines = {} }) =
 
   const isGoogleSearch = isGoogle && hostname.includes('google.') && pathname.includes('/search');
   const isGoogleMaps = isMaps && hostname.includes('google.') && pathname.includes('/maps');
-  const isBingSearch = isBing && hostname === 'www.bing.com' && pathname === '/search';
+  const isBingSearch = isBing && hostname.includes('bing.com') && pathname.includes('/search');
 
   if (!(isGoogleSearch || isGoogleMaps || isBingSearch)) return;
 
