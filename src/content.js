@@ -17,27 +17,77 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-console.log("SearchLogger ↔ content: loaded on", location.href);
+console.log('SearchLogger ↔ content: loaded on', location.href);
 
-chrome.storage.local.get(['port', 'engines'], ({ port = 27123, engines = {} }) => {
-  const isGoogle = engines.google ?? false;
-  const isMaps = engines.maps ?? false;
-  const isBing = engines.bing ?? false;
+function getQuery() {
+  var url = new URL(location.href);
+  return url.searchParams.get('q');
+}
 
-  const hostname = location.hostname;
-  const pathname = location.pathname;
+function logSearch(items) {
+  var port = (items && items.port) ? items.port : 27123;
+  var engines = (items && items.engines) ? items.engines : {};
 
-  const isGoogleSearch = isGoogle && hostname.includes('google.') && pathname.includes('/search');
-  const isGoogleMaps = isMaps && hostname.includes('google.') && pathname.includes('/maps');
-  const isBingSearch = isBing && hostname.includes('bing.com') && pathname.includes('/search');
+  var isGoogle = engines.google || false;
+  var isMaps = engines.maps || false;
+  var isBing = engines.bing || false;
+
+  var hostname = location.hostname;
+  var pathname = location.pathname;
+
+  var isGoogleSearch = isGoogle && hostname.includes('google.') && pathname.includes('/search');
+  var isGoogleMaps = isMaps && hostname.includes('google.') && pathname.includes('/maps');
+  var isBingSearch = isBing && hostname.includes('bing.com') && pathname.includes('/search');
 
   if (!(isGoogleSearch || isGoogleMaps || isBingSearch)) return;
 
-  const query = new URLSearchParams(window.location.search).get('q');
+  var query = getQuery();
   if (!query) return;
 
-  const url = location.href;
-  const timestamp = new Date().toISOString();
+  var url = location.href;
+  var timestamp = new Date().toISOString();
 
-  chrome.runtime.sendMessage({ query, url, timestamp, port });
+  chrome.runtime.sendMessage({ query: query, url: url, timestamp: timestamp, port: port });
+}
+
+function monitorUrlChange(callback) {
+  var lastUrl = location.href;
+
+  // Poll every 500ms to catch all URL changes (SPA, etc)
+  setInterval(function() {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      callback();
+    }
+  }, 500);
+
+  // Listen to popstate (back/forward)
+  window.addEventListener('popstate', function() {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      callback();
+    }
+  });
+
+  // Patch pushState and replaceState to call callback after navigation
+  ['pushState', 'replaceState'].forEach(function(type) {
+    var orig = history[type];
+    history[type] = function() {
+      var rv = orig.apply(this, arguments);
+      if (location.href !== lastUrl) {
+        lastUrl = location.href;
+        callback();
+      }
+      return rv;
+    };
+  });
+}
+
+// Main logic
+chrome.storage.local.get(['port', 'engines'], function(items) {
+  logSearch(items);
+
+  monitorUrlChange(function() {
+    logSearch(items);
+  });
 });
