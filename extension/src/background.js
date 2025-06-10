@@ -17,7 +17,7 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-// console.log("SearchLogger ↔ background: script started");
+console.log("SearchLogger ↔ background: script started");
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   console.log('[SearchLogger BG] Received message:', msg);
