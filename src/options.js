@@ -27,8 +27,9 @@ function saveSettings() {
   const port = Number.isNaN(parsedPort) ? -1 : parsedPort;
 
   const enableGoogle = document.getElementById('enable-google').checked;
-  const enableMaps = document.getElementById('enable-maps').checked;
-  const enableBing = document.getElementById('enable-bing').checked;
+  const enableG_Maps = document.getElementById('enable-g-maps').checked;
+  const enableBing   = document.getElementById('enable-bing').checked;
+  const enableB_Maps = document.getElementById('enable-b-maps').checked;
 
   const portError = document.getElementById('port-error');
   if (!validatePort(port)) {
@@ -42,8 +43,9 @@ function saveSettings() {
     port,
     engines: {
       google: enableGoogle,
-      maps: enableMaps,
-      bing: enableBing
+      g_maps: enableG_Maps,
+      bing: enableBing,
+      b_maps: enableB_Maps
     }
   }, () => {
     showNotice();
@@ -52,8 +54,9 @@ function saveSettings() {
 
 document.getElementById('port').addEventListener('input', saveSettings);
 document.getElementById('enable-google').addEventListener('change', saveSettings);
-document.getElementById('enable-maps').addEventListener('change', saveSettings);
+document.getElementById('enable-g-maps').addEventListener('change', saveSettings);
 document.getElementById('enable-bing').addEventListener('change', saveSettings);
+document.getElementById('enable-b-maps').addEventListener('change', saveSettings);
 
 async function restoreOptions() {
   const result = await chrome.storage.local.get(['port', 'engines']);
@@ -61,8 +64,9 @@ async function restoreOptions() {
 
   const engines = result.engines || {};
   document.getElementById('enable-google').checked = engines.google ?? true;
-  document.getElementById('enable-maps').checked = engines.maps ?? true;
-  document.getElementById('enable-bing').checked = engines.bing ?? false;
+  document.getElementById('enable-g-maps').checked = engines.g_maps ?? true;
+  document.getElementById('enable-bing').checked   = engines.bing ?? false;
+  document.getElementById('enable-b-maps').checked = engines.b_maps ?? true;
 }
 
 function showNotice() {

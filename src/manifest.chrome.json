@@ -22,7 +22,8 @@
         "https://www.google.co.jp/search*",
         "https://www.google.com/maps*",
         "https://www.google.co.jp/maps*",
-        "https://www.bing.com/search*"
+        "https://www.bing.com/search*",
+	"https://www.bing.com/maps*"
       ],
       "js": ["content.js"]
     }
