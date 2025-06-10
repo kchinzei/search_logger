@@ -1,5 +1,5 @@
-# Search Logger for Obsidian
-![](extension/src/icons/icon128.png)
+# Search Logger for Obsidian ![](extension/src/icons/icon128.png)
+
 This package helps logging your search terms in Google, Bing.
 It works for Chrome, Edge, Safari, Firefox on Windows and macOS.
 
