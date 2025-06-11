@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
 
   const getOutputDir = () => {
     if (isProduction) {
-      return isFirefox ? 'dist_firefox' : (isSafari ? 'dist_safari' : 'dist');
+      return isFirefox ? 'dist_firefox' : (isSafari ? 'dist_safari' : 'dist_chromium');
     } else {
       return isFirefox ? 'dev_firefox' : (isSafari ? 'dev_safari' : 'dev');
     }
