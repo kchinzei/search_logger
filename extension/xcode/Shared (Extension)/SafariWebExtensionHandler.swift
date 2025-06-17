@@ -2,7 +2,7 @@
 //  SafariWebExtensionHandler.swift
 //  Shared (Extension)
 //
-//  Created by ゆき on 2025/05/25.
+//  Created by iyo Chinzei on 2025/05/25.
 //
 
 import SafariServices
