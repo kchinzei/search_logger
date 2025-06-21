@@ -31,7 +31,7 @@ npm run build
 ```
 
 This will create three directories:
-- `dist/` for the Chromium version
+- `dist_chromium/` for the Chromium version
 - `dist_firefox/` for the Firefox version
 - `dist_safari/` for the Safari version
   For Safari on macOS and iOS, you need Xcode to compile.
@@ -42,7 +42,7 @@ For Chromium browsers, such as Chrome, Brave, Edge, and Arc:
 
 1. Open your browser and navigate to `chrome://extensions`
 2. Enable **Developer mode**
-3. Click **Load unpacked** and select the `dist` directory
+3. Click **Load unpacked** and select the `dist_chromium` folder
 
 For Firefox:
 
