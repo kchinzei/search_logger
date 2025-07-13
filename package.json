@@ -1,6 +1,6 @@
 {
 	"name": "search-logger",
-	"version": "1.0.0",
+	"version": "1.0.3",
 	"description": "Search Logger for Obsidian.",
 	"scripts": {
 		"dev:chrome": "webpack --watch --env BROWSER=chrome --mode development",
