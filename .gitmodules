@@ -1,0 +1,6 @@
+[submodule "plugin"]
+	path = plugin
+	url = https://github.com/kchinzei/search_logger_plugin.git
+[submodule "extension"]
+	path = extension
+	url = https://github.com/kchinzei/search_logger_extension.git
