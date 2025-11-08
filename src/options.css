@@ -33,6 +33,13 @@ h1 {
   margin-bottom: 1em;
 }
 
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--divider-color);
+}
+
 .section {
   margin-bottom: 2em;
   padding-bottom: 1em;
@@ -47,8 +54,20 @@ h1 {
   padding-left: 0.6em;
 }
 
+/* Hide the whole Connection section on iOS */
+body.ios .connection-section {
+  display: none;
+}
+
+#port-fieldset {
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
 .setting-group {
-  margin-bottom: 1em;
+  margin: 0 0 1em 1.5em; /* left indent from <h2> */
 }
 
 .setting-group label {
@@ -59,7 +78,8 @@ h1 {
   margin: 0.4em 0;
 }
 
-.setting-group input[type="text"] {
+.setting-group input[type="text"],
+.setting-group input[type="number"] {
   width: 6em;
   padding: 4px 6px;
   font-size: 1em;
@@ -95,3 +115,49 @@ h1 {
   transition: opacity 0.3s ease;
   z-index: 9999;
 }
+
+/* === Hard override for close button shape ========================= */
+/* Close button (SVG version, perfect circle) */
+.close-button {
+  /* exact square */
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+
+  /* keep our intended appearance */
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-sizing: content-box;
+
+  background: var(--interactive-accent);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+.close-button:hover {
+  opacity: 0.9;
+}
+.close-button:active {
+  transform: scale(0.95);
+}
+
+/* SVG inherits white stroke; scale nicely */
+.close-button svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+/* optional nicety */
+.switch-row { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+#port-fieldset.dimmed { opacity: .5; }
+#port-fieldset.dimmed input { pointer-events: none; }

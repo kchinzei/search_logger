@@ -31,6 +31,19 @@
 		7AEF05B62CA0F50D005FFBC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AEF05742CA0F50D005FFBC2 /* Assets.xcassets */; };
 		7AEF05B72CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF05762CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift */; };
 		7AEF05B82CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEF05762CA0F50D005FFBC2 /* SafariWebExtensionHandler.swift */; };
+		B65F57372EBE178E00DF150D /* logview.html in Resources */ = {isa = PBXBuildFile; fileRef = B65F57362EBE178E00DF150D /* logview.html */; };
+		B65F57382EBE178E00DF150D /* logview.html in Resources */ = {isa = PBXBuildFile; fileRef = B65F57362EBE178E00DF150D /* logview.html */; };
+		B65F573A2EBE17A300DF150D /* logview.js in Resources */ = {isa = PBXBuildFile; fileRef = B65F57392EBE17A300DF150D /* logview.js */; };
+		B65F573B2EBE17A300DF150D /* logview.js in Resources */ = {isa = PBXBuildFile; fileRef = B65F57392EBE17A300DF150D /* logview.js */; };
+		B65F573D2EBE17CD00DF150D /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = B65F573C2EBE17CD00DF150D /* popup.html */; };
+		B65F573E2EBE17CD00DF150D /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = B65F573C2EBE17CD00DF150D /* popup.html */; };
+		B65F57412EBE17E600DF150D /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = B65F573F2EBE17E600DF150D /* popup.js */; };
+		B65F57432EBE17FA00DF150D /* settings.js in Resources */ = {isa = PBXBuildFile; fileRef = B65F57422EBE17FA00DF150D /* settings.js */; };
+		B65F57442EBE17FA00DF150D /* settings.js in Resources */ = {isa = PBXBuildFile; fileRef = B65F57422EBE17FA00DF150D /* settings.js */; };
+		B6661E472EBECFDD00D63CDC /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = B6661E462EBECFDD00D63CDC /* popup.js */; };
+		B6661E492EBEDB6000D63CDC /* options.css in Resources */ = {isa = PBXBuildFile; fileRef = B6661E482EBEDB5400D63CDC /* options.css */; };
+		B6661E4B2EBF035100D63CDC /* logview.css in Resources */ = {isa = PBXBuildFile; fileRef = B6661E4A2EBF035100D63CDC /* logview.css */; };
+		B6661E4C2EBF035100D63CDC /* logview.css in Resources */ = {isa = PBXBuildFile; fileRef = B6661E4A2EBF035100D63CDC /* logview.css */; };
 		B69183F42DF0EFE500530CE1 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = B69183ED2DF0EFC600530CE1 /* background.js */; };
 		B69183F62DF0EFE500530CE1 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B69183EF2DF0EFC600530CE1 /* manifest.json */; };
 		B69183F72DF0EFE500530CE1 /* options.css in Resources */ = {isa = PBXBuildFile; fileRef = B69183F02DF0EFC600530CE1 /* options.css */; };
@@ -40,7 +53,6 @@
 		B6F5E20A2DF4D9B100772214 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = B69183FA2DF0F05C00530CE1 /* icons */; };
 		B6F5E20B2DF4D9BF00772214 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = B69183ED2DF0EFC600530CE1 /* background.js */; };
 		B6F5E20D2DF4D9C800772214 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B69183EF2DF0EFC600530CE1 /* manifest.json */; };
-		B6F5E20E2DF4D9CD00772214 /* options.css in Resources */ = {isa = PBXBuildFile; fileRef = B69183F02DF0EFC600530CE1 /* options.css */; };
 		B6F5E20F2DF4D9D100772214 /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = B69183F12DF0EFC600530CE1 /* options.html */; };
 		B6F5E2102DF4D9D500772214 /* options.js in Resources */ = {isa = PBXBuildFile; fileRef = B69183F22DF0EFC600530CE1 /* options.js */; };
 /* End PBXBuildFile section */
@@ -112,6 +124,14 @@
 		7AEF05A42CA0F50D005FFBC2 /* Search Logger Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Search Logger Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AEF05A92CA0F50D005FFBC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AEF05AA2CA0F50D005FFBC2 /* SearchLogger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SearchLogger.entitlements; sourceTree = "<group>"; };
+		B65F57362EBE178E00DF150D /* logview.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = logview.html; path = ../dist_safari/logview.html; sourceTree = SOURCE_ROOT; };
+		B65F57392EBE17A300DF150D /* logview.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = logview.js; path = ../dist_safari/logview.js; sourceTree = SOURCE_ROOT; };
+		B65F573C2EBE17CD00DF150D /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = popup.html; path = ../dist_safari/popup.html; sourceTree = SOURCE_ROOT; };
+		B65F573F2EBE17E600DF150D /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = popup.js; path = ../dist_safari/popup.js; sourceTree = SOURCE_ROOT; };
+		B65F57422EBE17FA00DF150D /* settings.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = settings.js; path = ../dist_safari/settings.js; sourceTree = SOURCE_ROOT; };
+		B6661E462EBECFDD00D63CDC /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
+		B6661E482EBEDB5400D63CDC /* options.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = options.css; sourceTree = "<group>"; };
+		B6661E4A2EBF035100D63CDC /* logview.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; name = logview.css; path = ../dist_safari/logview.css; sourceTree = SOURCE_ROOT; };
 		B69183ED2DF0EFC600530CE1 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../dist_safari/background.js; sourceTree = "<group>"; };
 		B69183EF2DF0EFC600530CE1 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../dist_safari/manifest.json; sourceTree = "<group>"; };
 		B69183F02DF0EFC600530CE1 /* options.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; name = options.css; path = ../../dist_safari/options.css; sourceTree = "<group>"; };
@@ -232,6 +252,8 @@
 		7AEF059E2CA0F50D005FFBC2 /* iOS (Extension) */ = {
 			isa = PBXGroup;
 			children = (
+				B6661E482EBEDB5400D63CDC /* options.css */,
+				B6661E462EBECFDD00D63CDC /* popup.js */,
 				7AEF059F2CA0F50D005FFBC2 /* Info.plist */,
 			);
 			path = "iOS (Extension)";
@@ -249,13 +271,19 @@
 		B69183F32DF0EFC600530CE1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4405DE162DF7EAC7004C3E9D /* content.js */,
 				B69183FA2DF0F05C00530CE1 /* icons */,
 				B69183ED2DF0EFC600530CE1 /* background.js */,
+				4405DE162DF7EAC7004C3E9D /* content.js */,
+				B6661E4A2EBF035100D63CDC /* logview.css */,
+				B65F57362EBE178E00DF150D /* logview.html */,
+				B65F57392EBE17A300DF150D /* logview.js */,
 				B69183EF2DF0EFC600530CE1 /* manifest.json */,
 				B69183F02DF0EFC600530CE1 /* options.css */,
 				B69183F12DF0EFC600530CE1 /* options.html */,
 				B69183F22DF0EFC600530CE1 /* options.js */,
+				B65F573C2EBE17CD00DF150D /* popup.html */,
+				B65F573F2EBE17E600DF150D /* popup.js */,
+				B65F57422EBE17FA00DF150D /* settings.js */,
 			);
 			name = Resources;
 			path = "Shared (Extension)";
@@ -415,11 +443,17 @@
 			files = (
 				B6F5E2102DF4D9D500772214 /* options.js in Resources */,
 				B6F5E20F2DF4D9D100772214 /* options.html in Resources */,
-				B6F5E20E2DF4D9CD00772214 /* options.css in Resources */,
+				B6661E472EBECFDD00D63CDC /* popup.js in Resources */,
+				B65F573B2EBE17A300DF150D /* logview.js in Resources */,
+				B6661E492EBEDB6000D63CDC /* options.css in Resources */,
 				B6F5E20D2DF4D9C800772214 /* manifest.json in Resources */,
+				B65F573D2EBE17CD00DF150D /* popup.html in Resources */,
+				B6661E4C2EBF035100D63CDC /* logview.css in Resources */,
 				B6F5E20B2DF4D9BF00772214 /* background.js in Resources */,
 				4405DE172DF7EAC7004C3E9D /* content.js in Resources */,
 				B69183FB2DF0F05C00530CE1 /* icons in Resources */,
+				B65F57372EBE178E00DF150D /* logview.html in Resources */,
+				B65F57432EBE17FA00DF150D /* settings.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,11 +463,17 @@
 			files = (
 				B6F5E20A2DF4D9B100772214 /* icons in Resources */,
 				B69183F42DF0EFE500530CE1 /* background.js in Resources */,
+				B65F573A2EBE17A300DF150D /* logview.js in Resources */,
 				B69183F62DF0EFE500530CE1 /* manifest.json in Resources */,
 				B69183F72DF0EFE500530CE1 /* options.css in Resources */,
+				B65F573E2EBE17CD00DF150D /* popup.html in Resources */,
 				B69183F82DF0EFE500530CE1 /* options.html in Resources */,
+				B6661E4B2EBF035100D63CDC /* logview.css in Resources */,
+				B65F57412EBE17E600DF150D /* popup.js in Resources */,
 				4405DE182DF7EAC7004C3E9D /* content.js in Resources */,
 				B69183F92DF0EFE500530CE1 /* options.js in Resources */,
+				B65F57382EBE178E00DF150D /* logview.html in Resources */,
+				B65F57442EBE17FA00DF150D /* settings.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +701,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -694,7 +734,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -735,7 +775,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -776,7 +816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -814,7 +854,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -848,7 +888,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -887,7 +927,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -927,7 +967,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,

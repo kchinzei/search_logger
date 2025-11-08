@@ -17,9 +17,24 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-console.log('SearchLogger ↔ content: loaded on', location.href);
+export {};  // marks this file as an ES module
 
-function getQuery() {
+import { loadSettings } from './settings';
+
+interface EnginesSettings {
+  google?: boolean;
+  g_maps?: boolean;
+  bing?: boolean;
+  b_maps?: boolean;
+}
+
+interface StoredSettings {
+  useExternal?: boolean;
+  port?: number;
+  engines?: EnginesSettings;
+}
+
+function getQuery(): string | null {
   const url = new URL(location.href);
 
   // Standard search: ?q=...
@@ -28,18 +43,17 @@ function getQuery() {
   return null;
 }
 
-function getG_MapQuery() {
-  const url = new URL(location.href);
+function getG_MapQuery(): string | null {
   const pathname = location.pathname;
 
   // Google Maps: /maps/(place|search)/something
   const m = pathname.match(/^\/maps\/(place|search)\/([^\/]+)/);
-  if (m) return decodeURIComponent(m[2]).replaceAll('+', ' ');
+  if (m) return decodeURIComponent(m[2]).replace(/\+/g, ' ');
 
   return null;
 }
 
-function getB_MapQuery() {
+function getB_MapQuery(): string | null {
   const url = new URL(location.href);
   const pathname = location.pathname;
 
@@ -48,48 +62,64 @@ function getB_MapQuery() {
   if (url.searchParams.has('cp')) return url.searchParams.get('cp');
   // ?q= is not great as a search term - not updated by clicks.
   if (url.searchParams.has('q')) return url.searchParams.get('q');
+
   // Also support /maps/POIName/...
   const m = pathname.match(/^\/maps\/([^\/]+)/);
-  if (m && m[1] !== 'maps') return decodeURIComponent(m[1]).replaceAll('+', ' ');
+  if (m && m[1] !== 'maps') return decodeURIComponent(m[1]).replace(/\+/g, ' ');
 
   return null;
 }
 
-function logSearch(items) {
-  var port = (items && items.port) ? items.port : 27123;
-  var engines = (items && items.engines) ? items.engines : {};
+function localISOString(date: Date = new Date()): string {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return (
+    date.getFullYear() + '-' +
+    pad(date.getMonth() + 1) + '-' +
+    pad(date.getDate()) + ' ' +
+    pad(date.getHours()) + ':' +
+    pad(date.getMinutes())
+  );
+}
 
-  var enableGoogle = engines.google || false;
-  var enableG_Maps = engines.g_maps || false;
-  var enableBing   = engines.bing   || false;
-  var enableB_Maps = engines.b_maps || false;
+function logSearch(items: StoredSettings): void {
+  let port = (items && typeof items.port === 'number') ? items.port : 27123;
+  const engines: EnginesSettings = (items && items.engines) ? items.engines : {};
 
-  var hostname = location.hostname;
-  var pathname = location.pathname;
+  // When useExternal is disabled, set port to 0 to disable sending it external.
+  const useExternal = items && items.useExternal;
+  if (useExternal === false) port = 0;
 
-  var isGoogle = enableGoogle && hostname.includes('google.') && pathname.startsWith('/search');
-  var isG_Maps = enableG_Maps && hostname.includes('google.') && pathname.startsWith('/maps/');
-  var isBing   = enableBing   && hostname.includes('bing.com') && pathname.startsWith('/search');
-  var isB_Maps = enableB_Maps && hostname.includes('bing.com') && pathname.startsWith('/maps');
+  const enableGoogle = !!engines.google;
+  const enableG_Maps = !!engines.g_maps;
+  const enableBing   = !!engines.bing;
+  const enableB_Maps = !!engines.b_maps;
+
+  const hostname = location.hostname;
+  const pathname = location.pathname;
+
+  const isGoogle = enableGoogle && hostname.includes('google.') && pathname.startsWith('/search');
+  const isG_Maps = enableG_Maps && hostname.includes('google.') && pathname.startsWith('/maps/');
+  const isBing   = enableBing   && hostname.includes('bing.com') && pathname.startsWith('/search');
+  const isB_Maps = enableB_Maps && hostname.includes('bing.com') && pathname.startsWith('/maps');
 
   if (!(isGoogle || isG_Maps || isBing || isB_Maps)) return;
 
-  var query = getQuery();
+  let query: string | null = getQuery();
   if (isG_Maps) query = getG_MapQuery();
   if (isB_Maps) query = getB_MapQuery();
   if (!query) return;
 
-  var url = location.href;
-  var timestamp = new Date().toISOString();
+  const url = location.href;
+  const timestamp = localISOString();
 
-  chrome.runtime.sendMessage({ query: query, url: url, timestamp: timestamp, port: port });
+  chrome.runtime.sendMessage({ query, url, timestamp, port });
 }
 
-function monitorUrlChange(callback) {
-  var lastUrl = location.href;
+function monitorUrlChange(callback: () => void): void {
+  let lastUrl = location.href;
 
   // Poll every 500ms to catch all URL changes (SPA, etc)
-  setInterval(function() {
+  setInterval(() => {
     if (location.href !== lastUrl) {
       lastUrl = location.href;
       callback();
@@ -97,7 +127,7 @@ function monitorUrlChange(callback) {
   }, 500);
 
   // Listen to popstate (back/forward)
-  window.addEventListener('popstate', function() {
+  window.addEventListener('popstate', () => {
     if (location.href !== lastUrl) {
       lastUrl = location.href;
       callback();
@@ -105,10 +135,10 @@ function monitorUrlChange(callback) {
   });
 
   // Patch pushState and replaceState to call callback after navigation
-  ['pushState', 'replaceState'].forEach(function(type) {
-    var orig = history[type];
-    history[type] = function() {
-      var rv = orig.apply(this, arguments);
+  (['pushState', 'replaceState'] as Array<'pushState' | 'replaceState'>).forEach((type) => {
+    const orig = (history as any)[type] as (...args: any[]) => any;
+    (history as any)[type] = function (...args: any[]) {
+      const rv = orig.apply(this, args);
       if (location.href !== lastUrl) {
         lastUrl = location.href;
         callback();
@@ -119,10 +149,13 @@ function monitorUrlChange(callback) {
 }
 
 // Main logic
-chrome.storage.local.get(['port', 'engines'], function(items) {
-  logSearch(items);
+(async () => {
+  const settings = await loadSettings();
 
-  monitorUrlChange(function() {
-    logSearch(items);
+  console.log('[SearchLogger contents] settings:', settings);
+  logSearch(settings);
+
+  monitorUrlChange(() => {
+    logSearch(settings);
   });
-});
+})();

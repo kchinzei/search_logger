@@ -1,7 +1,7 @@
 //    The MIT License (MIT)
 //    Copyright (c) Kiyo Chinzei (kchinzei@gmail.com)
 //
-//     Permission is hereby granted, free of charge, to any person obtaining a copy
+//    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the "Software"), to deal
 //    in the Software without restriction, including without limitation the rights
 //    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -17,27 +17,17 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-console.log("SearchLogger ↔ background: script started");
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  console.log('[SearchLogger BG] Received message:', msg);
-
-  const { query, url, timestamp, port } = msg;
-
-  if (!query || !url || !port) {
-    console.warn('[SearchLogger BG] Incomplete message:', msg);
-    return;
-  }
-
-  fetch(`http://localhost:${port}/log`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query, url, timestamp })
-  })
-    .then(res => {
-      console.log('[SearchLogger BG] HTTP POST done. Status:', res.status);
-    })
-    .catch(err => {
-      console.error('[SearchLogger BG] Fetch failed:', err);
-    });
+document.addEventListener('DOMContentLoaded', () => {
+  const openBtn = document.getElementById('logview');
+  const optionsBtn  = document.getElementById('options');
+  openBtn.addEventListener('click', async () => {
+    chrome.runtime.sendMessage({ action:'openhtml', arg: 'logview.html' });
+  });
+  optionsBtn.addEventListener('click', async () => {
+    if (chrome.runtime.openOptionsPage)
+      chrome.runtime.openOptionsPage();
+    else
+      chrome.runtime.sendMessage({ action: 'openhtml', arg: 'options.html' });
+  });
 });

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SearchLog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="logview.css">
+  </head>
+  <body>
+    <!-- Header bar: title + close button -->
+    <header class="top-bar">
+      <h1>SearchLog</h1>
+      <button id="close-button" class="close-button" aria-label="Close">
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          stroke="white"
+          stroke-width="2.5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </header>
+
+    <!-- Toolbar row for action buttons -->
+    <div class="toolbar">
+      <button id="btn-export">Export</button>
+      <button id="btn-clear" class="danger">Clear</button>
+    </div>
+
+    <main>
+      <div id="list-view" aria-live="polite"></div>
+    </main>
+
+    <footer><small>Tap a query to open its page.</small></footer>
+
+    <!-- Use the Webpack output name here -->
+    <script src="logview.js" defer></script>
+  </body>
+</html>

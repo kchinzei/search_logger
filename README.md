@@ -1,58 +1,41 @@
-# Search Logger browser extension for Obsidian 
+# Search Logger browser extension ![](src/icons/icon128.png)
 
-It is a part of Search Logger for Obsidian. It stays in your browser (Chrome, Edge, Safar, Firefox) to capture the search terms while Obsidian is running.
+Search Logger is a browser extension, stays in your browser (Chrome, Edge, Safar, Firefox) to capture and keep track of the search terms.
 
-Due to the nature of two-pieces software, you need to install and setup both extension and plugin.
+Typically the search log looks like;
 
-## Installation
+  **SearchLog**
+  - 2025-04-07 13:40 — hello world [🔗](https://www.google.com/search?q=hello+world)
+  - 2025-04-07 13:49 — how to auto record search history in Obsidian [🔗](https://www.google.com/search?q=how+to+auto+record+search+history+in+Obsidian)
+  - 2025-04-07 13:53 — Yellowstone National Park [🔗](https://www.google.com/maps/search/Yellowstone+National+Park)
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run build` to start compilation.
+You can also log Google Map search terms
 
-For detail, see [[#Developers]].
+## Why logging search queries?
 
-## Setup
+- As a convenient note,
+- To examine if you collectively search Internet,
+- To play back your thinking process.
 
-- Go Extensions of your browser.
-  Find 'Search Logger' and turn on.
-- Go 'Search Logger Settings'
-	- Log note name: Filename of a note. '.md' is automatically appeded.
-	- Listener port: local server port number, match with that in the browser extension.
-	- Prepend mode: When on, new entries are inserted at the top of the note. It can make Obsidian slow the the log growing very long.
+## Install Search Logger
 
-## Developers
+See [here](Installation.md)
 
-To build the extension:
+## Using Search Logger
 
-```
-npm run build
-```
+Search Logger keeps track of the search terms you type in Google etc.
 
-This will create three directories:
-- `dist_chromium/` for the Chromium version
-- `dist_firefox/` for the Firefox version
-- `dist_safari/` for the Safari version
-  For Safari on macOS and iOS, you need Xcode to compile.
+### To see the log
 
-### Install the extension locally
+From Search Logger face icon ![](src/icons/icon16.png), click "View logs".
 
-For Chromium browsers, such as Chrome, Brave, Edge, and Arc:
+### Options
 
-1. Open your browser and navigate to `chrome://extensions`
-2. Enable **Developer mode**
-3. Click **Load unpacked** and select the `dist_chromium` folder
+You can control the behavior of Search Logger from "Options..."
 
-For Firefox:
-
-1. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`
-2. Click **Load Temporary Add-on**
-3. Navigate to the `dist_firefox` directory and select the `manifest.json` file.
-
-For Safari on macOS:
-
-1. Open `Search Logger.xcodeproj` using Xcode.
-2. Build and run the project.
-3. Open Safari and navigate to Safari menu >> Preferences >> Extensions.
-4. Find 'Search Logger'.
+- Search Engines: Select your preferred engines.
+- Connection: It can export the log to external app like Obsidian.
+  - Port: Local IP connection port.
+- Ignore recent searches: Search Logger ignores repeating recent search terms from logging. You can set how 'recent' to ignore.
+  - Recent entries: define how many searches are 'recent'.
+  - Recent days: define how many days are 'recent'.
