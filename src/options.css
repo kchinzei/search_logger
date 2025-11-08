@@ -127,6 +127,7 @@ body.ios .connection-section {
   padding: 0 !important;
   margin: 0 !important;
   border-radius: 50% !important;
+  border: none;
 
   /* keep our intended appearance */
   -webkit-appearance: none !important;
