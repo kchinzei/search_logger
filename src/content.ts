@@ -152,7 +152,7 @@ function monitorUrlChange(callback: () => void): void {
 (async () => {
   const settings = await loadSettings();
 
-  console.log('[SearchLogger contents] settings:', settings);
+  // console.log('[SearchLogger contents] settings:', settings);
   logSearch(settings);
 
   monitorUrlChange(() => {

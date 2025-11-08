@@ -41,7 +41,7 @@ interface ActionMessage {
 const FROM_PARAM_KEY = 'from';
 const FROM_PARAM_VALUE = 'search-logger';
 
-console.log('SearchLogger ↔ background: script started');
+// console.log('SearchLogger ↔ background: script started');
 
 const QUOTA_TOTAL: number =
   (chrome.storage &&
@@ -250,7 +250,7 @@ chrome.runtime.onMessage.addListener((msg: ActionMessage & LogMessage, _sender, 
 
   // If this navigation already has ?from=search-logger, skip logging entirely.
   if (from === FROM_PARAM_VALUE) {
-    console.log('[SearchLogger BG] Skipping query from Obsidian/log click');
+    // console.log('[SearchLogger BG] Skipping query from Obsidian/log click');
     return;
   }
 

@@ -75,9 +75,8 @@ function makeRow(item: LogItem): HTMLElement {
   const href = escapeAttr(item.href);
 
   row.innerHTML = `
-    <span class="dash">-</span>
     <span class="ts">${ts}</span>
-    <span class="sep"> — </span>
+    <span class="sep"></span>
     <span class="q-text">${text}</span>
     <a class="q-link" href="${href}" target="_blank" rel="noopener" title="Open search">🔗</a>
   `;
@@ -127,9 +126,12 @@ async function renderList(listView: HTMLElement): Promise<void> {
 async function exportLog(): Promise<void> {
   const lines = await getAllLogLines();
   const itemsHtml = lines.map(line => {
-    const { href, text, ts } = parseLine(line);
-    return `<div class="log-row"><span class="dash">-</span><span class="ts">${escapeHtml(ts)}</span><span class="sep"> — </span><span class="q-text">${escapeHtml(text)}</span><a class="q-link" href="${escapeAttr(href)}" target="_blank" rel="noopener" title="Open search">🔗</a></div>`;
-  }).join('\n') || '<p>No entries.</p>';
+    var { href, text, ts } = parseLine(line);
+    ts = escapeHtml(ts || 'unknown time');
+    text = escapeHtml(text || '(no query)');
+    href = escapeAttr(href);
+    return `<div class="log-row"><span class="ts">${ts}</span><span class="sep"></span><span class="q-text">${text}</span><a class="q-link" href="${href}" target="_blank" rel="noopener" title="Open search">🔗</a></div>`;
+   }).join('\n') || '<p>No entries.</p>';
 
   const html = `<!doctype html>
   <html>
@@ -142,7 +144,7 @@ async function exportLog(): Promise<void> {
         .container{max-width:900px;margin:0 auto;padding:16px}
         .log-row{padding:6px 0}
         .dash{margin-right:8px;opacity:.7}
-        .ts{opacity:.85}
+        .ts{opacity:.85；min-width:160px;font-variant-numeric:tabular-nums;color:var(--text-muted)}
         .sep{margin:0 6px;opacity:.7}
         .q-text{user-select:text}
         .q-link{color:#eee;text-decoration:none;margin-left:.25em;opacity:.8}
