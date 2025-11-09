@@ -43,14 +43,14 @@ module.exports = (env, argv) => {
   const mainConfig = {
     mode: argv.mode,
     entry: {
-      //popup: './src/core/popup.ts',
-      //settings: './src/core/settings.ts',
       content: "./src/content.ts",
       background: "./src/background.ts",
       logview: "./src/logview.ts",
       options: "./src/options.ts",
       popup: "./src/popup.js",
-      settings: './src/settings.ts'
+      popup_list: "./src/popup_list.ts",
+      settings: "./src/settings.ts",
+      settings: "./src/log_common.ts",
     },
     output: {
       path: path.resolve(__dirname, outputDir),
@@ -163,6 +163,7 @@ module.exports = (env, argv) => {
           { from: "src/options.html", to: "options.html" },
           { from: "src/options.css", to: "options.css" },
           { from: "src/popup.html", to: "popup.html" },
+          { from: "src/popup.css", to: "popup.css" },
           { from: "src/icons", to: "icons" },
         ],
       }),

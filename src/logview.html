@@ -1,15 +1,18 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>SearchLog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="logview.css">
+    <link rel="stylesheet" href="logview.css" />
   </head>
   <body>
     <!-- Header bar: title + close button -->
     <header class="top-bar">
-      <h1>SearchLog</h1>
+      <h1 class="header-with-icon">
+        <img src="icons/icon64.png" alt="Search Logger icon" class="header-icon" />
+        SearchLog
+      </h1>
       <button id="close-button" class="close-button" aria-label="Close">
         <svg
           viewBox="0 0 24 24"
@@ -37,7 +40,7 @@
       <div id="list-view" aria-live="polite"></div>
     </main>
 
-    <footer><small>Tap a query to open its page.</small></footer>
+    <footer><small>Tap 🔗 to open its page.</small></footer>
 
     <!-- Use the Webpack output name here -->
     <script src="logview.js" defer></script>

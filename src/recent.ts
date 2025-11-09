@@ -30,15 +30,15 @@
 //
 // Works in both content-scripts (DOM available) and service worker (DOM absent).
 
-export const FROM_PARAM_KEY = 'from';
+export const FROM_PARAM_KEY = "from";
 
 export type RecentParams = {
   query: string;
   url: string;
   engine?: string;
-  from?: string;          // optional explicit value (preferred)
-  ttlMs?: number;         // optional override, otherwise "one day"
-  maxRecent?: number;     // optional override for buffer length
+  from?: string; // optional explicit value (preferred)
+  ttlMs?: number; // optional override, otherwise "one day"
+  maxRecent?: number; // optional override for buffer length
 };
 
 type RecentItem = { key: string; ts: number };
@@ -53,19 +53,25 @@ let inited = false;
 let cachedSettings: { maxRecent: number; ttlMs: number } | null = null;
 
 /* ---------------------- Safe helpers ---------------------- */
-function safeURL(u: string): URL | null { try { return new URL(u); } catch { return null; } }
+function safeURL(u: string): URL | null {
+  try {
+    return new URL(u);
+  } catch {
+    return null;
+  }
+}
 
 function fromQuery(u: URL | null): string | undefined {
   if (!u) return;
-  const v = u.searchParams.get(FROM_PARAM_KEY) || '';
+  const v = u.searchParams.get(FROM_PARAM_KEY) || "";
   if (v.trim()) return v.trim();
-  const h = u.hash ? new URLSearchParams(u.hash.replace(/^#/, '')) : null;
-  const hv = h?.get(FROM_PARAM_KEY) || '';
+  const h = u.hash ? new URLSearchParams(u.hash.replace(/^#/, "")) : null;
+  const hv = h?.get(FROM_PARAM_KEY) || "";
   return hv.trim() || undefined;
 }
 
 function normalizeQuery(q: string): string {
-  return (q || '').trim().toLowerCase().replace(/\s+/g, ' ');
+  return (q || "").trim().toLowerCase().replace(/\s+/g, " ");
 }
 
 /**
@@ -75,19 +81,24 @@ function normalizeQuery(q: string): string {
  * (No referrer/meta/storage/window.name here to keep key stable across reloads.)
  */
 function stableFromForKey(url: string, explicit?: string): string | undefined {
-  const viaArg = (explicit || '').trim();
+  const viaArg = (explicit || "").trim();
   if (viaArg) return viaArg;
-  const viaUrl = fromQuery(safeURL(url)) || '';
+  const viaUrl = fromQuery(safeURL(url)) || "";
   return viaUrl.trim() || undefined;
 }
 
-function normalizeKey(query: string, url: string, engine?: string, fromForKey?: string): string {
+function normalizeKey(
+  query: string,
+  url: string,
+  engine?: string,
+  fromForKey?: string,
+): string {
   const u = safeURL(url);
   // normalize google hosts like www.google.co.jp vs www.google.com
-  const hostRaw = (u?.host || '').toLowerCase();
-  const host = hostRaw.replace(/^www\./, ''); // treat www.* same as bare domain
-  const e = (engine || '').toLowerCase();
-  const f = (fromForKey || '').toLowerCase();
+  const hostRaw = (u?.host || "").toLowerCase();
+  const host = hostRaw.replace(/^www\./, ""); // treat www.* same as bare domain
+  const e = (engine || "").toLowerCase();
+  const f = (fromForKey || "").toLowerCase();
   const q = normalizeQuery(query);
   return `${e}::${host}::${f}::${q}`;
 }
@@ -101,17 +112,18 @@ async function getSettings(): Promise<{ maxRecent: number; ttlMs: number }> {
 
   try {
     // Read from the same place options.ts writes
-    const { maxRecent: storedMax, ttlDays: storedDays } = await chrome.storage.local.get({
-      maxRecent: DEFAULT_MAX_RECENT,
-      ttlDays: DEFAULT_TTL_DAYS,
-    });
+    const { maxRecent: storedMax, ttlDays: storedDays } =
+      await chrome.storage.local.get({
+        maxRecent: DEFAULT_MAX_RECENT,
+        ttlDays: DEFAULT_TTL_DAYS,
+      });
 
-    if (typeof storedMax === 'number' && storedMax > 0) {
+    if (typeof storedMax === "number" && storedMax > 0) {
       maxRecent = Math.trunc(storedMax);
     }
 
     let days = DEFAULT_TTL_DAYS;
-    if (typeof storedDays === 'number' && storedDays > 0) {
+    if (typeof storedDays === "number" && storedDays > 0) {
       days = Math.trunc(storedDays);
     }
     ttlMs = days * 24 * 60 * 60 * 1000;
@@ -127,7 +139,9 @@ async function getSettings(): Promise<{ maxRecent: number; ttlMs: number }> {
 // Use storage.local so buffer survives service worker restarts and browser restarts.
 async function loadLocal(): Promise<void> {
   try {
-    const { recentQueries = [] } = await chrome.storage.local.get({ recentQueries: [] });
+    const { recentQueries = [] } = await chrome.storage.local.get({
+      recentQueries: [],
+    });
     if (Array.isArray(recentQueries)) recent = recentQueries as RecentItem[];
   } catch {
     /* ignore */
@@ -146,7 +160,7 @@ async function saveLocal(): Promise<void> {
 function prune(ttlMs: number, maxRecent: number): void {
   const now = Date.now();
   // Drop anything older than ttlMs
-  recent = recent.filter(r => (now - r.ts) <= ttlMs);
+  recent = recent.filter((r) => now - r.ts <= ttlMs);
   // Keep only the newest maxRecent entries
   if (recent.length > maxRecent) recent = recent.slice(0, maxRecent);
 }
@@ -163,7 +177,9 @@ async function initIfNeeded(): Promise<void> {
 
 /* ---------------------- Public API ---------------------- */
 
-export async function isRecentDuplicate(params: RecentParams): Promise<boolean> {
+export async function isRecentDuplicate(
+  params: RecentParams,
+): Promise<boolean> {
   await initIfNeeded();
   const { maxRecent, ttlMs } = await getSettings();
 
@@ -178,7 +194,7 @@ export async function isRecentDuplicate(params: RecentParams): Promise<boolean> 
   await saveLocal();
 
   const now = Date.now();
-  const hit = recent.find(r => r.key === key && (now - r.ts) <= effectiveTtl);
+  const hit = recent.find((r) => r.key === key && now - r.ts <= effectiveTtl);
   return Boolean(hit);
 }
 

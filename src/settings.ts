@@ -17,8 +17,6 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-// settings.ts
-
 export const DEFAULT_MAX_RECENT = 50;
 export const DEFAULT_TTL_DAYS = 1;
 
@@ -70,7 +68,7 @@ export function normalizeSettings(raw: StoredSettings): NormalizedSettings {
   return {
     useExternal: raw.useExternal ?? DEFAULT_SETTINGS.useExternal,
     port:
-      typeof raw.port === 'number' && Number.isFinite(raw.port)
+      typeof raw.port === "number" && Number.isFinite(raw.port)
         ? raw.port
         : DEFAULT_SETTINGS.port,
     engines: {
@@ -86,7 +84,7 @@ export function normalizeSettings(raw: StoredSettings): NormalizedSettings {
 
 // Load settings safely even on first run (when storage is empty)
 export function loadSettings(): Promise<NormalizedSettings> {
-   return new Promise((resolve) => {
+  return new Promise((resolve) => {
     chrome.storage.local.get(null, (resultRaw) => {
       const normalized = normalizeSettings(resultRaw as StoredSettings);
 
@@ -99,7 +97,9 @@ export function loadSettings(): Promise<NormalizedSettings> {
 }
 
 // Save a partial object (like from options UI), normalized + persisted
-export function saveSettingsPartial(partial: StoredSettings): Promise<NormalizedSettings> {
+export function saveSettingsPartial(
+  partial: StoredSettings,
+): Promise<NormalizedSettings> {
   return new Promise((resolve) => {
     const normalized = normalizeSettings(partial);
     chrome.storage.local.set(normalized, () => {

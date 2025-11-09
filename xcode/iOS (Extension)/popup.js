@@ -22,14 +22,36 @@ function openExtensionPage(page) {
   window.open(url, '_blank');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const btnOpen = document.getElementById('logview');
-  const btnOptions = document.getElementById('options');
+function initPopup() {
+    const btnOpen = document.getElementById('logview');
+    const btnOptions = document.getElementById('options');
+    
+    btnOpen?.addEventListener('click', () => {
+        openExtensionPage('logview.html');
+    });
+    btnOptions?.addEventListener('click', () => {
+        openExtensionPage('options.html');
+    });
+    if (window.searchLoggerLoadRecentLogs) {
+        console.log('Calling searchLoggerLoadRecentLogs()');
+        window.searchLoggerLoadRecentLogs();
+    } else {
+        console.error('searchLoggerLoadRecentLogs not found on window');
+    }
+}
 
-  btnOpen?.addEventListener('click', () => {
-    openExtensionPage('logview.html');
-  });
-  btnOptions?.addEventListener('click', () => {
-    openExtensionPage('options.html');
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('Loading popup_list.js for iOS popup');
+
+  const script = document.createElement('script');
+  script.src = 'popup_list.js';   // from dist_safari, inside the extension bundle
+  script.onload = () => {
+    console.log('popup_list.js loaded');
+      initPopup();
+    };
+    script.onerror = () => {
+      console.error('Failed to load popup_list.js');
+    };
+
+    document.head.appendChild(script);
 });

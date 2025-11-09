@@ -17,9 +17,9 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-export {};  // marks this file as an ES module
+export {}; // marks this file as an ES module
 
-import { loadSettings } from './settings';
+import { loadSettings } from "./settings";
 
 interface EnginesSettings {
   google?: boolean;
@@ -38,7 +38,7 @@ function getQuery(): string | null {
   const url = new URL(location.href);
 
   // Standard search: ?q=...
-  if (url.searchParams.has('q')) return url.searchParams.get('q');
+  if (url.searchParams.has("q")) return url.searchParams.get("q");
 
   return null;
 }
@@ -48,7 +48,7 @@ function getG_MapQuery(): string | null {
 
   // Google Maps: /maps/(place|search)/something
   const m = pathname.match(/^\/maps\/(place|search)\/([^\/]+)/);
-  if (m) return decodeURIComponent(m[2]).replace(/\+/g, ' ');
+  if (m) return decodeURIComponent(m[2]).replace(/\+/g, " ");
 
   return null;
 }
@@ -58,32 +58,36 @@ function getB_MapQuery(): string | null {
   const pathname = location.pathname;
 
   // Bing Maps: /maps and possibly ?q= or ?where= or ?cp=(lat long)
-  if (url.searchParams.has('where')) return url.searchParams.get('where');
-  if (url.searchParams.has('cp')) return url.searchParams.get('cp');
+  if (url.searchParams.has("where")) return url.searchParams.get("where");
+  if (url.searchParams.has("cp")) return url.searchParams.get("cp");
   // ?q= is not great as a search term - not updated by clicks.
-  if (url.searchParams.has('q')) return url.searchParams.get('q');
+  if (url.searchParams.has("q")) return url.searchParams.get("q");
 
   // Also support /maps/POIName/...
   const m = pathname.match(/^\/maps\/([^\/]+)/);
-  if (m && m[1] !== 'maps') return decodeURIComponent(m[1]).replace(/\+/g, ' ');
+  if (m && m[1] !== "maps") return decodeURIComponent(m[1]).replace(/\+/g, " ");
 
   return null;
 }
 
 function localISOString(date: Date = new Date()): string {
-  const pad = (n: number) => String(n).padStart(2, '0');
+  const pad = (n: number) => String(n).padStart(2, "0");
   return (
-    date.getFullYear() + '-' +
-    pad(date.getMonth() + 1) + '-' +
-    pad(date.getDate()) + ' ' +
-    pad(date.getHours()) + ':' +
+    date.getFullYear() +
+    "-" +
+    pad(date.getMonth() + 1) +
+    "-" +
+    pad(date.getDate()) +
+    " " +
+    pad(date.getHours()) +
+    ":" +
     pad(date.getMinutes())
   );
 }
 
 function logSearch(items: StoredSettings): void {
-  let port = (items && typeof items.port === 'number') ? items.port : 27123;
-  const engines: EnginesSettings = (items && items.engines) ? items.engines : {};
+  let port = items && typeof items.port === "number" ? items.port : 27123;
+  const engines: EnginesSettings = items && items.engines ? items.engines : {};
 
   // When useExternal is disabled, set port to 0 to disable sending it external.
   const useExternal = items && items.useExternal;
@@ -91,16 +95,28 @@ function logSearch(items: StoredSettings): void {
 
   const enableGoogle = !!engines.google;
   const enableG_Maps = !!engines.g_maps;
-  const enableBing   = !!engines.bing;
+  const enableBing = !!engines.bing;
   const enableB_Maps = !!engines.b_maps;
 
   const hostname = location.hostname;
   const pathname = location.pathname;
 
-  const isGoogle = enableGoogle && hostname.includes('google.') && pathname.startsWith('/search');
-  const isG_Maps = enableG_Maps && hostname.includes('google.') && pathname.startsWith('/maps/');
-  const isBing   = enableBing   && hostname.includes('bing.com') && pathname.startsWith('/search');
-  const isB_Maps = enableB_Maps && hostname.includes('bing.com') && pathname.startsWith('/maps');
+  const isGoogle =
+    enableGoogle &&
+    hostname.includes("google.") &&
+    pathname.startsWith("/search");
+  const isG_Maps =
+    enableG_Maps &&
+    hostname.includes("google.") &&
+    pathname.startsWith("/maps/");
+  const isBing =
+    enableBing &&
+    hostname.includes("bing.com") &&
+    pathname.startsWith("/search");
+  const isB_Maps =
+    enableB_Maps &&
+    hostname.includes("bing.com") &&
+    pathname.startsWith("/maps");
 
   if (!(isGoogle || isG_Maps || isBing || isB_Maps)) return;
 
@@ -127,7 +143,7 @@ function monitorUrlChange(callback: () => void): void {
   }, 500);
 
   // Listen to popstate (back/forward)
-  window.addEventListener('popstate', () => {
+  window.addEventListener("popstate", () => {
     if (location.href !== lastUrl) {
       lastUrl = location.href;
       callback();
@@ -135,7 +151,9 @@ function monitorUrlChange(callback: () => void): void {
   });
 
   // Patch pushState and replaceState to call callback after navigation
-  (['pushState', 'replaceState'] as Array<'pushState' | 'replaceState'>).forEach((type) => {
+  (
+    ["pushState", "replaceState"] as Array<"pushState" | "replaceState">
+  ).forEach((type) => {
     const orig = (history as any)[type] as (...args: any[]) => any;
     (history as any)[type] = function (...args: any[]) {
       const rv = orig.apply(this, args);

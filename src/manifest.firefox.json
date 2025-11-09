@@ -3,11 +3,7 @@
   "name": "Search Logger",
   "version": "2.0.0",
   "description": "Logs Google/Bing search terms into a log file.",
-  "permissions": [
-    "storage",
-    "downloads",
-    "tabs"
-  ],
+  "permissions": ["storage", "downloads", "tabs"],
   "host_permissions": [
     "*://*.google.com/*",
     "*://*.google.co.jp/*",
@@ -22,9 +18,7 @@
     "open_in_tab": true
   },
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "scripts": ["background.js"]
   },
   "browser_specific_settings": {
     "gecko": {
@@ -42,15 +36,14 @@
         "*://www.bing.com/search*",
         "*://www.bing.com/maps*"
       ],
-      "js": [
-        "content.js"
-      ],
+      "js": ["content.js"],
       "run_at": "document_idle"
     }
   ],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
     "128": "icons/icon128.png"
   },
   "content_security_policy": {

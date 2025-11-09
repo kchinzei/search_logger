@@ -1,6 +1,5 @@
 # Search Logger browser extension; Installation
 
-
 ## Installation (Developer)
 
 You need to do it from command line.
@@ -11,6 +10,7 @@ You need to do it from command line.
 - `npm run build` to start compilation.
 
 This will create three directories:
+
 - `dist_chromium/` for the Chromium version
 - `dist_firefox/` for the Firefox version
 - `dist_safari/` for the Safari version;

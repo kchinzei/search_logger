@@ -1,22 +1,22 @@
-<!doctype html>
-<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SearchLog</title>
-  <style>
-    body{margin:0;padding:10px;font-family:system-ui;background:#111;color:#eee}
-    button{background:#1b1b1b;color:#eee;border:1px solid #333;border-radius:10px;padding:10px 12px;cursor:pointer}
-    button:active{transform:scale(0.98)}
-    @supports (-webkit-touch-callout: none){
-      body{padding:12px 14px;font-size:120%}
-      button{font-size:1.2em;padding:12px 16px;border-radius:12px;margin-right:10px}
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Search Logger</title>
+  <link rel="stylesheet" href="logview.css" />
+  <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <button id="logview">View logs</button>
-  <button id="options">Options...</button>
-  <script src="popup.js" defer></script>
+  <h1 class="header-with-icon">
+    <img src="icons/icon64.png" alt="Search Logger icon" class="header-icon" />
+    Recent searches
+  </h1>
+
+  <div id="recent-logs"></div>
+  <div id="recent-empty" hidden>No searches yet.</div>
+
+  <div class="popup-actions">
+    <button id="logview">View logs</button>
+    <button id="options">Options…</button>
+  </div>
+
+  <script type="module" src="popup.js"></script>
 </body>
-</html>

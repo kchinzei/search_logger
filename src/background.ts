@@ -17,10 +17,10 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-import { isRecentDuplicate, recordRecent, clearRecent } from './recent';
-import { loadSettings } from './settings';
+import { isRecentDuplicate, recordRecent, clearRecent } from "./recent";
+import { loadSettings } from "./settings";
 
-type QuotaErrorKind = 'quota' | 'item-too-large' | 'unknown';
+type QuotaErrorKind = "quota" | "item-too-large" | "unknown";
 
 interface StorageError extends Error {
   kind: QuotaErrorKind;
@@ -38,15 +38,15 @@ interface ActionMessage {
   arg?: string;
 }
 
-const FROM_PARAM_KEY = 'from';
-const FROM_PARAM_VALUE = 'search-logger';
+const FROM_PARAM_KEY = "from";
+const FROM_PARAM_VALUE = "search-logger";
 
 // console.log('SearchLogger ↔ background: script started');
 
 const QUOTA_TOTAL: number =
-  (chrome.storage &&
-    chrome.storage.local &&
-    typeof chrome.storage.local.QUOTA_BYTES === 'number')
+  chrome.storage &&
+  chrome.storage.local &&
+  typeof chrome.storage.local.QUOTA_BYTES === "number"
     ? chrome.storage.local.QUOTA_BYTES
     : 5_000_000;
 
@@ -57,30 +57,28 @@ const MIN_LINES_TO_KEEP = 2;
 // --- helpers: classify storage.set errors reliably ---
 function classifyStorageError(
   message?: string,
-  err?: Error | chrome.runtime.LastError | null
+  err?: Error | chrome.runtime.LastError | null,
 ): QuotaErrorKind {
   const fallbackMsg =
-    message ||
-    (err && (err as { message?: string }).message) ||
-    '';
+    message || (err && (err as { message?: string }).message) || "";
   const msg = String(fallbackMsg).toLowerCase();
 
   const quotaHints = [
-    'quota',
-    'quotaexceedederror',
-    'exceeded the quota',
-    'bytes in use',
+    "quota",
+    "quotaexceedederror",
+    "exceeded the quota",
+    "bytes in use",
   ];
   const itemTooLargeHints = [
-    'quota_bytes_per_item',
-    'per item quota',
-    'exceeds the maximum size',
-    'too large',
+    "quota_bytes_per_item",
+    "per item quota",
+    "exceeds the maximum size",
+    "too large",
   ];
 
-  if (quotaHints.some(h => msg.includes(h))) return 'quota';
-  if (itemTooLargeHints.some(h => msg.includes(h))) return 'item-too-large';
-  return 'unknown';
+  if (quotaHints.some((h) => msg.includes(h))) return "quota";
+  if (itemTooLargeHints.some((h) => msg.includes(h))) return "item-too-large";
+  return "unknown";
 }
 
 // Wrap chrome.storage.local.set to capture chrome.runtime.lastError consistently
@@ -90,7 +88,7 @@ function setLocalSafe(obj: Record<string, unknown>): Promise<void> {
       const le = chrome.runtime && chrome.runtime.lastError;
       if (le) {
         const kind = classifyStorageError(le.message, le);
-        const e = new Error(le.message || 'storage.set failed') as StorageError;
+        const e = new Error(le.message || "storage.set failed") as StorageError;
         e.kind = kind;
         return reject(e);
       }
@@ -99,25 +97,29 @@ function setLocalSafe(obj: Record<string, unknown>): Promise<void> {
   });
 }
 
-async function saveLocal(query: string, url: string, timestamp: string): Promise<void> {
-  const { logHtml = '' } = await chrome.storage.local.get({ logHtml: '' });
+async function saveLocal(
+  query: string,
+  url: string,
+  timestamp: string,
+): Promise<void> {
+  const { logHtml = "" } = await chrome.storage.local.get({ logHtml: "" });
   const newLine = `<div data-ts="${timestamp}"><a href="${url}">${query}</a></div>`;
-  let lines = String(logHtml).split('\n').filter(Boolean);
+  let lines = String(logHtml).split("\n").filter(Boolean);
   lines.unshift(newLine);
 
   const encoder = new TextEncoder();
-  let data = lines.join('\n') + '\n';
+  let data = lines.join("\n") + "\n";
   let bytes = encoder.encode(JSON.stringify({ logHtml: data })).length;
 
   // proactive trim
   while (bytes > QUOTA_SAFE_BYTES && lines.length > 10) {
     lines.pop();
-    data = lines.join('\n') + '\n';
+    data = lines.join("\n") + "\n";
     bytes = encoder.encode(JSON.stringify({ logHtml: data })).length;
   }
 
   let attempts = 0;
-  const originalCount = String(logHtml).split('\n').filter(Boolean).length;
+  const originalCount = String(logHtml).split("\n").filter(Boolean).length;
   const result: {
     ok: boolean;
     kept: number;
@@ -135,21 +137,27 @@ async function saveLocal(query: string, url: string, timestamp: string): Promise
       break;
     } catch (err) {
       const e = err as StorageError;
-      console.log('[SearchLogger BG] error when saving:\n', e);
+      console.log("[SearchLogger BG] error when saving:\n", e);
 
-      if ((e.kind === 'quota' || e.kind === 'item-too-large') && lines.length > MIN_LINES_TO_KEEP) {
+      if (
+        (e.kind === "quota" || e.kind === "item-too-large") &&
+        lines.length > MIN_LINES_TO_KEEP
+      ) {
         lines.pop();
-        data = lines.join('\n') + '\n';
+        data = lines.join("\n") + "\n";
         continue;
       }
-      result.error = { kind: e.kind || 'unknown', message: e.message || String(e) };
+      result.error = {
+        kind: e.kind || "unknown",
+        message: e.message || String(e),
+      };
       break;
     }
   }
 
   if (!result.ok && !result.error) {
     result.error = {
-      kind: 'quota-retry-exhausted',
+      kind: "quota-retry-exhausted",
       message: `Exceeded MAX_RETRIES=${MAX_RETRIES} while trimming.`,
     };
   }
@@ -157,25 +165,30 @@ async function saveLocal(query: string, url: string, timestamp: string): Promise
   // console.log('[SearchLogger BG] Status: ', result);
 }
 
-function saveRemote(query: string, url: string, timestamp: string, port: number): void {
+function saveRemote(
+  query: string,
+  url: string,
+  timestamp: string,
+  port: number,
+): void {
   if (port > 0) {
     fetch(`http://localhost:${port}/log`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, url, timestamp }),
     })
-      .then(res => {
-        console.log('[SearchLogger BG] HTTP POST done. Status:', res.status);
+      .then((res) => {
+        console.log("[SearchLogger BG] HTTP POST done. Status:", res.status);
       })
-      .catch(err => {
-        console.error('[SearchLogger BG] Fetch failed:', err);
+      .catch((err) => {
+        console.error("[SearchLogger BG] Fetch failed:", err);
       });
   }
 }
 
 export async function clearAllLogs(): Promise<void> {
   const all: Record<string, unknown> = await chrome.storage.local.get(null);
-  const keys = Object.keys(all).filter(k => /^logHtml($|_\d{8}$)/.test(k));
+  const keys = Object.keys(all).filter((k) => /^logHtml($|_\d{8}$)/.test(k));
 
   if (keys.length) {
     await chrome.storage.local.remove(keys);
@@ -190,13 +203,17 @@ export function openOrFocusPage(page: string): void {
 
   chrome.tabs.query({ url }, (tabs) => {
     if (chrome.runtime.lastError) {
-      console.warn('[SearchLogger BG] tabs.query error:', chrome.runtime.lastError);
+      console.warn(
+        "[SearchLogger BG] tabs.query error:",
+        chrome.runtime.lastError,
+      );
       return;
     }
 
     if (tabs.length > 0) {
       const tab = tabs[0];
-      if (tab.windowId != null) chrome.windows.update(tab.windowId, { focused: true });
+      if (tab.windowId != null)
+        chrome.windows.update(tab.windowId, { focused: true });
       if (tab.id != null) chrome.tabs.update(tab.id, { active: true });
     } else {
       chrome.tabs.create({ url });
@@ -220,48 +237,50 @@ chrome.runtime.onMessage.addListener((msg: ActionMessage) => {
 });
 */
 
-chrome.runtime.onMessage.addListener((msg: ActionMessage & LogMessage, _sender, _sendResponse) => {
-  const { action, arg } = msg;
-  if (action === 'openhtml') {
-    openOrFocusPage(arg as string);
-    return;
-  }
-  if (action === 'clearAllLogs') {
-    clearAllLogs();
-    return;
-  }
+chrome.runtime.onMessage.addListener(
+  (msg: ActionMessage & LogMessage, _sender, _sendResponse) => {
+    const { action, arg } = msg;
+    if (action === "openhtml") {
+      openOrFocusPage(arg as string);
+      return;
+    }
+    if (action === "clearAllLogs") {
+      clearAllLogs();
+      return;
+    }
 
-  const { query, url, timestamp, port } = msg;
-  if (!query || !url || !port) {
-    console.warn('[SearchLogger BG] Incomplete message:', msg);
-    return;
-  }
+    const { query, url, timestamp, port } = msg;
+    if (!query || !url || !port) {
+      console.warn("[SearchLogger BG] Incomplete message:", msg);
+      return;
+    }
 
-  // --- from=obsidian handling ---
-  let parsed: URL;
-  try {
-    parsed = new URL(url);
-  } catch {
-    console.warn('[SearchLogger BG] Invalid URL in message:', url);
-    return;
-  }
+    // --- from=obsidian handling ---
+    let parsed: URL;
+    try {
+      parsed = new URL(url);
+    } catch {
+      console.warn("[SearchLogger BG] Invalid URL in message:", url);
+      return;
+    }
 
-  const from = parsed.searchParams.get(FROM_PARAM_KEY);
+    const from = parsed.searchParams.get(FROM_PARAM_KEY);
 
-  // If this navigation already has ?from=search-logger, skip logging entirely.
-  if (from === FROM_PARAM_VALUE) {
-    // console.log('[SearchLogger BG] Skipping query from Obsidian/log click');
-    return;
-  }
+    // If this navigation already has ?from=search-logger, skip logging entirely.
+    if (from === FROM_PARAM_VALUE) {
+      // console.log('[SearchLogger BG] Skipping query from Obsidian/log click');
+      return;
+    }
 
-  // Otherwise, add ?from=obsidian for the stored/logged URL only.
-  parsed.searchParams.set(FROM_PARAM_KEY, FROM_PARAM_VALUE);
-  const urlForLog = parsed.toString();
-  
-  isRecentDuplicate({ query, url }).then(async dup => {
-    if (dup) return; // skip spammy repeats
-    await recordRecent({ query, url });
-    await saveLocal(query, urlForLog, timestamp!);
-    saveRemote(query, urlForLog, timestamp!, port);
-  });
-});
+    // Otherwise, add ?from=obsidian for the stored/logged URL only.
+    parsed.searchParams.set(FROM_PARAM_KEY, FROM_PARAM_VALUE);
+    const urlForLog = parsed.toString();
+
+    isRecentDuplicate({ query, url }).then(async (dup) => {
+      if (dup) return; // skip spammy repeats
+      await recordRecent({ query, url });
+      await saveLocal(query, urlForLog, timestamp!);
+      saveRemote(query, urlForLog, timestamp!, port);
+    });
+  },
+);

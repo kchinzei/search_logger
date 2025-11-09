@@ -4,10 +4,11 @@ Search Logger is a browser extension, stays in your browser (Chrome, Edge, Safar
 
 Typically the search log looks like;
 
-  **SearchLog**
-  - 2025-04-07 13:40 — hello world [🔗](https://www.google.com/search?q=hello+world)
-  - 2025-04-07 13:49 — how to auto record search history in Obsidian [🔗](https://www.google.com/search?q=how+to+auto+record+search+history+in+Obsidian)
-  - 2025-04-07 13:53 — Yellowstone National Park [🔗](https://www.google.com/maps/search/Yellowstone+National+Park)
+**SearchLog**
+
+- 2025-04-07 13:40 — hello world [🔗](https://www.google.com/search?q=hello+world)
+- 2025-04-07 13:49 — how to auto record search history in Obsidian [🔗](https://www.google.com/search?q=how+to+auto+record+search+history+in+Obsidian)
+- 2025-04-07 13:53 — Yellowstone National Park [🔗](https://www.google.com/maps/search/Yellowstone+National+Park)
 
 You can also log Google Map search terms
 

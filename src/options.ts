@@ -17,7 +17,7 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-export {};  // marks this file as an ES module
+export {}; // marks this file as an ES module
 
 import {
   DEFAULT_MAX_RECENT,
@@ -25,7 +25,7 @@ import {
   loadSettings,
   saveSettingsPartial,
   type StoredSettings,
-} from './settings';  // adjust path if needed
+} from "./settings"; // adjust path if needed
 
 // Helper to get typed elements by id
 function $<T extends HTMLElement = HTMLElement>(id: string): T | null {
@@ -37,28 +37,28 @@ function validatePort(port: number): boolean {
 }
 
 function updatePortUI(): void {
-  const useExternalEl = $<HTMLInputElement>('use-external');
+  const useExternalEl = $<HTMLInputElement>("use-external");
   const useExternal = !!useExternalEl?.checked;
 
-  const fieldsetExplicit = $<HTMLFieldSetElement>('port-fieldset');
-  const portInput = $<HTMLInputElement>('port');
-  const portError = $<HTMLDivElement>('port-error');
+  const fieldsetExplicit = $<HTMLFieldSetElement>("port-fieldset");
+  const portInput = $<HTMLInputElement>("port");
+  const portError = $<HTMLDivElement>("port-error");
 
   const fieldset =
     fieldsetExplicit ||
-    (portInput?.closest('fieldset') as HTMLFieldSetElement | null) ||
+    (portInput?.closest("fieldset") as HTMLFieldSetElement | null) ||
     null;
 
   if (fieldset) {
     fieldset.disabled = !useExternal;
-    fieldset.classList.toggle('dimmed', !useExternal);
+    fieldset.classList.toggle("dimmed", !useExternal);
   }
   if (portInput) {
     portInput.disabled = !useExternal;
     portInput.tabIndex = useExternal ? 0 : -1;
   }
   if (!useExternal && portError) {
-    portError.textContent = '';
+    portError.textContent = "";
   }
 }
 
@@ -68,46 +68,49 @@ function clampInt(value: number, min: number, max: number): number {
 }
 
 async function saveSettings(): Promise<void> {
-  const useExternalEl = $<HTMLInputElement>('use-external');
+  const useExternalEl = $<HTMLInputElement>("use-external");
   const useExternal = useExternalEl ? useExternalEl.checked : true;
 
-  const portInput = $<HTMLInputElement>('port');
-  const rawPort = portInput?.value.trim() ?? '';
+  const portInput = $<HTMLInputElement>("port");
+  const rawPort = portInput?.value.trim() ?? "";
   const parsedPort = parseInt(rawPort, 10);
   const port = Number.isNaN(parsedPort) ? -1 : parsedPort;
 
-  const portError = $<HTMLDivElement>('port-error');
+  const portError = $<HTMLDivElement>("port-error");
 
   if (useExternal) {
     if (!validatePort(port)) {
-      if (portError) portError.textContent = 'Port must be between 1024 and 65535.';
+      if (portError)
+        portError.textContent = "Port must be between 1024 and 65535.";
       return;
     } else {
-      if (portError) portError.textContent = '';
+      if (portError) portError.textContent = "";
     }
   }
 
-  const enableGoogle = $<HTMLInputElement>('enable-google')?.checked ?? true;
-  const enableG_Maps = $<HTMLInputElement>('enable-g-maps')?.checked ?? true;
-  const enableBing   = $<HTMLInputElement>('enable-bing')?.checked   ?? false;
-  const enableB_Maps = $<HTMLInputElement>('enable-b-maps')?.checked ?? true;
+  const enableGoogle = $<HTMLInputElement>("enable-google")?.checked ?? true;
+  const enableG_Maps = $<HTMLInputElement>("enable-g-maps")?.checked ?? true;
+  const enableBing = $<HTMLInputElement>("enable-bing")?.checked ?? false;
+  const enableB_Maps = $<HTMLInputElement>("enable-b-maps")?.checked ?? true;
 
-  const maxRecentInput = $<HTMLInputElement>('max-recent');
-  const ttlDaysInput   = $<HTMLInputElement>('ttl-days');
+  const maxRecentInput = $<HTMLInputElement>("max-recent");
+  const ttlDaysInput = $<HTMLInputElement>("ttl-days");
 
-  const rawMaxRecent = maxRecentInput?.value.trim() ?? '';
-  const rawTtlDays   = ttlDaysInput?.value.trim() ?? '';
+  const rawMaxRecent = maxRecentInput?.value.trim() ?? "";
+  const rawTtlDays = ttlDaysInput?.value.trim() ?? "";
 
   const parsedMaxRecent = parseInt(rawMaxRecent, 10);
-  const parsedTtlDays   = parseInt(rawTtlDays, 10);
+  const parsedTtlDays = parseInt(rawTtlDays, 10);
 
   const maxRecent = clampInt(
     Number.isNaN(parsedMaxRecent) ? DEFAULT_MAX_RECENT : parsedMaxRecent,
-    1, 500
+    1,
+    500,
   );
   const ttlDays = clampInt(
     Number.isNaN(parsedTtlDays) ? DEFAULT_TTL_DAYS : parsedTtlDays,
-    1, 30
+    1,
+    30,
   );
 
   const payload: StoredSettings = {
@@ -116,7 +119,7 @@ async function saveSettings(): Promise<void> {
     engines: {
       google: enableGoogle,
       g_maps: enableG_Maps,
-      bing:  enableBing,
+      bing: enableBing,
       b_maps: enableB_Maps,
     },
     maxRecent,
@@ -130,78 +133,86 @@ async function saveSettings(): Promise<void> {
 async function restoreOptions(): Promise<void> {
   const settings = await loadSettings();
 
-  const useExternalEl = $<HTMLInputElement>('use-external');
+  const useExternalEl = $<HTMLInputElement>("use-external");
   if (useExternalEl) useExternalEl.checked = settings.useExternal;
 
-  const portInput = $<HTMLInputElement>('port');
+  const portInput = $<HTMLInputElement>("port");
   if (portInput) portInput.value = String(settings.port);
 
-  const googleEl  = $<HTMLInputElement>('enable-google');
-  const gMapsEl   = $<HTMLInputElement>('enable-g-maps');
-  const bingEl    = $<HTMLInputElement>('enable-bing');
-  const bMapsEl   = $<HTMLInputElement>('enable-b-maps');
+  const googleEl = $<HTMLInputElement>("enable-google");
+  const gMapsEl = $<HTMLInputElement>("enable-g-maps");
+  const bingEl = $<HTMLInputElement>("enable-bing");
+  const bMapsEl = $<HTMLInputElement>("enable-b-maps");
 
   if (googleEl) googleEl.checked = settings.engines.google;
-  if (gMapsEl)  gMapsEl.checked  = settings.engines.g_maps;
-  if (bingEl)   bingEl.checked   = settings.engines.bing;
-  if (bMapsEl)  bMapsEl.checked  = settings.engines.b_maps;
+  if (gMapsEl) gMapsEl.checked = settings.engines.g_maps;
+  if (bingEl) bingEl.checked = settings.engines.bing;
+  if (bMapsEl) bMapsEl.checked = settings.engines.b_maps;
 
-  const maxRecentInput = $<HTMLInputElement>('max-recent');
-  const ttlDaysInput   = $<HTMLInputElement>('ttl-days');
+  const maxRecentInput = $<HTMLInputElement>("max-recent");
+  const ttlDaysInput = $<HTMLInputElement>("ttl-days");
   if (maxRecentInput) maxRecentInput.value = String(settings.maxRecent);
-  if (ttlDaysInput)   ttlDaysInput.value   = String(settings.ttlDays);
+  if (ttlDaysInput) ttlDaysInput.value = String(settings.ttlDays);
 
   updatePortUI();
 }
 
 function showNotice(): void {
-  const el = $<HTMLDivElement>('notice');
+  const el = $<HTMLDivElement>("notice");
   if (!el) return;
-  el.style.opacity = '1';
-  setTimeout(() => { el.style.opacity = '0'; }, 1200);
+  el.style.opacity = "1";
+  setTimeout(() => {
+    el.style.opacity = "0";
+  }, 1200);
 }
 
 // If you already have a getBrowser() helper, use that instead.
 function getBrowser(): typeof chrome {
   // Safari/Firefox use `browser`, Chromium uses `chrome`
   // `as any` to keep TS happy if only one exists.
-  return (typeof (globalThis as any).browser !== 'undefined'
-    ? (globalThis as any).browser
-    : chrome) as typeof chrome;
+  return (
+    typeof (globalThis as any).browser !== "undefined"
+      ? (globalThis as any).browser
+      : chrome
+  ) as typeof chrome;
 }
 
 function setupCloseButton(): void {
-  const btn = document.getElementById('close-button') as HTMLButtonElement | null;
+  const btn = document.getElementById(
+    "close-button",
+  ) as HTMLButtonElement | null;
   if (!btn) return;
 
-  btn.addEventListener('click', () => {
+  btn.addEventListener("click", () => {
     // 1) Try normal window.close() (works for popup windows)
     window.close();
 
     // 2) Ask background to close this tab if window.close() is blocked
     try {
-      getBrowser().runtime.sendMessage({ action: 'closeSelf' });
+      getBrowser().runtime.sendMessage({ action: "closeSelf" });
     } catch (e) {
-      console.warn('closeSelf message failed', e);
+      console.warn("closeSelf message failed", e);
     }
   });
 }
 
 function isIOS() {
-  const ua = window.navigator.userAgent || '';
-  const platform = window.navigator.platform || '';
+  const ua = window.navigator.userAgent || "";
+  const platform = window.navigator.platform || "";
   const maxTouchPoints = window.navigator.maxTouchPoints || 0;
 
   if (/iPhone|iPad|iPod/.test(ua)) return true;
-  if (platform === 'MacIntel' && maxTouchPoints > 1) return true;
+  if (platform === "MacIntel" && maxTouchPoints > 1) return true;
   return false;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   if (isIOS()) {
-    document.body.classList.add('ios');
+    document.body.classList.add("ios");
 
-    const useExternal = document.getElementById('use-external') as HTMLInputElement | null;
+    const useExternal = document.getElementById(
+      "use-external",
+    ) as HTMLInputElement | null;
     if (useExternal) {
       useExternal.checked = false;
       updatePortUI();
@@ -211,18 +222,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Wire events
-$<HTMLInputElement>('port')?.addEventListener('input', () => { void saveSettings(); });
-$<HTMLInputElement>('enable-google')?.addEventListener('change', () => { void saveSettings(); });
-$<HTMLInputElement>('enable-g-maps')?.addEventListener('change', () => { void saveSettings(); });
-$<HTMLInputElement>('enable-bing')?.addEventListener('change', () => { void saveSettings(); });
-$<HTMLInputElement>('enable-b-maps')?.addEventListener('change', () => { void saveSettings(); });
+$<HTMLInputElement>("port")?.addEventListener("input", () => {
+  void saveSettings();
+});
+$<HTMLInputElement>("enable-google")?.addEventListener("change", () => {
+  void saveSettings();
+});
+$<HTMLInputElement>("enable-g-maps")?.addEventListener("change", () => {
+  void saveSettings();
+});
+$<HTMLInputElement>("enable-bing")?.addEventListener("change", () => {
+  void saveSettings();
+});
+$<HTMLInputElement>("enable-b-maps")?.addEventListener("change", () => {
+  void saveSettings();
+});
 
-$<HTMLInputElement>('use-external')?.addEventListener('change', () => {
+$<HTMLInputElement>("use-external")?.addEventListener("change", () => {
   updatePortUI();
   void saveSettings();
 });
 
-$<HTMLInputElement>('max-recent')?.addEventListener('input', () => { void saveSettings(); });
-$<HTMLInputElement>('ttl-days')?.addEventListener('input', () => { void saveSettings(); });
+$<HTMLInputElement>("max-recent")?.addEventListener("input", () => {
+  void saveSettings();
+});
+$<HTMLInputElement>("ttl-days")?.addEventListener("input", () => {
+  void saveSettings();
+});
 
 void restoreOptions();

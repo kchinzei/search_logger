@@ -17,18 +17,64 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-import { loadRecentLogs } from "./popup_list";
+import { parseLine, makeRow } from "./log_common";
 
-document.addEventListener("DOMContentLoaded", () => {
+const POPUP_MAX_RECENT = 6;
+
+/* ---------------------- Local helper ---------------------- */
+async function getAllLogLines(): Promise<string[]> {
+  // Read only the active log buffer (max 5 MB)
+  const { logHtml = "" } = await chrome.storage.local.get("logHtml");
+  return String(logHtml)
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+}
+
+/* ---------------------- Main logic ------------------------ */
+export async function loadRecentLogs(): Promise<void> {
+  const container = document.getElementById("recent-logs");
+  const emptyMsg = document.getElementById(
+    "recent-empty",
+  ) as HTMLElement | null;
+  if (!container) return;
+
+  const lines = await getAllLogLines();
+
+  if (!lines.length) {
+    if (emptyMsg) emptyMsg.hidden = false;
+    return;
+  }
+
+  // show newest first
+  const recentLines = lines.slice(-POPUP_MAX_RECENT).reverse();
+
+  container.innerHTML = "";
+
+  for (const line of recentLines) {
+    const { ts, text, href } = parseLine(line);
+    container.appendChild(makeRow(ts, text, href));
+  }
+}
+
+/* ---------------------- UI handlers ----------------------- */
+function initButtons(): void {
   const openBtn = document.getElementById("logview");
   const optionsBtn = document.getElementById("options");
-  openBtn.addEventListener("click", async () => {
+  openBtn?.addEventListener("click", async () => {
     chrome.runtime.sendMessage({ action: "openhtml", arg: "logview.html" });
   });
-  optionsBtn.addEventListener("click", async () => {
+  optionsBtn?.addEventListener("click", async () => {
     if (chrome.runtime.openOptionsPage) chrome.runtime.openOptionsPage();
     else
       chrome.runtime.sendMessage({ action: "openhtml", arg: "options.html" });
   });
-  loadRecentLogs();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initButtons();
+  void loadRecentLogs();
 });
+
+// Make it available as a global for non-module environments (iOS popup)
+(window as any).searchLoggerLoadRecentLogs = loadRecentLogs;

@@ -98,6 +98,20 @@ h1 {
   margin-bottom: 1em;
 }
 
+.header-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5em; /* space between icon and text */
+  font-size: 1.2rem; /* match your h1 style */
+  margin-bottom: 0.8em;
+}
+
+.header-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px; /* optional, looks nicer on iOS */
+}
+
 /* sections --------------------------------------------------------------- */
 
 .section {

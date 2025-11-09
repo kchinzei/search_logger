@@ -33,6 +33,20 @@ h1 {
   margin-bottom: 1em;
 }
 
+.header-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5em; /* space between icon and text */
+  font-size: 1.2rem; /* match your h1 style */
+  margin-bottom: 0.8em;
+}
+
+.header-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px; /* optional, looks nicer on iOS */
+}
+
 .top-bar {
   display: flex;
   justify-content: space-between;
@@ -141,7 +155,9 @@ body.ios .connection-section {
   background: var(--interactive-accent);
   color: #fff;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.1s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease;
 }
 .close-button:hover {
   opacity: 0.9;
@@ -159,6 +175,15 @@ body.ios .connection-section {
 }
 
 /* optional nicety */
-.switch-row { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-#port-fieldset.dimmed { opacity: .5; }
-#port-fieldset.dimmed input { pointer-events: none; }
+.switch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+#port-fieldset.dimmed {
+  opacity: 0.5;
+}
+#port-fieldset.dimmed input {
+  pointer-events: none;
+}
