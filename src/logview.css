@@ -65,14 +65,17 @@ body {
 
 h1 {
   margin: 0;
-  font-size: 18px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* spacing between icon and text */
 }
 
-.header-with-icon {
+.h1-title {
   display: flex;
   align-items: center;
   gap: 0.5em; /* space between icon and text */
-  font-size: 1.2rem; /* match your h1 style */
   margin-bottom: 0.8em;
 }
 
@@ -80,6 +83,7 @@ h1 {
   width: 32px;
   height: 32px;
   border-radius: 6px; /* optional, looks nicer on iOS */
+  flex-shrink: 0;
 }
 
 /* ------------------------------------------------------------------
@@ -88,7 +92,7 @@ h1 {
 .toolbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 20px;
   align-items: center;
   padding: 8px 16px;
   border-bottom: 1px solid var(--divider-color);
@@ -104,11 +108,9 @@ button {
   cursor: pointer;
   font-size: 1rem;
 }
-
 button:active {
   transform: scale(0.98);
 }
-
 button.danger {
   border-color: #552;
   color: #ffd6d6;
@@ -116,7 +118,7 @@ button.danger {
 }
 
 /* Close button (must come AFTER generic button rule) --------------- */
-.close-button {
+.btn-close {
   border-radius: 50%;
   width: 36px;
   height: 36px;
@@ -144,12 +146,10 @@ button.danger {
     opacity 0.2s ease,
     transform 0.1s ease;
 }
-
-.close-button:hover {
+.btn-close:hover {
   opacity: 0.9;
 }
-
-.close-button:active {
+.btn-close:active {
   transform: scale(0.95);
 }
 
@@ -171,7 +171,7 @@ main {
   display: flex;
   align-items: baseline;
   gap: 6px;
-  border-bottom: 1px solid #151515;
+  border-bottom: 1px solid var(--divider-color);
   font-size: 1rem;
   line-height: 1.6;
   padding: 2px 0;
@@ -199,7 +199,6 @@ a.q {
   text-decoration: none;
   overflow-wrap: anywhere;
 }
-
 a.q:active {
   opacity: 0.85;
 }
@@ -207,14 +206,12 @@ a.q:active {
 .log-row .q-text {
   font-weight: 500;
 }
-
 .log-row .q-link {
   text-decoration: none;
   margin-left: 0.3em;
   opacity: 0.8;
   font-size: 1.1em;
 }
-
 .log-row .q-link:hover {
   opacity: 1;
 }
@@ -295,7 +292,7 @@ footer {
   button {
     min-height: 40px;
   }
-  .close-button {
+  .btn-close {
     width: 34px;
     height: 34px;
     font-size: 1.5em;
@@ -304,7 +301,7 @@ footer {
 
 /* === Hard override for close button shape ========================= */
 /* Close button (SVG version, perfect circle) */
-.close-button {
+.btn-close {
   /* exact square */
   width: 34px !important;
   height: 34px !important;
@@ -330,15 +327,15 @@ footer {
     opacity 0.2s ease,
     transform 0.1s ease;
 }
-.close-button:hover {
+.btn-close:hover {
   opacity: 0.9;
 }
-.close-button:active {
+.btn-close:active {
   transform: scale(0.95);
 }
 
 /* SVG inherits white stroke; scale nicely */
-.close-button svg {
+.btn-close svg {
   display: block;
   width: 20px;
   height: 20px;

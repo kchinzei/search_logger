@@ -8,11 +8,11 @@
   </head>
   <body>
     <header class="top-bar">
-      <h1 class="header-with-icon">
+      <h1>
         <img src="icons/icon64.png" alt="Search Logger icon" class="header-icon" />
-        Search Logger Settings
+        <span id="h1-title">Search Logger Settings</span>
       </h1>
-      <button id="close-button" class="close-button" aria-label="Close">
+      <button id="btn-close" class="btn-close" aria-label="Close">
         <svg
           viewBox="0 0 24 24"
           width="16"
@@ -30,37 +30,34 @@
     </header>
 
     <div class="section">
-      <h2>Search Engines</h2>
+      <h2 id="h2-search-engines">Search Engines</h2>
       <div class="setting-group">
         <label
-          ><span>Google Search</span><input type="checkbox" id="enable-google"
+          ><span>Google Search</span><input type="checkbox" id="ckbox-google"
         /></label>
         <label
           ><span>Google Maps (beta)</span
-          ><input type="checkbox" id="enable-g-maps"
+          ><input type="checkbox" id="ckbox-g-maps"
         /></label>
         <label
-          ><span>Bing Search</span><input type="checkbox" id="enable-bing"
+          ><span>Bing Search</span><input type="checkbox" id="ckbox-bing"
         /></label>
         <label
           ><span>Bing Maps (alpha)</span
-          ><input type="checkbox" id="enable-b-maps"
+          ><input type="checkbox" id="ckbox-b-maps"
         /></label>
       </div>
     </div>
 
-    <div class="section connection-section">
-      <h2>Connection</h2>
-      <div>
-        Search Logger can keep (only) 5 MB of logs. Older logs exceeding the
-        limit will be lost.
-      </div>
-      <div>To keep more logs, please connect to external plugin.</div>
+    <div class="section section-connection">
+      <h2 id="h2-connection">App sync</h2>
+      <div id="label-connection1">Search Logger can sync the log with an external App.</div>
+      <div id="label-connection2">App needs a plugin to receive logs from Search Logger.</div>
       <!-- Master switch -->
       <div class="setting-group">
         <label class="switch-row">
-          <span>Use external plugin</span>
-          <input type="checkbox" id="use-external" />
+          <span id="label-use-external">Use external plugin</span>
+          <input type="checkbox" id="ckbox-use-external" />
         </label>
       </div>
 
@@ -68,7 +65,7 @@
       <fieldset id="port-fieldset">
         <div class="setting-group">
           <label for="port">
-            Port Number
+            <span id="label-port">Port Number</span> 
             <input id="port" type="text" inputmode="numeric" pattern="[0-9]*" />
           </label>
           <div id="port-error" class="error"></div>
@@ -78,19 +75,17 @@
 
     <!-- Duplicate detection settings -->
     <div class="section">
-      <h2>Ignore recent search</h2>
-      <div>
-        Search Logger ignores repeating recent search terms from logging. You
-        can set how 'recent' to ignore.
-      </div>
+      <h2 id="h2-recent-search">Recent searches</h2>
+      <div id="label-ignore-recent1">Search Logger skips repeating recent search terms from logging.</div>
+      <div id="label-ignore-recent2">You can set how 'recent' to ignore.</div>
       <div class="setting-group">
-        <label for="max-recent">
-          Recent entries
-          <input id="max-recent" type="number" min="1" max="100" />
+        <label for="input-max-recent">
+          <span id="label-max-recent">Recent entries</span>
+          <input id="input-max-recent" type="number" min="1" max="100" />
         </label>
-        <label for="ttl-days">
-          Recent days
-          <input id="ttl-days" type="number" min="1" max="30" />
+        <label for="input-recent-days">
+         <span id="label-recent-days">Recent days</span>
+          <input id="input-recent-days" type="number" min="1" max="30" />
         </label>
       </div>
     </div>

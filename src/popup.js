@@ -17,11 +17,14 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-import { loadRecentLogs } from "./popup_list";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const openBtn = document.getElementById("logview");
-  const optionsBtn = document.getElementById("options");
+import { loadRecentLogs } from "./popup_list";
+import { setLanguage, autoTranslate } from './i18n';
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const openBtn = document.getElementById("btn-logview");
+  const optionsBtn = document.getElementById("btn-options");
+
   openBtn.addEventListener("click", async () => {
     chrome.runtime.sendMessage({ action: "openhtml", arg: "logview.html" });
   });
@@ -30,5 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
     else
       chrome.runtime.sendMessage({ action: "openhtml", arg: "options.html" });
   });
+
+  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
+  autoTranslate('popup');
+
   loadRecentLogs();
 });

@@ -5,17 +5,17 @@
   <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <h1 class="header-with-icon">
+  <h1>
     <img src="icons/icon64.png" alt="Search Logger icon" class="header-icon" />
-    Recent searches
+    <span id="h1-title">Recent searches</span>
   </h1>
 
   <div id="recent-logs"></div>
-  <div id="recent-empty" hidden>No searches yet.</div>
+  <div id="label-recent-empty" hidden>No searches yet.</div>
 
   <div class="popup-actions">
-    <button id="logview">View logs</button>
-    <button id="options">Options…</button>
+    <button id="btn-logview">View logs</button>
+    <button id="btn-options">Options…</button>
   </div>
 
   <script type="module" src="popup.js"></script>

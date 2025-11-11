@@ -25,7 +25,8 @@ import {
   loadSettings,
   saveSettingsPartial,
   type StoredSettings,
-} from "./settings"; // adjust path if needed
+} from "./settings";
+import { setLanguage, autoTranslate } from './i18n';
 
 // Helper to get typed elements by id
 function $<T extends HTMLElement = HTMLElement>(id: string): T | null {
@@ -37,7 +38,7 @@ function validatePort(port: number): boolean {
 }
 
 function updatePortUI(): void {
-  const useExternalEl = $<HTMLInputElement>("use-external");
+  const useExternalEl = $<HTMLInputElement>("ckbox-use-external");
   const useExternal = !!useExternalEl?.checked;
 
   const fieldsetExplicit = $<HTMLFieldSetElement>("port-fieldset");
@@ -68,7 +69,7 @@ function clampInt(value: number, min: number, max: number): number {
 }
 
 async function saveSettings(): Promise<void> {
-  const useExternalEl = $<HTMLInputElement>("use-external");
+  const useExternalEl = $<HTMLInputElement>("ckbox-use-external");
   const useExternal = useExternalEl ? useExternalEl.checked : true;
 
   const portInput = $<HTMLInputElement>("port");
@@ -88,13 +89,13 @@ async function saveSettings(): Promise<void> {
     }
   }
 
-  const enableGoogle = $<HTMLInputElement>("enable-google")?.checked ?? true;
-  const enableG_Maps = $<HTMLInputElement>("enable-g-maps")?.checked ?? true;
-  const enableBing = $<HTMLInputElement>("enable-bing")?.checked ?? false;
-  const enableB_Maps = $<HTMLInputElement>("enable-b-maps")?.checked ?? true;
+  const enableGoogle = $<HTMLInputElement>("ckbox-google")?.checked ?? true;
+  const enableG_Maps = $<HTMLInputElement>("ckbox-g-maps")?.checked ?? true;
+  const enableBing = $<HTMLInputElement>("ckbox-bing")?.checked ?? false;
+  const enableB_Maps = $<HTMLInputElement>("ckbox-b-maps")?.checked ?? true;
 
-  const maxRecentInput = $<HTMLInputElement>("max-recent");
-  const ttlDaysInput = $<HTMLInputElement>("ttl-days");
+  const maxRecentInput = $<HTMLInputElement>("input-max-recent");
+  const ttlDaysInput = $<HTMLInputElement>("input-recent-days");
 
   const rawMaxRecent = maxRecentInput?.value.trim() ?? "";
   const rawTtlDays = ttlDaysInput?.value.trim() ?? "";
@@ -133,24 +134,24 @@ async function saveSettings(): Promise<void> {
 async function restoreOptions(): Promise<void> {
   const settings = await loadSettings();
 
-  const useExternalEl = $<HTMLInputElement>("use-external");
+  const useExternalEl = $<HTMLInputElement>("ckbox-use-external");
   if (useExternalEl) useExternalEl.checked = settings.useExternal;
 
   const portInput = $<HTMLInputElement>("port");
   if (portInput) portInput.value = String(settings.port);
 
-  const googleEl = $<HTMLInputElement>("enable-google");
-  const gMapsEl = $<HTMLInputElement>("enable-g-maps");
-  const bingEl = $<HTMLInputElement>("enable-bing");
-  const bMapsEl = $<HTMLInputElement>("enable-b-maps");
+  const googleEl = $<HTMLInputElement>("ckbox-google");
+  const gMapsEl = $<HTMLInputElement>("ckbox-g-maps");
+  const bingEl = $<HTMLInputElement>("ckbox-bing");
+  const bMapsEl = $<HTMLInputElement>("ckbox-b-maps");
 
   if (googleEl) googleEl.checked = settings.engines.google;
   if (gMapsEl) gMapsEl.checked = settings.engines.g_maps;
   if (bingEl) bingEl.checked = settings.engines.bing;
   if (bMapsEl) bMapsEl.checked = settings.engines.b_maps;
 
-  const maxRecentInput = $<HTMLInputElement>("max-recent");
-  const ttlDaysInput = $<HTMLInputElement>("ttl-days");
+  const maxRecentInput = $<HTMLInputElement>("input-max-recent");
+  const ttlDaysInput = $<HTMLInputElement>("input-recent-days");
   if (maxRecentInput) maxRecentInput.value = String(settings.maxRecent);
   if (ttlDaysInput) ttlDaysInput.value = String(settings.ttlDays);
 
@@ -179,7 +180,7 @@ function getBrowser(): typeof chrome {
 
 function setupCloseButton(): void {
   const btn = document.getElementById(
-    "close-button",
+    "btn-close",
   ) as HTMLButtonElement | null;
   if (!btn) return;
 
@@ -206,12 +207,15 @@ function isIOS() {
   return false;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
+  autoTranslate('options');
+
   if (isIOS()) {
     document.body.classList.add("ios");
 
     const useExternal = document.getElementById(
-      "use-external",
+      "ckbox-use-external",
     ) as HTMLInputElement | null;
     if (useExternal) {
       useExternal.checked = false;
@@ -225,28 +229,28 @@ document.addEventListener("DOMContentLoaded", () => {
 $<HTMLInputElement>("port")?.addEventListener("input", () => {
   void saveSettings();
 });
-$<HTMLInputElement>("enable-google")?.addEventListener("change", () => {
+$<HTMLInputElement>("ckbox-google")?.addEventListener("change", () => {
   void saveSettings();
 });
-$<HTMLInputElement>("enable-g-maps")?.addEventListener("change", () => {
+$<HTMLInputElement>("ckbox-g-maps")?.addEventListener("change", () => {
   void saveSettings();
 });
-$<HTMLInputElement>("enable-bing")?.addEventListener("change", () => {
+$<HTMLInputElement>("ckbox-bing")?.addEventListener("change", () => {
   void saveSettings();
 });
-$<HTMLInputElement>("enable-b-maps")?.addEventListener("change", () => {
+$<HTMLInputElement>("ckbox-b-maps")?.addEventListener("change", () => {
   void saveSettings();
 });
 
-$<HTMLInputElement>("use-external")?.addEventListener("change", () => {
+$<HTMLInputElement>("ckbox-use-external")?.addEventListener("change", () => {
   updatePortUI();
   void saveSettings();
 });
 
-$<HTMLInputElement>("max-recent")?.addEventListener("input", () => {
+$<HTMLInputElement>("input-max-recent")?.addEventListener("input", () => {
   void saveSettings();
 });
-$<HTMLInputElement>("ttl-days")?.addEventListener("input", () => {
+$<HTMLInputElement>("input-recent-days")?.addEventListener("input", () => {
   void saveSettings();
 });
 

@@ -29,11 +29,14 @@ body {
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 1.8em;
   margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* spacing between icon and text */
 }
 
-.header-with-icon {
+.h1-title {
   display: flex;
   align-items: center;
   gap: 0.5em; /* space between icon and text */
@@ -45,6 +48,7 @@ h1 {
   width: 32px;
   height: 32px;
   border-radius: 6px; /* optional, looks nicer on iOS */
+  flex-shrink: 0;
 }
 
 .top-bar {
@@ -69,7 +73,7 @@ h1 {
 }
 
 /* Hide the whole Connection section on iOS */
-body.ios .connection-section {
+body.ios .section-connection {
   display: none;
 }
 
@@ -112,6 +116,7 @@ body.ios .connection-section {
   font-size: 0.9em;
   color: var(--text-error);
   margin-top: 0.3em;
+  text-align: right;
 }
 
 #notice {
@@ -132,7 +137,7 @@ body.ios .connection-section {
 
 /* === Hard override for close button shape ========================= */
 /* Close button (SVG version, perfect circle) */
-.close-button {
+.btn-close {
   /* exact square */
   width: 34px !important;
   height: 34px !important;
@@ -159,15 +164,14 @@ body.ios .connection-section {
     opacity 0.2s ease,
     transform 0.1s ease;
 }
-.close-button:hover {
+.btn-close:hover {
   opacity: 0.9;
 }
-.close-button:active {
+.btn-close:active {
   transform: scale(0.95);
 }
-
 /* SVG inherits white stroke; scale nicely */
-.close-button svg {
+.btn-close svg {
   display: block;
   width: 20px;
   height: 20px;

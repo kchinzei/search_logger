@@ -35,7 +35,7 @@ async function getAllLogLines(): Promise<string[]> {
 export async function loadRecentLogs(): Promise<void> {
   const container = document.getElementById("recent-logs");
   const emptyMsg = document.getElementById(
-    "recent-empty",
+    "label-recent-empty",
   ) as HTMLElement | null;
   if (!container) return;
 
@@ -58,6 +58,7 @@ export async function loadRecentLogs(): Promise<void> {
 }
 
 /* ---------------------- UI handlers ----------------------- */
+/*
 function initButtons(): void {
   const openBtn = document.getElementById("logview");
   const optionsBtn = document.getElementById("options");
@@ -75,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initButtons();
   void loadRecentLogs();
 });
+*/
 
 // Make it available as a global for non-module environments (iOS popup)
 (window as any).searchLoggerLoadRecentLogs = loadRecentLogs;

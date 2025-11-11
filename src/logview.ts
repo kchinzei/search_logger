@@ -19,6 +19,7 @@
 
 export {}; // marks this file as an ES module
 import { escapeHtml, parseLine, makeRow, rowHtmlFromItem } from "./log_common";
+import { setLanguage, autoTranslate } from './i18n';
 
 const SELECTORS = {
   listView: "#list-view",
@@ -177,9 +178,7 @@ function getBrowser(): typeof chrome {
 }
 
 function setupCloseButton(): void {
-  const btn = document.getElementById(
-    "close-button",
-  ) as HTMLButtonElement | null;
+  const btn = document.getElementById("btn-close") as HTMLButtonElement | null;
   if (!btn) return;
 
   btn.addEventListener("click", () => {
@@ -209,7 +208,7 @@ function injectMinimalStyles(): void {
   document.head.appendChild(style);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const listView = assertEl($(SELECTORS.listView), SELECTORS.listView);
   const btnExport = assertEl(
     $(SELECTORS.btnExport),
@@ -219,6 +218,9 @@ document.addEventListener("DOMContentLoaded", () => {
     $(SELECTORS.btnClear),
     SELECTORS.btnClear,
   ) as HTMLButtonElement;
+
+  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
+  autoTranslate('logview');
 
   injectMinimalStyles();
 

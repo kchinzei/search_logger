@@ -73,7 +73,7 @@ export function rowHtmlFromItem(
     <span class="ts">${tsEsc}</span>
     <span class="sep"></span>
     <span class="q-text">${textEsc}</span>
-    <a class="q-link" href="${hrefEsc}" target="_blank" rel="noopener" title="Open search">🔗</a>
+    <a class="q-link" href="${hrefEsc}" target="_blank" rel="noopener" title="Open search">↗️</a>
   </div>`;
 }
 

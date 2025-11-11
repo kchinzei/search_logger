@@ -23,8 +23,8 @@ function openExtensionPage(page) {
 }
 
 function initPopup() {
-    const btnOpen = document.getElementById('logview');
-    const btnOptions = document.getElementById('options');
+    const btnOpen = document.getElementById('btn-logview');
+    const btnOptions = document.getElementById('btn-options');
     
     btnOpen?.addEventListener('click', () => {
         openExtensionPage('logview.html');

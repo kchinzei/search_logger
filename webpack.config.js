@@ -45,12 +45,13 @@ module.exports = (env, argv) => {
     entry: {
       content: "./src/content.ts",
       background: "./src/background.ts",
+      i18n: "./src/i18n.ts",
       logview: "./src/logview.ts",
       options: "./src/options.ts",
       popup: "./src/popup.js",
       popup_list: "./src/popup_list.ts",
       settings: "./src/settings.ts",
-      settings: "./src/log_common.ts",
+      log_common: "./src/log_common.ts",
     },
     output: {
       path: path.resolve(__dirname, outputDir),
@@ -165,6 +166,7 @@ module.exports = (env, argv) => {
           { from: "src/popup.html", to: "popup.html" },
           { from: "src/popup.css", to: "popup.css" },
           { from: "src/icons", to: "icons" },
+          { from: "src/lang", to: "lang" },
         ],
       }),
       new MiniCssExtractPlugin({

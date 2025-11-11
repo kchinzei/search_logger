@@ -63,7 +63,7 @@ body {
 }
 
 /* --- Close button --- */
-.close-button {
+.btn-close {
   border: none;
   width: 32px;
   height: 32px;
@@ -79,16 +79,16 @@ body {
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.close-button:hover {
+.btn-close:hover {
   background-color: var(--divider-color);
 }
 
-.close-button:active {
+.btn-close:active {
   transform: scale(0.95);
 }
 
 /* Optional: give a more native iOS look when running in Safari */
-body.ios .close-button {
+body.ios .btn-close {
   background: var(--interactive-accent);
   color: #fff;
 }
@@ -98,7 +98,7 @@ h1 {
   margin-bottom: 1em;
 }
 
-.header-with-icon {
+.h1-title {
   display: flex;
   align-items: center;
   gap: 0.5em; /* space between icon and text */
@@ -133,7 +133,7 @@ h1 {
 }
 
 /* Hide the whole Connection section on iOS */
-body.ios .connection-section {
+body.ios .section-connection {
   display: none;
 }
 
