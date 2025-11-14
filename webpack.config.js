@@ -1,11 +1,12 @@
 const path = require("path");
+const { createSharedParts } = require("./webpack.shared.js");
 const fs = require("fs");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ZipPlugin = require("zip-webpack-plugin");
 const package = require("./package.json");
 const webpack = require("webpack");
-const TerserPlugin = require("terser-webpack-plugin");
+//const TerserPlugin = require("terser-webpack-plugin");
 
 // Remove .DS_Store files
 function removeDSStore(dir) {
@@ -40,113 +41,28 @@ module.exports = (env, argv) => {
   const outputDir = getOutputDir();
   const browserName = isFirefox ? "firefox" : isSafari ? "safari" : "chrome";
 
+  const shared = createSharedParts(isProduction);
+
   const mainConfig = {
     mode: argv.mode,
     entry: {
       content: "./src/content.ts",
       background: "./src/background.ts",
-      i18n: "./src/i18n.ts",
       logview: "./src/logview.ts",
       options: "./src/options.ts",
-      popup: "./src/popup.js",
-      popup_list: "./src/popup_list.ts",
-      settings: "./src/settings.ts",
-      log_common: "./src/log_common.ts",
+      popup: "./src/popup.ts",
     },
     output: {
       path: path.resolve(__dirname, outputDir),
       filename: "[name].js",
       module: false,
     },
+
+    ...shared,  // <<— reuse ALL rules, resolve, optimization
+
     devtool: isProduction ? false : "source-map",
-    optimization: {
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            mangle: false,
-            compress: {
-              defaults: true,
-              global_defs: {
-                DEBUG_MODE: !isProduction,
-              },
-              unused: true,
-              dead_code: true,
-              passes: 2,
-              ecma: 2020,
-              module: false,
-            },
-            format: {
-              ascii_only: true,
-              comments: false,
-              ecma: 2020,
-            },
-            module: false,
-            toplevel: true,
-            keep_classnames: true,
-            keep_fnames: true,
-          },
-          extractComments: false,
-        }),
-      ],
-      moduleIds: "named",
-      chunkIds: "named",
-    },
     experiments: {
       outputModule: false,
-    },
-    resolve: {
-      extensions: [".ts", ".js"],
-      alias: {
-        "./utils/browser-polyfill": path.resolve(
-          __dirname,
-          "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
-        ),
-        "../utils/browser-polyfill": path.resolve(
-          __dirname,
-          "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
-        ),
-      },
-    },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          use: [
-            {
-              loader: "ts-loader",
-              options: {
-                compilerOptions: {
-                  module: "ES2020",
-                },
-              },
-            },
-          ],
-          exclude: /node_modules/,
-        },
-        {
-          test: /\.css$/i,
-          use: ["style-loader", "css-loader"],
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: !isProduction,
-              },
-            },
-            {
-              loader: "sass-loader",
-              options: {
-                sourceMap: !isProduction,
-              },
-            },
-          ],
-        },
-      ],
     },
     plugins: [
       new CopyPlugin({

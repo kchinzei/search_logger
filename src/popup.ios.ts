@@ -17,41 +17,37 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-function openExtensionPage(page) {
+export {}; // mark this file as an ES module
+
+import { loadRecentLogs } from './popup_list';
+import { setLanguage, autoTranslate } from './i18n';
+
+// If you don't already have @types/chrome, this keeps TS happy
+declare const chrome: {
+  runtime: {
+    getURL(path: string): string;
+  };
+};
+
+function openExtensionPage(page: string): void {
   const url = chrome.runtime.getURL(page);
   window.open(url, '_blank');
 }
 
-function initPopup() {
-    const btnOpen = document.getElementById('btn-logview');
-    const btnOptions = document.getElementById('btn-options');
-    
-    btnOpen?.addEventListener('click', () => {
-        openExtensionPage('logview.html');
-    });
-    btnOptions?.addEventListener('click', () => {
-        openExtensionPage('options.html');
-    });
-    if (window.searchLoggerLoadRecentLogs) {
-        console.log('Calling searchLoggerLoadRecentLogs()');
-        window.searchLoggerLoadRecentLogs();
-    } else {
-        console.error('searchLoggerLoadRecentLogs not found on window');
-    }
-}
+document.addEventListener('DOMContentLoaded', async () => {
+  const btnOpen = document.getElementById('btn-logview');
+  const btnOptions = document.getElementById('btn-options');
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('Loading popup_list.js for iOS popup');
+  btnOpen?.addEventListener('click', () => {
+    openExtensionPage('logview.html');
+  });
 
-  const script = document.createElement('script');
-  script.src = 'popup_list.js';   // from dist_safari, inside the extension bundle
-  script.onload = () => {
-    console.log('popup_list.js loaded');
-      initPopup();
-    };
-    script.onerror = () => {
-      console.error('Failed to load popup_list.js');
-    };
+  btnOptions?.addEventListener('click', () => {
+    openExtensionPage('options.html');
+  });
 
-    document.head.appendChild(script);
+  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
+  autoTranslate('popup');
+
+  loadRecentLogs();
 });

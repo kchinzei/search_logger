@@ -10,7 +10,9 @@
     "build:firefox": "webpack --env BROWSER=firefox --mode production",
     "build:safari": "webpack --env BROWSER=safari --mode production",
     "build": "npm run build:chrome && npm run build:firefox && npm run build:safari",
-    "dev": "npm run dev:chrome"
+    "dev": "npm run dev:chrome",
+    "build:ios": "webpack --config webpack.ios.config.js --mode production",
+    "dev:ios":   "webpack --config webpack.ios.config.js --mode development"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.270",

@@ -1,0 +1,33 @@
+{
+  "logview": {
+    "h1-title": "SearchLog",
+    "btn-export": "Export",
+    "btn-clear": "Clear",
+    "label-footer": "Tap ↗️ to open its page."
+  },
+  "popup": {
+    "h1-title": "Recent searches",
+    "label-recent-empty": "No searches yet.",
+    "btn-logview": "Open logs",
+    "btn-options": "Options…"
+  },
+  "options": {
+    "h1-title": "Search Logger Options",
+    "h2-search-engines": "Search engines to log",
+    "ckbox-google": "Google Search",
+    "ckbox-g-maps": "Google Maps (beta)",
+    "ckbox-bing": "Bing Search",
+    "ckbox-b-maps": "Bing Maps (alpha)",
+    "h2-connection": "App sync",
+    "label-connection1": "Search Logger can sync the log with an external App.",
+    "label-connection2": "App needs a plugin to receive logs from Search Logger.",
+    "label-use-external": "Use external plugin",
+    "label-port": "Port Number",
+    "h2-recent-search": "Recent searches",
+    "label-ignore-recent1": "Search Logger skips repeating recent search terms from logging.",
+    "label-ignore-recent2": "You can set how 'recent' to ignore.",
+    "label-max-recent": "Recent entries",
+    "label-recent-days": "Recent days",
+    "notice": "✔ Saved"
+  }
+}

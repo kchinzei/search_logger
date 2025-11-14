@@ -1,0 +1,33 @@
+{
+  "logview": {
+    "h1-title": "SearchLog",
+    "btn-export": "エクスポート",
+    "btn-clear": "消去",
+    "label-footer": "↗️をクリックすると，ページが開きます"
+  },
+  "popup": {
+    "h1-title": "最新の検索",
+    "label-recent-empty": "検索がまだありません",
+    "btn-logview": "ログを開く",
+    "btn-options": "オプション"
+  },
+  "options": {
+    "h1-title": "Search Logger設定",
+    "h2-search-engines": "記録するサーチサイト",
+    "ckbox-google": "Google Search",
+    "ckbox-g-maps": "Google Maps (ベータ版)",
+    "ckbox-bing": "Bing Search",
+    "ckbox-b-maps": "Bing Maps (アルファ版)",
+    "h2-connection": "アプリ連携",
+    "label-connection1": "Search Loggerのログを，別のアプリに転送することができます．",
+    "label-connection2": "そのアプリに受信のためのプラグインが必要です．",
+    "label-use-external": "アプリ転送を使う",
+    "label-port": "ポート番号",
+    "h2-recent-search": "直近の検索設定",
+    "label-ignore-recent1": "Search Loggerは，直近の検索語が繰り返し検索された場合，その検索語を記録しません．",
+    "label-ignore-recent2": "「直近」の範囲を以下で指定します．",
+    "label-max-recent": "「直近」の回数",
+    "label-recent-days": "「直近」の日数",
+    "notice": "✔ 設定を保存しました"
+  }
+}

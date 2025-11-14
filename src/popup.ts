@@ -17,22 +17,38 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
+export {};  // marks this file as an ES module
 
-import { loadRecentLogs } from "./popup_list";
+import { loadRecentLogs } from './popup_list';
 import { setLanguage, autoTranslate } from './i18n';
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const openBtn = document.getElementById("btn-logview");
-  const optionsBtn = document.getElementById("btn-options");
+// Minimal chrome typing so you don't *have* to install @types/chrome
+declare const chrome: {
+  runtime: {
+    sendMessage(message: unknown): void;
+    openOptionsPage?: () => void;
+  };
+};
 
-  openBtn.addEventListener("click", async () => {
-    chrome.runtime.sendMessage({ action: "openhtml", arg: "logview.html" });
-  });
-  optionsBtn.addEventListener("click", async () => {
-    if (chrome.runtime.openOptionsPage) chrome.runtime.openOptionsPage();
-    else
-      chrome.runtime.sendMessage({ action: "openhtml", arg: "options.html" });
-  });
+document.addEventListener('DOMContentLoaded', async () => {
+  const openBtn = document.getElementById('btn-logview') as HTMLButtonElement | null;
+  const optionsBtn = document.getElementById('btn-options') as HTMLButtonElement | null;
+
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      chrome.runtime.sendMessage({ action: 'openhtml', arg: 'logview.html' });
+    });
+  }
+
+  if (optionsBtn) {
+    optionsBtn.addEventListener('click', () => {
+      if (chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+      } else {
+        chrome.runtime.sendMessage({ action: 'openhtml', arg: 'options.html' });
+      }
+    });
+  }
 
   await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
   autoTranslate('popup');

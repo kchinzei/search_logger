@@ -96,6 +96,11 @@ body.ios .section-connection {
   margin: 0.4em 0;
 }
 
+.label-hint {
+  color: var(--text-muted);
+  font-size: clamp(12px, 0.7em, 0.8em);
+}
+
 .setting-group input[type="text"],
 .setting-group input[type="number"] {
   width: 6em;

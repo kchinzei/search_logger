@@ -15,6 +15,7 @@ dist/
 dist_firefox/
 dist_safari/
 dist_chromium/
+dist_ios/
 builds/
 assets/shared
 

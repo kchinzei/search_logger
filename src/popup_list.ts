@@ -46,8 +46,11 @@ export async function loadRecentLogs(): Promise<void> {
     return;
   }
 
+  // console.log("[popup_list] lines.length=", lines.length);
+
   // show newest first
-  const recentLines = lines.slice(-POPUP_MAX_RECENT).reverse();
+  // const recentLines = lines.slice(-POPUP_MAX_RECENT).reverse();
+  const recentLines = lines.slice(0, POPUP_MAX_RECENT);
 
   container.innerHTML = "";
 
