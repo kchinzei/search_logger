@@ -19,13 +19,17 @@
 
 export {}; // marks this file as an ES module
 import { escapeHtml, parseLine, makeRow, rowHtmlFromItem } from "./log_common";
-import { setLanguage, autoTranslate } from './i18n';
+import { setLanguage, autoTranslate, makePrefixer2 } from './i18n';
+import { EXPORT_FILE_NAME } from './const';
 
 const SELECTORS = {
   listView: "#list-view",
   btnExport: "#btn-export",
   btnClear: "#btn-clear",
 } as const;
+
+setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
+const tp = makePrefixer2('logview');
 
 function $(sel: string): HTMLElement | null {
   return document.querySelector<HTMLElement>(sel);
@@ -111,7 +115,6 @@ async function exportLog(): Promise<void> {
     </body>
   </html>`;
 
-  const filename = "SearchLog.html";
   const blob = new Blob([html], { type: "text/html" });
   const ua = navigator.userAgent || "";
   const isiOS = /iPhone|iPad|iPod/.test(ua);
@@ -122,7 +125,7 @@ async function exportLog(): Promise<void> {
       try {
         // TS doesn’t know about canShare/files, so cast to any
         const navAny = navigator as any;
-        const file = new File([blob], filename, { type: "text/html" });
+        const file = new File([blob], EXPORT_FILE_NAME, { type: "text/html" });
 
         if (
           typeof navAny.canShare === "function" &&
@@ -138,13 +141,13 @@ async function exportLog(): Promise<void> {
         console.error("Search Logger export: Web Share failed", e);
       }
     }
-    alert("To use Export, please activate Share.");
+    alert(tp('alert-need-share-activated'));
   } else {
     // PC can save easy.
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "SearchLog.html";
+    a.download = EXPORT_FILE_NAME;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -154,8 +157,8 @@ async function exportLog(): Promise<void> {
 
 async function clearAll(listView: HTMLElement): Promise<void> {
   const ok = await showConfirmModal(
-    "Erase the entire log?",
-    "This cannot be undone.",
+    tp('alert-erase1'),
+    tp('alert-erase2'),
   );
   if (!ok) return;
 
@@ -219,7 +222,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     SELECTORS.btnClear,
   ) as HTMLButtonElement;
 
-  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
+  // await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
   autoTranslate('logview');
 
   injectMinimalStyles();
@@ -230,7 +233,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   btnClear.addEventListener("click", () => {
     void clearAll(listView);
   });
-
+  setupCloseButton();
+  
   void renderList(listView);
 
   // 🔄 Auto-refresh when log storage changes
@@ -245,7 +249,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     void renderList(listView);
   });
-  setupCloseButton();
 });
 /* Alternative modal dialog */
 

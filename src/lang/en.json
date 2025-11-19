@@ -3,7 +3,14 @@
     "h1-title": "SearchLog",
     "btn-export": "Export",
     "btn-clear": "Clear",
-    "label-footer": "Tap ↗️ to open its page."
+    "label-footer": "Tap ↗️ to open its page.",
+    "alert-need-share-activated": "To use Export, please activate Share.",
+    "alert-erase1": "Erase the entire log?",
+    "alert-erase2": "This cannot be undone."
+  },
+  "log-common": {
+    "missing-ts": "(time no logged)",
+    "missing-query": "(no query)"
   },
   "popup": {
     "h1-title": "Recent searches",
@@ -26,7 +33,7 @@
     "h2-recent-search": "Recent searches",
     "label-ignore-recent1": "Search Logger skips repeating recent search terms from logging.",
     "label-ignore-recent2": "You can set how 'recent' to ignore.",
-    "label-max-recent": "Recent entries",
+    "label-recent-items": "Recent entries",
     "label-recent-days": "Recent days",
     "notice": "✔ Saved"
   }

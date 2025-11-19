@@ -6,9 +6,9 @@ Typically the search log looks like;
 
 **SearchLog**
 
-- 2025-04-07 13:40 — hello world [🔗](https://www.google.com/search?q=hello+world)
-- 2025-04-07 13:49 — how to auto record search history in Obsidian [🔗](https://www.google.com/search?q=how+to+auto+record+search+history+in+Obsidian)
-- 2025-04-07 13:53 — Yellowstone National Park [🔗](https://www.google.com/maps/search/Yellowstone+National+Park)
+<span style="color: gray; ">2025-04-07 13:40</span> hello world [↗️](https://www.google.com/search?q=hello+world)<br>
+<span style="color: gray; ">2025-04-07 13:49</span> how to auto record search history in Obsidian [↗️](https://www.google.com/search?q=how+to+auto+record+search+history+in+Obsidian)<br>
+<span style="color: gray; ">2025-04-07 13:53</span> Yellowstone National Park [↗️](https://www.google.com/maps/search/Yellowstone+National+Park)
 
 You can also log Google Map search terms
 

@@ -17,11 +17,16 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
+import { setLanguage, makePrefixer2 } from './i18n'; // assume setLanguage() already called.
+
 interface LogItem {
   ts?: string; // ISO timestamp string
   text?: string;
   href?: string;
 }
+
+setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
+const tp = makePrefixer2('log-common');
 
 function escapeAttr(str: string | undefined): string {
   if (!str) return "";
@@ -65,8 +70,8 @@ export function rowHtmlFromItem(
   text?: string,
   href?: string,
 ): string {
-  const tsEsc = escapeHtml(ts || "unknown time");
-  const textEsc = escapeHtml(text || "(no query)");
+  const tsEsc = escapeHtml(ts || tp('missing-ts'));
+  const textEsc = escapeHtml(text || tp('missing-query'));
   const hrefEsc = escapeAttr(href);
 
   return `<div class="log-row">

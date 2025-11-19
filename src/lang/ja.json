@@ -3,7 +3,14 @@
     "h1-title": "SearchLog",
     "btn-export": "エクスポート",
     "btn-clear": "消去",
-    "label-footer": "↗️をクリックすると，ページが開きます"
+    "label-footer": "↗️をクリックすると，ページが開きます",
+    "alert-need-share-activated": "エクスポートするためには，共有を有効にしてください",
+    "alert-erase1": "ログをすべて消去しますか?",
+    "alert-erase2": "この操作は取り消せません"
+  },
+    "log-common": {
+    "missing-ts": "(日時記録欠落）",
+    "missing-query": "（検索語記録欠落）"
   },
   "popup": {
     "h1-title": "最新の検索",
@@ -26,7 +33,7 @@
     "h2-recent-search": "直近の検索設定",
     "label-ignore-recent1": "Search Loggerは，直近の検索語が繰り返し検索された場合，その検索語を記録しません．",
     "label-ignore-recent2": "「直近」の範囲を以下で指定します．",
-    "label-max-recent": "「直近」の回数",
+    "label-recent-items": "「直近」の回数",
     "label-recent-days": "「直近」の日数",
     "notice": "✔ 設定を保存しました"
   }

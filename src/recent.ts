@@ -30,7 +30,7 @@
 //
 // Works in both content-scripts (DOM available) and service worker (DOM absent).
 
-export const FROM_PARAM_KEY = "from";
+import { FROM_PARAM_KEY, DEFAULT_RECENT_ITEMS, DEFAULT_RECENT_DAYS, MIN_RECENT_ITEMS, MIN_RECENT_DAYS } from './const';
 
 export type RecentParams = {
   query: string;
@@ -38,19 +38,16 @@ export type RecentParams = {
   engine?: string;
   from?: string; // optional explicit value (preferred)
   ttlMs?: number; // optional override, otherwise "one day"
-  maxRecent?: number; // optional override for buffer length
+  recentItems?: number; // optional override for buffer length
 };
 
 type RecentItem = { key: string; ts: number };
 
-// Small defaults; this buffer is tiny to fit easily in storage.local.
-const DEFAULT_MAX_RECENT = 50;
-const DEFAULT_TTL_DAYS = 1;
-const DEFAULT_TTL_MS = DEFAULT_TTL_DAYS * 24 * 60 * 60 * 1000; // 1 day
+const DEFAULT_TTL_MS = DEFAULT_RECENT_DAYS * 24 * 60 * 60 * 1000; // 1 day
 
 let recent: RecentItem[] = [];
 let inited = false;
-let cachedSettings: { maxRecent: number; ttlMs: number } | null = null;
+let cachedSettings: { recentItems: number; ttlMs: number } | null = null;
 
 /* ---------------------- Safe helpers ---------------------- */
 function safeURL(u: string): URL | null {
@@ -104,26 +101,26 @@ function normalizeKey(
 }
 
 /* ---------------------- Settings ---------------------- */
-async function getSettings(): Promise<{ maxRecent: number; ttlMs: number }> {
+async function getSettings(): Promise<{ recentItems: number; ttlMs: number }> {
   if (cachedSettings) return cachedSettings;
 
-  let maxRecent = DEFAULT_MAX_RECENT;
+  let recentItems = DEFAULT_RECENT_ITEMS;
   let ttlMs = DEFAULT_TTL_MS;
 
   try {
     // Read from the same place options.ts writes
-    const { maxRecent: storedMax, ttlDays: storedDays } =
+    const { recentItems: storedMax, ttlDays: storedDays } =
       await chrome.storage.local.get({
-        maxRecent: DEFAULT_MAX_RECENT,
-        ttlDays: DEFAULT_TTL_DAYS,
+        recentItems: DEFAULT_RECENT_ITEMS,
+        ttlDays: DEFAULT_RECENT_DAYS,
       });
 
-    if (typeof storedMax === "number" && storedMax > 0) {
-      maxRecent = Math.trunc(storedMax);
+    if (typeof storedMax === "number" && storedMax >= MIN_RECENT_ITEMS) {
+      recentItems = Math.trunc(storedMax);
     }
 
-    let days = DEFAULT_TTL_DAYS;
-    if (typeof storedDays === "number" && storedDays > 0) {
+    let days = DEFAULT_RECENT_DAYS;
+    if (typeof storedDays === "number" && storedDays >= MIN_RECENT_DAYS) {
       days = Math.trunc(storedDays);
     }
     ttlMs = days * 24 * 60 * 60 * 1000;
@@ -131,7 +128,7 @@ async function getSettings(): Promise<{ maxRecent: number; ttlMs: number }> {
     // ignore errors, keep defaults
   }
 
-  cachedSettings = { maxRecent, ttlMs };
+  cachedSettings = { recentItems, ttlMs };
   return cachedSettings;
 }
 
@@ -157,12 +154,12 @@ async function saveLocal(): Promise<void> {
 }
 
 /* ---------------------- Prune & init ---------------------- */
-function prune(ttlMs: number, maxRecent: number): void {
+function prune(ttlMs: number, recentItems: number): void {
   const now = Date.now();
   // Drop anything older than ttlMs
   recent = recent.filter((r) => now - r.ts <= ttlMs);
-  // Keep only the newest maxRecent entries
-  if (recent.length > maxRecent) recent = recent.slice(0, maxRecent);
+  // Keep only the newest recentItems entries
+  if (recent.length > recentItems) recent = recent.slice(0, recentItems);
 }
 
 async function initIfNeeded(): Promise<void> {
@@ -170,8 +167,8 @@ async function initIfNeeded(): Promise<void> {
   inited = true;
 
   await loadLocal();
-  const { maxRecent, ttlMs } = await getSettings();
-  prune(ttlMs, maxRecent);
+  const { recentItems, ttlMs } = await getSettings();
+  prune(ttlMs, recentItems);
   await saveLocal();
 }
 
@@ -181,13 +178,13 @@ export async function isRecentDuplicate(
   params: RecentParams,
 ): Promise<boolean> {
   await initIfNeeded();
-  const { maxRecent, ttlMs } = await getSettings();
+  const { recentItems, ttlMs } = await getSettings();
 
   const fromKey = stableFromForKey(params.url, params.from);
   const key = normalizeKey(params.query, params.url, params.engine, fromKey);
 
   const effectiveTtl = params.ttlMs ?? ttlMs;
-  const effectiveMax = params.maxRecent ?? maxRecent;
+  const effectiveMax = params.recentItems ?? recentItems;
 
   // Clean the buffer first
   prune(effectiveTtl, effectiveMax);
@@ -200,13 +197,13 @@ export async function isRecentDuplicate(
 
 export async function recordRecent(params: RecentParams): Promise<void> {
   await initIfNeeded();
-  const { maxRecent, ttlMs } = await getSettings();
+  const { recentItems, ttlMs } = await getSettings();
 
   const fromKey = stableFromForKey(params.url, params.from);
   const key = normalizeKey(params.query, params.url, params.engine, fromKey);
 
   const effectiveTtl = params.ttlMs ?? ttlMs;
-  const effectiveMax = params.maxRecent ?? maxRecent;
+  const effectiveMax = params.recentItems ?? recentItems;
 
   recent.unshift({ key, ts: Date.now() });
   prune(effectiveTtl, effectiveMax);

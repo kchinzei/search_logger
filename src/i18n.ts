@@ -35,6 +35,15 @@ export function makePrefixer(prefix: string): (key: string) => string | undefine
   return (key: string) => t(`${prefix}.${key}`);
 }
 
+export function makePrefixer2(prefix: string): (key: string) => string {
+  // Always return a string
+  const p = makePrefixer(prefix);
+  return (key: string) => {
+    const val = p(key);
+    return val !== undefined ? val : `${prefix}.${key}`;
+  };
+}
+
 export function applyTexts(keys: string[], prefix = ''): void {
   const tp = makePrefixer(prefix);
   for (const k of keys) {

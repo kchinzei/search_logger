@@ -17,8 +17,7 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-export const DEFAULT_MAX_RECENT = 50;
-export const DEFAULT_TTL_DAYS = 1;
+import { DEFAULT_USE_EXTERNAL, DEFAULT_PORT, DEFAULT_RECENT_ITEMS, DEFAULT_RECENT_DAYS } from './const';
 
 export interface EnginesSettings {
   google?: boolean;
@@ -31,7 +30,7 @@ export interface StoredSettings {
   useExternal?: boolean;
   port?: number;
   engines?: EnginesSettings;
-  maxRecent?: number;
+  recentItems?: number;
   ttlDays?: number;
 }
 
@@ -45,21 +44,21 @@ export type NormalizedSettings = {
     bing: boolean;
     b_maps: boolean;
   };
-  maxRecent: number;
+  recentItems: number;
   ttlDays: number;
 };
 
 export const DEFAULT_SETTINGS: NormalizedSettings = {
-  useExternal: true,
-  port: 27123,
+  useExternal: DEFAULT_USE_EXTERNAL,
+  port: DEFAULT_PORT,
   engines: {
     google: true,
     g_maps: true,
     bing: false,
-    b_maps: true,
+    b_maps: false,
   },
-  maxRecent: DEFAULT_MAX_RECENT,
-  ttlDays: DEFAULT_TTL_DAYS,
+  recentItems: DEFAULT_RECENT_ITEMS,
+  ttlDays: DEFAULT_RECENT_DAYS,
 };
 
 // Merge raw storage values with defaults
@@ -77,7 +76,7 @@ export function normalizeSettings(raw: StoredSettings): NormalizedSettings {
       bing: engines.bing ?? DEFAULT_SETTINGS.engines.bing,
       b_maps: engines.b_maps ?? DEFAULT_SETTINGS.engines.b_maps,
     },
-    maxRecent: raw.maxRecent ?? DEFAULT_SETTINGS.maxRecent,
+    recentItems: raw.recentItems ?? DEFAULT_SETTINGS.recentItems,
     ttlDays: raw.ttlDays ?? DEFAULT_SETTINGS.ttlDays,
   };
 }

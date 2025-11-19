@@ -19,9 +19,13 @@
 
 export {}; // marks this file as an ES module
 
+import { DEFAULT_RECENT_ITEMS, DEFAULT_RECENT_DAYS,
+  MIN_PORT, MAX_PORT,
+  MIN_RECENT_ITEMS, MIN_RECENT_DAYS,
+  MAX_RECENT_ITEMS, MAX_RECENT_DAYS
+ } from './const';
+
 import {
-  DEFAULT_MAX_RECENT,
-  DEFAULT_TTL_DAYS,
   loadSettings,
   saveSettingsPartial,
   type StoredSettings,
@@ -34,7 +38,7 @@ function $<T extends HTMLElement = HTMLElement>(id: string): T | null {
 }
 
 function validatePort(port: number): boolean {
-  return Number.isInteger(port) && port >= 1024 && port <= 65535;
+  return Number.isInteger(port) && port >= MIN_PORT && port <= MAX_PORT;
 }
 
 function updatePortUI(): void {
@@ -92,26 +96,26 @@ async function saveSettings(): Promise<void> {
   const enableGoogle = $<HTMLInputElement>("ckbox-google")?.checked ?? true;
   const enableG_Maps = $<HTMLInputElement>("ckbox-g-maps")?.checked ?? true;
   const enableBing = $<HTMLInputElement>("ckbox-bing")?.checked ?? false;
-  const enableB_Maps = $<HTMLInputElement>("ckbox-b-maps")?.checked ?? true;
+  const enableB_Maps = $<HTMLInputElement>("ckbox-b-maps")?.checked ?? false;
 
-  const maxRecentInput = $<HTMLInputElement>("input-max-recent");
+  const recentItemsInput = $<HTMLInputElement>("input-max-recent");
   const ttlDaysInput = $<HTMLInputElement>("input-recent-days");
 
-  const rawMaxRecent = maxRecentInput?.value.trim() ?? "";
+  const rawRecentItems = recentItemsInput?.value.trim() ?? "";
   const rawTtlDays = ttlDaysInput?.value.trim() ?? "";
 
-  const parsedMaxRecent = parseInt(rawMaxRecent, 10);
+  const parsedRecentItems = parseInt(rawRecentItems, 10);
   const parsedTtlDays = parseInt(rawTtlDays, 10);
 
-  const maxRecent = clampInt(
-    Number.isNaN(parsedMaxRecent) ? DEFAULT_MAX_RECENT : parsedMaxRecent,
-    1,
-    500,
+  const recentItems = clampInt(
+    Number.isNaN(parsedRecentItems) ? DEFAULT_RECENT_ITEMS : parsedRecentItems,
+    MIN_RECENT_ITEMS,
+    MAX_RECENT_ITEMS,
   );
   const ttlDays = clampInt(
-    Number.isNaN(parsedTtlDays) ? DEFAULT_TTL_DAYS : parsedTtlDays,
-    1,
-    30,
+    Number.isNaN(parsedTtlDays) ? DEFAULT_RECENT_DAYS : parsedTtlDays,
+    MIN_RECENT_DAYS,
+    MAX_RECENT_DAYS,
   );
 
   const payload: StoredSettings = {
@@ -123,7 +127,7 @@ async function saveSettings(): Promise<void> {
       bing: enableBing,
       b_maps: enableB_Maps,
     },
-    maxRecent,
+    recentItems,
     ttlDays,
   };
 
@@ -150,9 +154,9 @@ async function restoreOptions(): Promise<void> {
   if (bingEl) bingEl.checked = settings.engines.bing;
   if (bMapsEl) bMapsEl.checked = settings.engines.b_maps;
 
-  const maxRecentInput = $<HTMLInputElement>("input-max-recent");
+  const recentItemsInput = $<HTMLInputElement>("input-recent-items");
   const ttlDaysInput = $<HTMLInputElement>("input-recent-days");
-  if (maxRecentInput) maxRecentInput.value = String(settings.maxRecent);
+  if (recentItemsInput) recentItemsInput.value = String(settings.recentItems);
   if (ttlDaysInput) ttlDaysInput.value = String(settings.ttlDays);
 
   updatePortUI();
@@ -247,7 +251,7 @@ $<HTMLInputElement>("ckbox-use-external")?.addEventListener("change", () => {
   void saveSettings();
 });
 
-$<HTMLInputElement>("input-max-recent")?.addEventListener("input", () => {
+$<HTMLInputElement>("input-recent-items")?.addEventListener("input", () => {
   void saveSettings();
 });
 $<HTMLInputElement>("input-recent-days")?.addEventListener("input", () => {
