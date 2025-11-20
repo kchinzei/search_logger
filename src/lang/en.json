@@ -6,7 +6,8 @@
     "label-footer": "Tap ↗️ to open its page.",
     "alert-need-share-activated": "To use Export, please activate Share.",
     "alert-erase1": "Erase the entire log?",
-    "alert-erase2": "This cannot be undone."
+    "alert-erase2": "This cannot be undone.",
+    "label-no-log": "(No log entry.)"
   },
   "log-common": {
     "missing-ts": "(time no logged)",

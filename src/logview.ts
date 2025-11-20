@@ -68,7 +68,7 @@ async function renderList(listView: HTMLElement): Promise<void> {
   const lines = await getAllLogLines();
   listView.innerHTML = "";
   if (lines.length === 0) {
-    listView.innerHTML = `<p style="opacity:.7">No entries.</p>`;
+    listView.innerHTML = `<p style="opacity:.7">${tp('label-no-log')}</p>`;
     return;
   }
   const frag = document.createDocumentFragment();
@@ -87,7 +87,7 @@ async function exportLog(): Promise<void> {
         const { ts, text, href } = parseLine(line);
         return rowHtmlFromItem(ts, text, href);
       })
-      .join("\n") || "<p>No entries.</p>";
+      .join("\n") || `<p>${tp('label-no-log')}</p>`;
 
   const html = `<!doctype html>
   <html>
@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     SELECTORS.btnClear,
   ) as HTMLButtonElement;
 
-  // await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
+  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
   autoTranslate('logview');
 
   injectMinimalStyles();
