@@ -46,7 +46,7 @@ export function escapeHtml(str: string): string {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-/** Parse one stored HTML line: <div data-ts="2025-11-03T08:31:45.201Z"><a ...> */
+/** Parse one stored HTML line: <div ts="2025-11-03T08:31:45.201Z"><a ...> */
 export function parseLine(line: string): LogItem {
   const box = document.createElement("div");
   box.innerHTML = line.trim();
@@ -56,7 +56,7 @@ export function parseLine(line: string): LogItem {
 
   const href = a?.getAttribute("href") ?? "";
   const text = a?.textContent ?? "";
-  const ts = root?.getAttribute("data-ts") ?? "";
+  const ts = root?.getAttribute("ts") ?? "";
 
   return { ts, text, href }; // keep ts as ISO string
 }
