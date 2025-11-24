@@ -249,7 +249,57 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     void renderList(listView);
   });
+
+  // Import html file for demo purpose: Do not include it in production.
+  const importBtn = document.getElementById('btn-import');
+  const importFile = document.getElementById('import-file') as HTMLInputElement;
+
+  importBtn?.addEventListener('click', () => {
+    importFile.value = '';  // reset
+    importFile.click();
+  });
+
+  importFile?.addEventListener('change', async () => {
+    if (!importFile.files || importFile.files.length === 0) return;
+    const file = importFile.files[0];
+
+    try {
+      const text = await file.text();
+      const importedLines = parseExportedLogHtml(text);
+      await prependLogs(importedLines);
+      alert('Import complete.');
+      location.reload();
+    } catch (err) {
+      console.error(err);
+      alert('Failed to import log.');
+    }
+  });
 });
+
+function parseExportedLogHtml(html: string): string[] {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  const rows = Array.from(doc.querySelectorAll('.log-row'));
+  const snippets: string[] = [];
+
+  for (const row of rows) {
+    // Preserve exact structure of each log-row
+    snippets.push(row.outerHTML.trim());
+  }
+
+  return snippets;
+}
+
+async function prependLogs(importedRows: string[]): Promise<void> {
+  return new Promise((resolve) => {
+    chrome.storage.local.set({ logHtml: importedRows }, () => {
+      resolve();
+    });
+  });
+}
+// End of demo import
+
 /* Alternative modal dialog */
 
 async function showConfirmModal(
