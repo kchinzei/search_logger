@@ -264,11 +264,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const file = importFile.files[0];
 
     try {
+      const btn = document.getElementById('btn-import');
+      if (btn) btn.style.display = 'none';
       const text = await file.text();
       const importedLines = parseExportedLogHtml(text);
       await prependLogs(importedLines);
-      alert('Import complete.');
-      location.reload();
     } catch (err) {
       console.error(err);
       alert('Failed to import log.');
@@ -281,19 +281,25 @@ function parseExportedLogHtml(html: string): string[] {
   const doc = parser.parseFromString(html, 'text/html');
 
   const rows = Array.from(doc.querySelectorAll('.log-row'));
-  const snippets: string[] = [];
+  const entries: string[] = [];
 
   for (const row of rows) {
-    // Preserve exact structure of each log-row
-    snippets.push(row.outerHTML.trim());
-  }
+    const ts = row.querySelector('.ts')?.textContent?.trim() ?? '';
+    const text = row.querySelector('.q-text')?.textContent?.trim() ?? '';
+    const link = row.querySelector('.q-link')?.getAttribute('href') ?? '';
 
-  return snippets;
+    if (!ts || !text || !link) continue;
+
+    const internal = `<div ts="${ts}"><a href="${link}">${text}</a></div>`;
+    entries.push(internal);
+  }
+  return entries;
 }
 
 async function prependLogs(importedRows: string[]): Promise<void> {
   return new Promise((resolve) => {
-    chrome.storage.local.set({ logHtml: importedRows }, () => {
+    const data = importedRows.join("\n") + "\n";
+    chrome.storage.local.set({ logHtml: data }, () => {
       resolve();
     });
   });
