@@ -103,7 +103,7 @@ async function saveLocal(
   timestamp: string,
 ): Promise<void> {
   const { logHtml = "" } = await chrome.storage.local.get({ logHtml: "" });
-  const newLine = `<div data-ts="${timestamp}"><a href="${url}">${query}</a></div>`;
+  const newLine = `<div ts="${timestamp}"><a href="${url}">${query}</a></div>`;
   let lines = String(logHtml).split("\n").filter(Boolean);
   lines.unshift(newLine);
 
