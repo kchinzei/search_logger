@@ -17,7 +17,7 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-import { setLanguage, makePrefixer2 } from './i18n'; // assume setLanguage() already called.
+import { setLanguage, makePrefixer2 } from "./i18n"; // assume setLanguage() already called.
 
 interface LogItem {
   ts?: string; // ISO timestamp string
@@ -25,8 +25,8 @@ interface LogItem {
   href?: string;
 }
 
-setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
-const tp = makePrefixer2('log-common');
+setLanguage(navigator.language.startsWith("ja") ? "ja" : "en");
+const tp = makePrefixer2("log-common");
 
 function escapeAttr(str: string | undefined): string {
   if (!str) return "";
@@ -36,9 +36,11 @@ function escapeAttr(str: string | undefined): string {
     .replace(/</g, "&lt;");
 }
 
+/*
 function pad2(n: number): string {
   return String(n).padStart(2, "0");
 }
+*/
 
 // --- exported API ---
 
@@ -70,8 +72,8 @@ export function rowHtmlFromItem(
   text?: string,
   href?: string,
 ): string {
-  const tsEsc = escapeHtml(ts || tp('missing-ts'));
-  const textEsc = escapeHtml(text || tp('missing-query'));
+  const tsEsc = escapeHtml(ts || tp("missing-ts"));
+  const textEsc = escapeHtml(text || tp("missing-query"));
   const hrefEsc = escapeAttr(href);
 
   return `<div class="log-row">

@@ -9,7 +9,7 @@
     "alert-erase2": "この操作は取り消せません",
     "label-no-log": "（ログ項目なし）"
   },
-    "log-common": {
+  "log-common": {
     "missing-ts": "(日時記録欠落）",
     "missing-query": "（検索語記録欠落）"
   },

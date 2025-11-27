@@ -104,7 +104,7 @@ async function saveLocal(
 ): Promise<void> {
   const { logHtml = "" } = await chrome.storage.local.get({ logHtml: "" });
   const newLine = `<div ts="${timestamp}"><a href="${url}">${query}</a></div>`;
-  let lines = String(logHtml).split("\n").filter(Boolean);
+  const lines = String(logHtml).split("\n").filter(Boolean);
   lines.unshift(newLine);
 
   const encoder = new TextEncoder();
@@ -222,7 +222,7 @@ export function openOrFocusPage(page: string): void {
 }
 
 chrome.runtime.onInstalled.addListener(async () => {
-  const settings = await loadSettings();
+  const _settings = await loadSettings();
   // optional: log or use them
 });
 

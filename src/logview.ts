@@ -19,8 +19,8 @@
 
 export {}; // marks this file as an ES module
 import { escapeHtml, parseLine, makeRow, rowHtmlFromItem } from "./log_common";
-import { setLanguage, autoTranslate, makePrefixer2 } from './i18n';
-import { EXPORT_FILE_NAME } from './const';
+import { setLanguage, autoTranslate, makePrefixer2 } from "./i18n";
+import { EXPORT_FILE_NAME } from "./const";
 
 const SELECTORS = {
   listView: "#list-view",
@@ -28,8 +28,8 @@ const SELECTORS = {
   btnClear: "#btn-clear",
 } as const;
 
-setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
-const tp = makePrefixer2('logview');
+setLanguage(navigator.language.startsWith("ja") ? "ja" : "en");
+const tp = makePrefixer2("logview");
 
 function $(sel: string): HTMLElement | null {
   return document.querySelector<HTMLElement>(sel);
@@ -68,7 +68,7 @@ async function renderList(listView: HTMLElement): Promise<void> {
   const lines = await getAllLogLines();
   listView.innerHTML = "";
   if (lines.length === 0) {
-    listView.innerHTML = `<p style="opacity:.7">${tp('label-no-log')}</p>`;
+    listView.innerHTML = `<p style="opacity:.7">${tp("label-no-log")}</p>`;
     return;
   }
   const frag = document.createDocumentFragment();
@@ -87,7 +87,7 @@ async function exportLog(): Promise<void> {
         const { ts, text, href } = parseLine(line);
         return rowHtmlFromItem(ts, text, href);
       })
-      .join("\n") || `<p>${tp('label-no-log')}</p>`;
+      .join("\n") || `<p>${tp("label-no-log")}</p>`;
 
   const html = `<!doctype html>
   <html>
@@ -141,7 +141,7 @@ async function exportLog(): Promise<void> {
         console.error("Search Logger export: Web Share failed", e);
       }
     }
-    alert(tp('alert-need-share-activated'));
+    alert(tp("alert-need-share-activated"));
   } else {
     // PC can save easy.
     const url = URL.createObjectURL(blob);
@@ -156,10 +156,7 @@ async function exportLog(): Promise<void> {
 }
 
 async function clearAll(listView: HTMLElement): Promise<void> {
-  const ok = await showConfirmModal(
-    tp('alert-erase1'),
-    tp('alert-erase2'),
-  );
+  const ok = await showConfirmModal(tp("alert-erase1"), tp("alert-erase2"));
   if (!ok) return;
 
   // Ask background to clear logs + dedupe
@@ -222,8 +219,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     SELECTORS.btnClear,
   ) as HTMLButtonElement;
 
-  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
-  autoTranslate('logview');
+  await setLanguage(navigator.language.startsWith("ja") ? "ja" : "en");
+  autoTranslate("logview");
 
   injectMinimalStyles();
 
@@ -234,7 +231,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     void clearAll(listView);
   });
   setupCloseButton();
-  
+
   void renderList(listView);
 
   // 🔄 Auto-refresh when log storage changes

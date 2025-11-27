@@ -58,7 +58,7 @@ module.exports = (env, argv) => {
       module: false,
     },
 
-    ...shared,  // <<— reuse ALL rules, resolve, optimization
+    ...shared, // <<— reuse ALL rules, resolve, optimization
 
     devtool: isProduction ? false : "source-map",
     experiments: {
@@ -90,7 +90,7 @@ module.exports = (env, argv) => {
       }),
       {
         apply: (compiler) => {
-          compiler.hooks.afterEmit.tap("RemoveDSStore", (compilation) => {
+          compiler.hooks.afterEmit.tap("RemoveDSStore", (_compilation) => {
             removeDSStore(path.resolve(__dirname, outputDir));
           });
         },

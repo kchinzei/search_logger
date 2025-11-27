@@ -19,8 +19,8 @@
 
 export {}; // mark this file as an ES module
 
-import { loadRecentLogs } from './popup_list';
-import { setLanguage, autoTranslate } from './i18n';
+import { loadRecentLogs } from "./popup_list";
+import { setLanguage, autoTranslate } from "./i18n";
 
 // If you don't already have @types/chrome, this keeps TS happy
 declare const chrome: {
@@ -31,23 +31,23 @@ declare const chrome: {
 
 function openExtensionPage(page: string): void {
   const url = chrome.runtime.getURL(page);
-  window.open(url, '_blank');
+  window.open(url, "_blank");
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const btnOpen = document.getElementById('btn-logview');
-  const btnOptions = document.getElementById('btn-options');
+document.addEventListener("DOMContentLoaded", async () => {
+  const btnOpen = document.getElementById("btn-logview");
+  const btnOptions = document.getElementById("btn-options");
 
-  btnOpen?.addEventListener('click', () => {
-    openExtensionPage('logview.html');
+  btnOpen?.addEventListener("click", () => {
+    openExtensionPage("logview.html");
   });
 
-  btnOptions?.addEventListener('click', () => {
-    openExtensionPage('options.html');
+  btnOptions?.addEventListener("click", () => {
+    openExtensionPage("options.html");
   });
 
-  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
-  autoTranslate('popup');
+  await setLanguage(navigator.language.startsWith("ja") ? "ja" : "en");
+  autoTranslate("popup");
 
   loadRecentLogs();
 });

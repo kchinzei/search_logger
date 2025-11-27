@@ -1,9 +1,9 @@
 // webpack.ios.config.js
 const path = require("path");
 const { createSharedParts } = require("./webpack.shared.js");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-const webpack = require("webpack");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const CopyPlugin = require("copy-webpack-plugin");
+// const webpack = require("webpack");
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
@@ -20,9 +20,9 @@ module.exports = (env, argv) => {
     output: {
       path: path.resolve(__dirname, outputDir),
       filename: "[name].js",
-      module: false
+      module: false,
     },
 
-    ...shared,  // <<— reuse ALL rules, resolve, optimization
+    ...shared, // <<— reuse ALL rules, resolve, optimization
   };
 };

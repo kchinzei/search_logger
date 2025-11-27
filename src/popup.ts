@@ -17,10 +17,10 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
 
-export {};  // marks this file as an ES module
+export {}; // marks this file as an ES module
 
-import { loadRecentLogs } from './popup_list';
-import { setLanguage, autoTranslate } from './i18n';
+import { loadRecentLogs } from "./popup_list";
+import { setLanguage, autoTranslate } from "./i18n";
 
 // Minimal chrome typing so you don't *have* to install @types/chrome
 declare const chrome: {
@@ -30,28 +30,32 @@ declare const chrome: {
   };
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const openBtn = document.getElementById('btn-logview') as HTMLButtonElement | null;
-  const optionsBtn = document.getElementById('btn-options') as HTMLButtonElement | null;
+document.addEventListener("DOMContentLoaded", async () => {
+  const openBtn = document.getElementById(
+    "btn-logview",
+  ) as HTMLButtonElement | null;
+  const optionsBtn = document.getElementById(
+    "btn-options",
+  ) as HTMLButtonElement | null;
 
   if (openBtn) {
-    openBtn.addEventListener('click', () => {
-      chrome.runtime.sendMessage({ action: 'openhtml', arg: 'logview.html' });
+    openBtn.addEventListener("click", () => {
+      chrome.runtime.sendMessage({ action: "openhtml", arg: "logview.html" });
     });
   }
 
   if (optionsBtn) {
-    optionsBtn.addEventListener('click', () => {
+    optionsBtn.addEventListener("click", () => {
       if (chrome.runtime.openOptionsPage) {
         chrome.runtime.openOptionsPage();
       } else {
-        chrome.runtime.sendMessage({ action: 'openhtml', arg: 'options.html' });
+        chrome.runtime.sendMessage({ action: "openhtml", arg: "options.html" });
       }
     });
   }
 
-  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
-  autoTranslate('popup');
+  await setLanguage(navigator.language.startsWith("ja") ? "ja" : "en");
+  autoTranslate("popup");
 
   loadRecentLogs();
 });

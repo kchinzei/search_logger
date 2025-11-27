@@ -47,6 +47,7 @@ function getG_MapQuery(): string | null {
   const pathname = location.pathname;
 
   // Google Maps: /maps/(place|search)/something
+  // eslint-disable-next-line no-useless-escape
   const m = pathname.match(/^\/maps\/(place|search)\/([^\/]+)/);
   if (m) return decodeURIComponent(m[2]).replace(/\+/g, " ");
 
@@ -64,6 +65,7 @@ function getB_MapQuery(): string | null {
   if (url.searchParams.has("q")) return url.searchParams.get("q");
 
   // Also support /maps/POIName/...
+  // eslint-disable-next-line no-useless-escape
   const m = pathname.match(/^\/maps\/([^\/]+)/);
   if (m && m[1] !== "maps") return decodeURIComponent(m[1]).replace(/\+/g, " ");
 
