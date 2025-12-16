@@ -19,6 +19,7 @@
 
 import { isRecentDuplicate, recordRecent, clearRecent } from "./recent";
 import { loadSettings } from "./settings";
+import { MIN_PORT, MAX_PORT } from "./const";
 
 type QuotaErrorKind = "quota" | "item-too-large" | "unknown";
 
@@ -171,7 +172,7 @@ function saveRemote(
   timestamp: string,
   port: number,
 ): void {
-  if (port > 0) {
+  if (MIN_PORT <= port && port <= MAX_PORT) {
     fetch(`http://localhost:${port}/log`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -181,7 +182,7 @@ function saveRemote(
         console.log("[SearchLogger BG] HTTP POST done. Status:", res.status);
       })
       .catch((err) => {
-        console.error("[SearchLogger BG] Fetch failed:", err);
+        console.warn("[SearchLogger BG] Fetch failed:", err);
       });
   }
 }
@@ -250,7 +251,7 @@ chrome.runtime.onMessage.addListener(
     }
 
     const { query, url, timestamp, port } = msg;
-    if (!query || !url || !port) {
+    if (!query || !url || !timestamp || !port) {
       console.warn("[SearchLogger BG] Incomplete message:", msg);
       return;
     }

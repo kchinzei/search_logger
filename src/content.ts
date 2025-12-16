@@ -20,6 +20,7 @@
 export {}; // marks this file as an ES module
 
 import { loadSettings } from "./settings";
+import { INVALID_PORT } from "./const";
 
 interface EnginesSettings {
   google?: boolean;
@@ -88,12 +89,13 @@ function localISOString(date: Date = new Date()): string {
 }
 
 function logSearch(items: StoredSettings): void {
-  let port = items && typeof items.port === "number" ? items.port : 27123;
+  let port =
+    items && typeof items.port === "number" ? items.port : INVALID_PORT;
   const engines: EnginesSettings = items && items.engines ? items.engines : {};
 
-  // When useExternal is disabled, set port to 0 to disable sending it external.
+  // When useExternal is disabled, set port to -1 to disable sending it external.
   const useExternal = items && items.useExternal;
-  if (useExternal === false) port = 0;
+  if (useExternal === false) port = INVALID_PORT;
 
   const enableGoogle = !!engines.google;
   const enableG_Maps = !!engines.g_maps;
@@ -131,6 +133,7 @@ function logSearch(items: StoredSettings): void {
   const timestamp = localISOString();
 
   chrome.runtime.sendMessage({ query, url, timestamp, port });
+  // chrome.runtime.sendMessage({ action: "log", arg: { query, url, timestamp, port } });
 }
 
 function monitorUrlChange(callback: () => void): void {
