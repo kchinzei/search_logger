@@ -283,11 +283,19 @@ function parseExportedLogHtml(html: string): string[] {
   for (const row of rows) {
     const ts = row.querySelector('.ts')?.textContent?.trim() ?? '';
     const text = row.querySelector('.q-text')?.textContent?.trim() ?? '';
-    const link = row.querySelector('.q-link')?.getAttribute('href') ?? '';
+    const linkEl = row.querySelector('.q-link') as HTMLAnchorElement | null;
+    const link = linkEl?.getAttribute('href') ?? '';
 
     if (!ts || !text || !link) continue;
 
-    const internal = `<div ts="${ts}"><a href="${link}">${text}</a></div>`;
+    // Detect map vs normal by icon text inside the link
+    const icon = (linkEl?.textContent ?? '').trim();
+    // Be robust to emoji variation selectors: match the base characters.
+    const isMap = icon.includes('✴');
+    const mapAttr = isMap ? ' map-log="1"' : '';
+  
+    const internal = `<div ts="${ts}"${mapAttr}><a href="${link}">${text}</a></div>`;
+    // const internal = `<div ts="${ts}"><a href="${link}">${text}</a></div>`;
     entries.push(internal);
   }
   return entries;
