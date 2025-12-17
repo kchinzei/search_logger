@@ -131,8 +131,9 @@ function logSearch(items: StoredSettings): void {
 
   const url = location.href;
   const timestamp = localISOString();
+  const map = isG_Maps || isB_Maps;
 
-  chrome.runtime.sendMessage({ query, url, timestamp, port });
+  chrome.runtime.sendMessage({ query, url, timestamp, port, map });
   // chrome.runtime.sendMessage({ action: "log", arg: { query, url, timestamp, port } });
 }
 

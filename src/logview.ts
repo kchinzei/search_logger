@@ -73,8 +73,8 @@ async function renderList(listView: HTMLElement): Promise<void> {
   }
   const frag = document.createDocumentFragment();
   for (const line of lines) {
-    const { ts, text, href } = parseLine(line);
-    frag.appendChild(makeRow(ts, text, href));
+    const { ts, text, href, map } = parseLine(line);
+    frag.appendChild(makeRow(ts, text, href, map));
   }
   listView.appendChild(frag);
 }
@@ -84,8 +84,8 @@ async function exportLog(): Promise<void> {
   const itemsHtml =
     lines
       .map((line) => {
-        const { ts, text, href } = parseLine(line);
-        return rowHtmlFromItem(ts, text, href);
+        const { ts, text, href, map } = parseLine(line);
+        return rowHtmlFromItem(ts, text, href, map);
       })
       .join("\n") || `<p>${tp("label-no-log")}</p>`;
 
