@@ -103,7 +103,7 @@ module.exports = (env, argv) => {
         ? [
             new ZipPlugin({
               path: path.resolve(__dirname, "builds"),
-              filename: `obsidian-search-logger-${package.version}-${browserName}.zip`,
+              filename: `search-logger-${package.version}-${browserName}.zip`,
             }),
           ]
         : []),
