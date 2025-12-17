@@ -20,6 +20,7 @@
 export {}; // marks this file as an ES module
 
 import { loadSettings } from "./settings";
+import { INVALID_PORT } from "./const";
 
 interface EnginesSettings {
   google?: boolean;
@@ -47,6 +48,7 @@ function getG_MapQuery(): string | null {
   const pathname = location.pathname;
 
   // Google Maps: /maps/(place|search)/something
+  // eslint-disable-next-line no-useless-escape
   const m = pathname.match(/^\/maps\/(place|search)\/([^\/]+)/);
   if (m) return decodeURIComponent(m[2]).replace(/\+/g, " ");
 
@@ -64,6 +66,7 @@ function getB_MapQuery(): string | null {
   if (url.searchParams.has("q")) return url.searchParams.get("q");
 
   // Also support /maps/POIName/...
+  // eslint-disable-next-line no-useless-escape
   const m = pathname.match(/^\/maps\/([^\/]+)/);
   if (m && m[1] !== "maps") return decodeURIComponent(m[1]).replace(/\+/g, " ");
 
@@ -86,12 +89,13 @@ function localISOString(date: Date = new Date()): string {
 }
 
 function logSearch(items: StoredSettings): void {
-  let port = items && typeof items.port === "number" ? items.port : 27123;
+  let port =
+    items && typeof items.port === "number" ? items.port : INVALID_PORT;
   const engines: EnginesSettings = items && items.engines ? items.engines : {};
 
-  // When useExternal is disabled, set port to 0 to disable sending it external.
+  // When useExternal is disabled, set port to -1 to disable sending it external.
   const useExternal = items && items.useExternal;
-  if (useExternal === false) port = 0;
+  if (useExternal === false) port = INVALID_PORT;
 
   const enableGoogle = !!engines.google;
   const enableG_Maps = !!engines.g_maps;
@@ -127,8 +131,10 @@ function logSearch(items: StoredSettings): void {
 
   const url = location.href;
   const timestamp = localISOString();
+  const map = isG_Maps || isB_Maps;
 
-  chrome.runtime.sendMessage({ query, url, timestamp, port });
+  chrome.runtime.sendMessage({ query, url, timestamp, port, map });
+  // chrome.runtime.sendMessage({ action: "log", arg: { query, url, timestamp, port } });
 }
 
 function monitorUrlChange(callback: () => void): void {

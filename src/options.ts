@@ -19,18 +19,23 @@
 
 export {}; // marks this file as an ES module
 
-import { DEFAULT_RECENT_ITEMS, DEFAULT_RECENT_DAYS,
-  MIN_PORT, MAX_PORT,
-  MIN_RECENT_ITEMS, MIN_RECENT_DAYS,
-  MAX_RECENT_ITEMS, MAX_RECENT_DAYS
- } from './const';
+import {
+  DEFAULT_RECENT_ITEMS,
+  DEFAULT_RECENT_DAYS,
+  MIN_PORT,
+  MAX_PORT,
+  MIN_RECENT_ITEMS,
+  MIN_RECENT_DAYS,
+  MAX_RECENT_ITEMS,
+  MAX_RECENT_DAYS,
+} from "./const";
 
 import {
   loadSettings,
   saveSettingsPartial,
   type StoredSettings,
 } from "./settings";
-import { setLanguage, autoTranslate } from './i18n';
+import { setLanguage, autoTranslate } from "./i18n";
 
 // Helper to get typed elements by id
 function $<T extends HTMLElement = HTMLElement>(id: string): T | null {
@@ -183,9 +188,7 @@ function getBrowser(): typeof chrome {
 }
 
 function setupCloseButton(): void {
-  const btn = document.getElementById(
-    "btn-close",
-  ) as HTMLButtonElement | null;
+  const btn = document.getElementById("btn-close") as HTMLButtonElement | null;
   if (!btn) return;
 
   btn.addEventListener("click", () => {
@@ -212,8 +215,8 @@ function isIOS() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await setLanguage(navigator.language.startsWith('ja') ? 'ja' : 'en');
-  autoTranslate('options');
+  await setLanguage(navigator.language.startsWith("ja") ? "ja" : "en");
+  autoTranslate("options");
 
   if (isIOS()) {
     document.body.classList.add("ios");

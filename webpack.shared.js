@@ -1,9 +1,9 @@
 // webpack.shared.js
 const path = require("path");
-const fs = require("fs");
-const CopyPlugin = require("copy-webpack-plugin");
+//const fs = require("fs");
+//const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const webpack = require("webpack");
+//const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 
 /**
@@ -19,14 +19,14 @@ function createSharedParts(isProduction) {
           use: [
             {
               loader: "ts-loader",
-              options: { compilerOptions: { module: "ES2020" } }
-            }
+              options: { compilerOptions: { module: "ES2020" } },
+            },
           ],
-          exclude: /node_modules/
+          exclude: /node_modules/,
         },
         {
           test: /\.css$/i,
-          use: ["style-loader", "css-loader"]
+          use: ["style-loader", "css-loader"],
         },
         {
           test: /\.scss$/,
@@ -34,15 +34,15 @@ function createSharedParts(isProduction) {
             MiniCssExtractPlugin.loader,
             {
               loader: "css-loader",
-              options: { sourceMap: !isProduction }
+              options: { sourceMap: !isProduction },
             },
             {
               loader: "sass-loader",
-              options: { sourceMap: !isProduction }
-            }
-          ]
-        }
-      ]
+              options: { sourceMap: !isProduction },
+            },
+          ],
+        },
+      ],
     },
 
     resolve: {
@@ -50,13 +50,13 @@ function createSharedParts(isProduction) {
       alias: {
         "./utils/browser-polyfill": path.resolve(
           __dirname,
-          "node_modules/webextension-polyfill/dist/browser-polyfill.min.js"
+          "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
         ),
         "../utils/browser-polyfill": path.resolve(
           __dirname,
-          "node_modules/webextension-polyfill/dist/browser-polyfill.min.js"
-        )
-      }
+          "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
+        ),
+      },
     },
 
     optimization: {
@@ -79,14 +79,14 @@ function createSharedParts(isProduction) {
             format: { ascii_only: true, comments: false, ecma: 2020 },
             toplevel: true,
             keep_classnames: true,
-            keep_fnames: true
+            keep_fnames: true,
           },
-          extractComments: false
-        })
+          extractComments: false,
+        }),
       ],
       moduleIds: "named",
-      chunkIds: "named"
-    }
+      chunkIds: "named",
+    },
   };
 }
 

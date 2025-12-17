@@ -30,7 +30,13 @@
 //
 // Works in both content-scripts (DOM available) and service worker (DOM absent).
 
-import { FROM_PARAM_KEY, DEFAULT_RECENT_ITEMS, DEFAULT_RECENT_DAYS, MIN_RECENT_ITEMS, MIN_RECENT_DAYS } from './const';
+import {
+  FROM_PARAM_KEY,
+  DEFAULT_RECENT_ITEMS,
+  DEFAULT_RECENT_DAYS,
+  MIN_RECENT_ITEMS,
+  MIN_RECENT_DAYS,
+} from "./const";
 
 export type RecentParams = {
   query: string;

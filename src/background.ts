@@ -19,6 +19,7 @@
 
 import { isRecentDuplicate, recordRecent, clearRecent } from "./recent";
 import { loadSettings } from "./settings";
+import { MIN_PORT, MAX_PORT } from "./const";
 
 type QuotaErrorKind = "quota" | "item-too-large" | "unknown";
 
@@ -31,6 +32,7 @@ interface LogMessage {
   url?: string;
   timestamp?: string;
   port?: number;
+  map?: boolean;
 }
 
 interface ActionMessage {
@@ -101,10 +103,13 @@ async function saveLocal(
   query: string,
   url: string,
   timestamp: string,
+  map: boolean,
 ): Promise<void> {
   const { logHtml = "" } = await chrome.storage.local.get({ logHtml: "" });
-  const newLine = `<div ts="${timestamp}"><a href="${url}">${query}</a></div>`;
-  let lines = String(logHtml).split("\n").filter(Boolean);
+  const mapAttr = map ? ' map-log="1"' : '';
+  const newLine = `<div ts="${timestamp}"${mapAttr}><a href="${url}">${query}</a></div>`;
+  // const newLine = `<div ts="${timestamp}"><a href="${url}">${query}</a></div>`;
+  const lines = String(logHtml).split("\n").filter(Boolean);
   lines.unshift(newLine);
 
   const encoder = new TextEncoder();
@@ -170,8 +175,9 @@ function saveRemote(
   url: string,
   timestamp: string,
   port: number,
+  map: boolean,
 ): void {
-  if (port > 0) {
+  if (MIN_PORT <= port && port <= MAX_PORT) {
     fetch(`http://localhost:${port}/log`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -181,7 +187,7 @@ function saveRemote(
         console.log("[SearchLogger BG] HTTP POST done. Status:", res.status);
       })
       .catch((err) => {
-        console.error("[SearchLogger BG] Fetch failed:", err);
+        console.warn("[SearchLogger BG] Fetch failed:", err);
       });
   }
 }
@@ -222,7 +228,7 @@ export function openOrFocusPage(page: string): void {
 }
 
 chrome.runtime.onInstalled.addListener(async () => {
-  const settings = await loadSettings();
+  const _settings = await loadSettings();
   // optional: log or use them
 });
 
@@ -249,8 +255,8 @@ chrome.runtime.onMessage.addListener(
       return;
     }
 
-    const { query, url, timestamp, port } = msg;
-    if (!query || !url || !port) {
+    const { query, url, timestamp, port, map } = msg;
+    if (!query || !url || !timestamp || !port) {
       console.warn("[SearchLogger BG] Incomplete message:", msg);
       return;
     }
@@ -279,8 +285,8 @@ chrome.runtime.onMessage.addListener(
     isRecentDuplicate({ query, url }).then(async (dup) => {
       if (dup) return; // skip spammy repeats
       await recordRecent({ query, url });
-      await saveLocal(query, urlForLog, timestamp!);
-      saveRemote(query, urlForLog, timestamp!, port);
+      await saveLocal(query, urlForLog, timestamp!, map!);
+      saveRemote(query, urlForLog, timestamp!, port, map!);
     });
   },
 );

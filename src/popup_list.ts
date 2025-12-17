@@ -55,8 +55,8 @@ export async function loadRecentLogs(): Promise<void> {
   container.innerHTML = "";
 
   for (const line of recentLines) {
-    const { ts, text, href } = parseLine(line);
-    container.appendChild(makeRow(ts, text, href));
+    const { ts, text, href, map } = parseLine(line);
+    container.appendChild(makeRow(ts, text, href, map));
   }
 }
 
