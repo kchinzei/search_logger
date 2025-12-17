@@ -106,7 +106,7 @@ async function saveLocal(
   map: boolean,
 ): Promise<void> {
   const { logHtml = "" } = await chrome.storage.local.get({ logHtml: "" });
-  const mapAttr = map ? ' map-log="1"' : '';
+  const mapAttr = map ? ' map-log="1"' : "";
   const newLine = `<div ts="${timestamp}"${mapAttr}><a href="${url}">${query}</a></div>`;
   // const newLine = `<div ts="${timestamp}"><a href="${url}">${query}</a></div>`;
   const lines = String(logHtml).split("\n").filter(Boolean);
@@ -181,7 +181,7 @@ function saveRemote(
     fetch(`http://localhost:${port}/log`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query, url, timestamp }),
+      body: JSON.stringify({ query, url, timestamp, map }),
     })
       .then((res) => {
         console.log("[SearchLogger BG] HTTP POST done. Status:", res.status);

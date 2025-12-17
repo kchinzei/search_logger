@@ -20,7 +20,7 @@
 export {}; // marks this file as an ES module
 
 export const FROM_PARAM_KEY = "from";
-export const DEFAULT_USE_EXTERNAL = true;
+export const DEFAULT_USE_EXTERNAL = false;
 export const DEFAULT_PORT = 27123;
 export const DEFAULT_RECENT_ITEMS = 50;
 export const DEFAULT_RECENT_DAYS = 1;

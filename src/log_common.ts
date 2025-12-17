@@ -78,7 +78,7 @@ export function rowHtmlFromItem(
   const tsEsc = escapeHtml(ts || tp("missing-ts"));
   const textEsc = escapeHtml(text || tp("missing-query"));
   const hrefEsc = escapeAttr(href);
-  const linkIcon = map? "✴️" : "↗️";
+  const linkIcon = map ? "✴️" : "↗️";
 
   return `<div class="log-row">
     <span class="ts">${tsEsc}</span>
